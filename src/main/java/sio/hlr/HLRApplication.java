@@ -12,7 +12,7 @@ public class HLRApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HLRApplication.class.getResource("hlr-connexion-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Help Le Rebours!");
+        stage.setTitle("Help Le Rebours ");
         stage.setScene(scene);
         stage.show();
     }
