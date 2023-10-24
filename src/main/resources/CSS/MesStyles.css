@@ -1,0 +1,17 @@
+.couleurDeFond
+{
+    -fx-background-color: #0f8fd1;
+}
+
+.btnMenu:hover
+{
+    -fx-font-color: #010408;
+    -fx-background-color: #C3FFFF;
+    -fx-background-radius: 30 0 0 30;
+    -fx-font-family: "System";
+}
+
+.ap
+{
+    -fx-background-color: white;
+}
