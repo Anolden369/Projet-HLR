@@ -21,7 +21,7 @@
       </HBox>
       <VBox prefHeight="515.0" prefWidth="166.0" spacing="20.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css">
          <children>
-            <Label alignment="CENTER" prefHeight="91.0" prefWidth="166.0" text="MON ESPACE ETUDIANT" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="91.0" prefWidth="170.0" text="MON ESPACE ADMINISTRATEUR" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
@@ -35,7 +35,25 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Soutiens" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Compétences" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Les Demandes" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Statistiques" textFill="WHITE">
                <styleClass>
                   <String fx:value="couleurDeFond" />
                   <String fx:value="btnMenu" />
@@ -46,10 +64,12 @@
             </Button>
          </children>
       </VBox>
-      <AnchorPane layoutX="166.0" layoutY="90.0" prefHeight="408.0" prefWidth="562.0">
+      <AnchorPane layoutX="166.0" layoutY="90.0" prefHeight="419.0" prefWidth="562.0">
          <children>
             <AnchorPane prefHeight="424.0" prefWidth="562.0" />
-            <AnchorPane layoutX="3.0" layoutY="2.0" prefHeight="418.0" prefWidth="554.0" />
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" />
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" />
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" />
          </children>
       </AnchorPane>
    </children>
