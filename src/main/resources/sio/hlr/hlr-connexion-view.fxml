@@ -40,6 +40,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <PasswordField layoutX="249.0" layoutY="243.0" prefHeight="27.0" prefWidth="208.0" />
+      <PasswordField fx:id="pfMdp" layoutX="249.0" layoutY="243.0" prefHeight="27.0" prefWidth="208.0" />
    </children>
 </AnchorPane>
