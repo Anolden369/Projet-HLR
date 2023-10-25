@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 public class HLRMenuEtudiantController implements Initializable{
 
 
+
     @javafx.fxml.FXML
     private Button btnMesCompetences;
     @javafx.fxml.FXML
