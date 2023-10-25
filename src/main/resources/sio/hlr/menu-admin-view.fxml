@@ -38,7 +38,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des matières" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des matières" textFill="WHITE" wrapText="true">
                <styleClass>
                   <String fx:value="couleurDeFond" />
                   <String fx:value="btnMenu" />
@@ -47,7 +47,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Créer des salles" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Créer des salles" textFill="WHITE" wrapText="true">
                <styleClass>
                   <String fx:value="couleurDeFond" />
                   <String fx:value="btnMenu" />
@@ -56,7 +56,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des salles" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des salles" textFill="WHITE" wrapText="true">
                <styleClass>
                   <String fx:value="couleurDeFond" />
                   <String fx:value="btnMenu" />
@@ -87,7 +87,7 @@
       </VBox>
       <AnchorPane layoutX="166.0" layoutY="90.0" prefHeight="419.0" prefWidth="562.0">
          <children>
-            <AnchorPane prefHeight="424.0" prefWidth="562.0" visible="false">
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
                <children>
                   <Label layoutX="10.0" layoutY="37.0" prefHeight="19.0" prefWidth="140.0" text="Nom de la matère :" />
                   <TextField layoutX="174.0" layoutY="33.0" />
@@ -95,7 +95,7 @@
                   <Label layoutX="10.0" layoutY="94.0" text="Nom des sous-matères :" />
                   <TextField layoutX="174.0" layoutY="90.0" prefHeight="77.0" prefWidth="329.0" />
                </children></AnchorPane>
-            <AnchorPane prefHeight="424.0" prefWidth="562.0" visible="false">
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
                <children>
                   <Label layoutX="28.0" layoutY="238.0" text="Modification nom matière : " />
                   <TextField layoutX="226.0" layoutY="234.0" prefHeight="27.0" prefWidth="245.0" />
@@ -105,7 +105,7 @@
                   <ComboBox layoutX="226.0" layoutY="32.0" prefHeight="27.0" prefWidth="209.0" />
                   <Label layoutX="28.0" layoutY="36.0" text="Nom de la matière :" />
                </children></AnchorPane>
-            <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="424.0" prefWidth="562.0" visible="false">
+            <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
                <children>
                   <Label layoutX="390.0" layoutY="62.0" text="Numéro de la salle :" />
                   <TextField layoutX="208.0" layoutY="58.0" />
@@ -113,7 +113,7 @@
                   <TextField layoutX="208.0" layoutY="130.0" />
                   <Button layoutX="112.0" layoutY="315.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="338.0" text="Valider" />
                </children></AnchorPane>
-            <AnchorPane prefHeight="424.0" prefWidth="562.0">
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="29.0" layoutY="151.0" text="Modification étage : " />
                   <Label layoutX="29.0" layoutY="67.0" text="Modification numéro salle :" />
@@ -121,8 +121,8 @@
                   <TextField layoutX="232.0" layoutY="147.0" />
                   <Button layoutX="85.0" layoutY="327.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="338.0" text="Button" />
                </children></AnchorPane>
-            <AnchorPane prefHeight="424.0" prefWidth="562.0" />
-            <AnchorPane prefHeight="424.0" prefWidth="562.0" visible="false" />
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" />
+            <AnchorPane prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false" />
          </children>
       </AnchorPane>
    </children>
