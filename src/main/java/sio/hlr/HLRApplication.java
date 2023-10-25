@@ -10,7 +10,7 @@ import java.io.IOException;
 public class HLRApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HLRApplication.class.getResource("menu-admin-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HLRApplication.class.getResource("hlr-connexion-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Help Le Rebours ");
         stage.setScene(scene);
