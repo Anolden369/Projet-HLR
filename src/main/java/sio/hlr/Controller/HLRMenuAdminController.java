@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 public class HLRMenuAdminController implements Initializable {
 
-
     @javafx.fxml.FXML
     private Button btnCreerMatiere;
     @javafx.fxml.FXML
@@ -96,22 +95,102 @@ public class HLRMenuAdminController implements Initializable {
 
     @javafx.fxml.FXML
     public void btnValiderCreerMatiere(Event event) {
-
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (txtCreerNomMatiere.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir le nom de la matière");
+            alert.showAndWait();
+        }
+        else if (txtCreerNomSousMatiere.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir les sous-matières");
+            alert.showAndWait();
+        }
+        else
+        {
+            // a compléter
+        }
     }
 
     @javafx.fxml.FXML
     public void btnValiderModifMatiereClicked(Event event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (cboNomMatiere.getSelectionModel().getSelectedItem()==null)
+        {
+            alert.setTitle("Erreur de choix");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez choisir une matière");
+            alert.showAndWait();
+        }
+        else if (txtModifNomMatiere.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir le nom de la matière");
+            alert.showAndWait();
+        }
+        else if (txtModifNomSousMatiere.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir les sous-matières");
+            alert.showAndWait();
+        }
+        else
+        {
+            // a compléter
+        }
 
     }
 
     @javafx.fxml.FXML
     public void btnValiderCreerSalleClicked(Event event) {
-
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (txtCreerNumSalle.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir le numéro de la salle");
+            alert.showAndWait();
+        }
+        else if (txtCreerEtage.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir l'étage");
+            alert.showAndWait();
+        }
+        else
+        {
+            // a compléter
+        }
     }
 
     @javafx.fxml.FXML
     public void btnValiderModifSallesClicked(Event event) {
-
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (txtModfNumSalle.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir le numéro de la salle");
+            alert.showAndWait();
+        }
+        else if (txtModifEtage.getText().isEmpty())
+        {
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("");
+            alert.setContentText("Veuillez saisir l'étage");
+            alert.showAndWait();
+        }
+        else
+        {
+            // a compléter
+        }
     }
 
     @Override
