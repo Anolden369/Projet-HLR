@@ -9,8 +9,6 @@ public class HLRConnexionController {
     @FXML
     private TextField txtLogin;
     @FXML
-    private TextField txtMdp;
-    @FXML
     private Button btnConnexion;
 
 
