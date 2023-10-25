@@ -25,15 +25,7 @@ public class HLRConnexionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            maCnx = new ConnexionBDD();
 
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
