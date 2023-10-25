@@ -113,7 +113,7 @@
                   <TextField layoutX="208.0" layoutY="130.0" />
                   <Button layoutX="112.0" layoutY="315.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="338.0" text="Valider" />
                </children></AnchorPane>
-            <AnchorPane prefHeight="424.0" prefWidth="562.0" visible="false">
+            <AnchorPane prefHeight="424.0" prefWidth="562.0">
                <children>
                   <Label layoutX="29.0" layoutY="151.0" text="Modification étage : " />
                   <Label layoutX="29.0" layoutY="67.0" text="Modification numéro salle :" />
