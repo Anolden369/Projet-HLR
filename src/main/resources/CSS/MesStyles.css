@@ -9,6 +9,7 @@
     -fx-background-color: #FF5733;
     -fx-background-radius: 30 0 0 30;
     -fx-font-family: "System";
+    -fx-text-fill: black;
 }
 
 .ap
