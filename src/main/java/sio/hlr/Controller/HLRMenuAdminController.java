@@ -1,9 +1,14 @@
 package sio.hlr.Controller;
 
 import javafx.event.Event;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
-public class HLRMenuAdminController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class HLRMenuAdminController implements Initializable {
 
 
     @javafx.fxml.FXML
@@ -46,44 +51,71 @@ public class HLRMenuAdminController {
     private Button btnValiderModifSalles;
     @javafx.fxml.FXML
     private TreeView tvSoutiensAdmin;
+    @javafx.fxml.FXML
+    private AnchorPane apCreerMatieres;
+    @javafx.fxml.FXML
+    private AnchorPane apModifMatiere;
+    @javafx.fxml.FXML
+    private AnchorPane apCreerSalles;
+    @javafx.fxml.FXML
+    private AnchorPane apModifSalles;
+    @javafx.fxml.FXML
+    private AnchorPane apVisuSoutients;
+    @javafx.fxml.FXML
+    private AnchorPane apStatistiques;
 
     @javafx.fxml.FXML
     public void btnCreerMatiereClicked(Event event) {
+        apCreerMatieres.toFront();
     }
 
     @javafx.fxml.FXML
     public void btnModifMatiereClicked(Event event) {
+        apModifMatiere.toFront();
     }
 
     @javafx.fxml.FXML
     public void btnCreerSallesClicked(Event event) {
+        apCreerSalles.toFront();
     }
 
     @javafx.fxml.FXML
     public void btnModifSallesClicked(Event event) {
+        apModifSalles.toFront();
     }
 
     @javafx.fxml.FXML
     public void btnVisuSoutiensClicked(Event event) {
+        apVisuSoutients.toFront();
     }
 
     @javafx.fxml.FXML
     public void btnStatistiquesAdminClicked(Event event) {
+        apStatistiques.toFront();
     }
 
     @javafx.fxml.FXML
     public void btnValiderCreerMatiere(Event event) {
+
     }
 
     @javafx.fxml.FXML
     public void btnValiderModifMatiereClicked(Event event) {
+
     }
 
     @javafx.fxml.FXML
     public void btnValiderCreerSalleClicked(Event event) {
+
     }
 
     @javafx.fxml.FXML
     public void btnValiderModifSallesClicked(Event event) {
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        apCreerMatieres.toFront();
     }
 }
