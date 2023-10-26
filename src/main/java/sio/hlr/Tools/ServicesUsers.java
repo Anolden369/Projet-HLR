@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sio.hlr.Entities.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ServicesUsers {
     private Connection uneCnx;
@@ -45,4 +42,54 @@ public class ServicesUsers {
 
         return lesUsers;
     }
+    public boolean checkCredentials(String prenom, String password) throws SQLException {
+        // Vérifiez les informations d'identification dans la base de données
+        String query = "SELECT * FROM user WHERE prenom=? AND password=?";
+        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
+            ps.setString(1, prenom);
+            ps.setString(2, password);
+            ResultSet resultSet = ps.executeQuery();
+
+            // Si une correspondance est trouvée, l'utilisateur est valide
+            boolean isValidUser = resultSet.next();
+
+            // Fermez les ressources
+            resultSet.close();
+            return isValidUser;
+        }
+    }
+    public boolean isUserClient(String prenom) throws SQLException {
+        // Vérifiez dans la base de données si l'utilisateur est un client
+        String query = "SELECT * FROM user WHERE prenom=? AND role='Etudiant'";
+        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
+            ps.setString(1, prenom);
+            ResultSet resultSet = ps.executeQuery();
+
+            // Si une correspondance est trouvée, l'utilisateur est un client
+            boolean isClient = resultSet.next();
+
+            // Fermez les ressources
+            resultSet.close();
+            return isClient;
+        }
+    }
+
+    public boolean isUserAdmin(String prenom) throws SQLException {
+        // Vérifiez dans la base de données si l'utilisateur est un administrateur
+        String query = "SELECT * FROM user WHERE prenom=? AND role='admin'";
+        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
+            ps.setString(1, prenom);
+            ResultSet resultSet = ps.executeQuery();
+
+            // Si une correspondance est trouvée, l'utilisateur est un administrateur
+            boolean isAdmin = resultSet.next();
+
+            // Fermez les ressources
+            resultSet.close();
+            return isAdmin;
+        }
+    }
+
+
+
 }
