@@ -17,8 +17,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HLRConnexionController implements Initializable {
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("menu-etudiant-view.fxml"));
-    ServicesUsers servicesUsers = new ServicesUsers();
     ConnexionBDD maCnx;
     @FXML
     private TextField txtLogin;
@@ -29,13 +27,22 @@ public class HLRConnexionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            maCnx = new ConnexionBDD();
+            ServicesUsers servicesUsers = new ServicesUsers();
+        }
+            catch(SQLException e){
+                throw new RuntimeException(e);
+            } catch(ClassNotFoundException e){
+                throw new RuntimeException(e);
+            }
+        }
 
-    }
 
 
     @FXML
     public void btnConnexionClicked(Event event) {
-        try{
+
             if(txtLogin.getText().equals("")){
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur de saisie");
@@ -48,19 +55,7 @@ public class HLRConnexionController implements Initializable {
                 alert.setContentText("Veuillez saisir votre mot de passe");
                 alert.setHeaderText("");
                 alert.showAndWait();
-            }else {
-                maCnx = new ConnexionBDD();
-                servicesUsers = new ServicesUsers();
-                //if (servicesUsers.verifLogin(txtLogin.getText(),pfMdp.getText())){
-                    //Stage newStage = new Stage();
-
-               // }
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
