@@ -21,4 +21,12 @@ public class Matiere {
     public String getSousMatiere() {
         return sousMatiere;
     }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public void setSousMatiere(String sousMatiere) {
+        this.sousMatiere = sousMatiere;
+    }
 }

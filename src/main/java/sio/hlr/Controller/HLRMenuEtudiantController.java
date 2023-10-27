@@ -1,11 +1,25 @@
 package sio.hlr.Controller;
 
+import javafx.collections.ObservableList;
+import javafx.css.converter.StringConverter;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import sio.hlr.Entities.Matiere;
+import sio.hlr.Entities.User;
+import sio.hlr.Tools.ConnexionBDD;
+import sio.hlr.Tools.ServicesMatieres;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import javafx.scene.control.TreeTableView;
+import sio.hlr.Tools.ServicesSousMatieres;
+
+
 import java.util.ResourceBundle;
 
 public class HLRMenuEtudiantController implements Initializable{
@@ -32,19 +46,13 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private AnchorPane apCreerDemande;
     @javafx.fxml.FXML
-    private ComboBox cboCreerChoixMatiere;
-    @javafx.fxml.FXML
     private ComboBox cboCreerChoixSousMatiere;
     @javafx.fxml.FXML
     private AnchorPane apModifierDemande;
     @javafx.fxml.FXML
     private ComboBox cboModifierDemande;
     @javafx.fxml.FXML
-    private ComboBox cboModiferChoixMatiere;
-    @javafx.fxml.FXML
-    private ChoiceBox CceModifierSousMatiere;
-    @javafx.fxml.FXML
-    private DatePicker DpModifierDateActuelle;
+    private DatePicker dpModifierDateActuelle;
     @javafx.fxml.FXML
     private AnchorPane apMesCompetences;
     @javafx.fxml.FXML
@@ -55,10 +63,6 @@ public class HLRMenuEtudiantController implements Initializable{
     private Button btnMenuCreerCompetence;
     @javafx.fxml.FXML
     private AnchorPane apCreerCompetence;
-    @javafx.fxml.FXML
-    private ComboBox cboCreerChoixMatiereCompetence;
-    @javafx.fxml.FXML
-    private ComboBox cboCreerChoixSousMatiereCompetence;
     @javafx.fxml.FXML
     private Button btnCreerCompetence;
     @javafx.fxml.FXML
@@ -79,10 +83,73 @@ public class HLRMenuEtudiantController implements Initializable{
     private AnchorPane apStatistiques;
     @javafx.fxml.FXML
     private AnchorPane apLesDemandes;
+    @javafx.fxml.FXML
+    private DatePicker dpDateCreation;
+    @javafx.fxml.FXML
+    private DatePicker dpDateFin;
+    ServicesMatieres servicesMatieres;
+    ConnexionBDD maCnx;
+
+    @FXML
+    private TableView tvCreerMatiereCompetence;
+    @FXML
+    private TableColumn tcCreerMatiereCompetence;
+    @FXML
+    private TableView tvCreerMatiereDemande;
+    @FXML
+    private TableColumn tcCreerMatiereDemande;
+    @FXML
+    private TableView tvModifMatiereDemande;
+    @FXML
+    private TableColumn tcModifMatiereDemande;
+    @FXML
+    private TableView tvModifSMatiereDemande;
+    @FXML
+    private TableColumn tcModifSMatiereDemande;
+    @FXML
+    private TableView tvCreerSMatiereCompetence;
+    @FXML
+    private TableColumn tcCreerSMatiereCompetence;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         apMesDemandes.toFront();
+        try {
+            maCnx = new ConnexionBDD();
+            LocalDate currentDate = LocalDate.now();
+            dpDateCreation.setValue(currentDate);
+            dpDateFin.setValue(currentDate.plusDays(7));
+            dpModifierDateActuelle.setValue(currentDate);
+
+            //ServicesMatieres servicesMatieres = new ServicesMatieres();
+            //ObservableList<Matiere> lesMatieres = servicesMatieres.GetAllMatiere();
+            //cboCreerChoixMatiere.setItems(lesMatieres);
+
+            ServicesMatieres servicesMatieres = new ServicesMatieres();
+            ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
+
+            tvCreerMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
+            tcCreerMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+            tvCreerMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
+            tcCreerMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+            tvModifMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
+            tcModifMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+            tvModifSMatiereDemande.setItems(servicesSousMatieres.GetSousMatiereAnglais());
+            tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("sousMatiere"));
+
+
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @javafx.fxml.FXML
@@ -110,9 +177,11 @@ public class HLRMenuEtudiantController implements Initializable{
         apModifierDemande.toFront();
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void onBtnCreerDemandeClicked(Event event) {
         apCreerDemande.toFront();
+
+
     }
 
     @javafx.fxml.FXML
