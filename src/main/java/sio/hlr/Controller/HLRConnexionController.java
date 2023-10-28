@@ -47,7 +47,6 @@ public class HLRConnexionController implements Initializable {
                 boolean isValidUser = servicesUsers.checkCredentials(username, password);
 
                 if (isValidUser) {
-                    // Charger la scène appropriée ici
                     if (servicesUsers.isUserClient(username)) {
                         loadClientScene();
                     } else if (servicesUsers.isUserAdmin(username)) {
@@ -61,7 +60,7 @@ public class HLRConnexionController implements Initializable {
                     alert.showAndWait();
                 }
             } catch (SQLException e) {
-                e.printStackTrace(); // Gérer l'erreur de base de données
+                e.printStackTrace();
             }
         }
     }
@@ -71,10 +70,10 @@ public class HLRConnexionController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menu-etudiant-view.fxml"));
             Parent root = loader.load();
             Scene clientScene = new Scene(root);
-            Stage stage = (Stage) btnConnexion.getScene().getWindow(); // Obtenez la fenêtre actuelle
+            Stage stage = (Stage) btnConnexion.getScene().getWindow();
             stage.setScene(clientScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Gérer l'erreur de chargement de la scène
+            e.printStackTrace();
         }
     }
 
@@ -83,10 +82,10 @@ public class HLRConnexionController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menu-admin-view.fxml"));
             Parent root = loader.load();
             Scene adminScene = new Scene(root);
-            Stage stage = (Stage) btnConnexion.getScene().getWindow(); // Obtenez la fenêtre actuelle
+            Stage stage = (Stage) btnConnexion.getScene().getWindow();
             stage.setScene(adminScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Gérer l'erreur de chargement de la scène
+            e.printStackTrace();
         }
     }
 

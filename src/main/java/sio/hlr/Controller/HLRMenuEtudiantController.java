@@ -46,8 +46,6 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private AnchorPane apCreerDemande;
     @javafx.fxml.FXML
-    private ComboBox cboCreerChoixSousMatiere;
-    @javafx.fxml.FXML
     private AnchorPane apModifierDemande;
     @javafx.fxml.FXML
     private ComboBox cboModifierDemande;
@@ -70,11 +68,7 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private ComboBox cboModifierCompetence;
     @javafx.fxml.FXML
-    private ComboBox cboModiferChoixSousMatiereCompetence;
-    @javafx.fxml.FXML
     private Button btnModifierCompetence;
-    @javafx.fxml.FXML
-    private ComboBox cboModiferChoixMatiereCompetence;
     @javafx.fxml.FXML
     private Button btnMesDemandes;
     @javafx.fxml.FXML
@@ -110,6 +104,18 @@ public class HLRMenuEtudiantController implements Initializable{
     private TableView tvCreerSMatiereCompetence;
     @FXML
     private TableColumn tcCreerSMatiereCompetence;
+    @FXML
+    private TableView tvCreerSMatiereDemande;
+    @FXML
+    private TableColumn tcCreerSMatiereDemande;
+    @FXML
+    private TableView tvModifMatiereCompetence;
+    @FXML
+    private TableColumn tcModifMatiereCompetence;
+    @FXML
+    private TableView tvModifSMatiereCompetence;
+    @FXML
+    private TableColumn tcModifSMatiereCompetence;
 
 
     @Override
@@ -137,6 +143,9 @@ public class HLRMenuEtudiantController implements Initializable{
 
             tvModifMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
             tcModifMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+            tvModifMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
+            tcModifMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
 
             tvModifSMatiereDemande.setItems(servicesSousMatieres.GetSousMatiereAnglais());
             tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("sousMatiere"));
@@ -178,11 +187,7 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
     @FXML
-    public void onBtnCreerDemandeClicked(Event event) {
-        apCreerDemande.toFront();
-
-
-    }
+    public void onBtnCreerDemandeClicked(Event event) {apCreerDemande.toFront();}
 
     @javafx.fxml.FXML
     public void onBtnModifierCompetenceClicked(Event event) {
@@ -192,5 +197,19 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     public void onBtnCreerCompetenceClicked(Event event) {
         apCreerCompetence.toFront();
+    }
+
+    @FXML
+    public void btnSMDemande(Event event) throws SQLException {
+
+    }
+
+    @FXML
+    public void lvChoixMatiereDemandeClicked(Event event) throws SQLException {
+        if (tvCreerMatiereDemande.getSelectionModel().getSelectedItem().equals("Anglais")){
+            ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
+            tvModifSMatiereDemande.setItems(servicesSousMatieres.GetSousMatiereAnglais());
+            tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("sousMatiere"));
+        }
     }
 }

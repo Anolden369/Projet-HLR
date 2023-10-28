@@ -89,12 +89,6 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="310.0" layoutY="133.0" prefHeight="32.0" prefWidth="194.0" text="Choix de la/les sous-matière(s) : ">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cboCreerChoixSousMatiere" layoutX="310.0" layoutY="290.0" prefHeight="26.0" prefWidth="150.0" />
                   <Button fx:id="btnCreerDemande" layoutX="92.0" layoutY="377.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer">
                      <font>
                         <Font size="13.0" />
@@ -112,10 +106,15 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tvCreerMatiereDemande" layoutX="49.0" layoutY="133.0" prefHeight="171.0" prefWidth="167.0">
+                  <TableView fx:id="tvCreerMatiereDemande" layoutX="49.0" layoutY="133.0" onMouseClicked="#lvChoixMatiereDemandeClicked" prefHeight="171.0" prefWidth="167.0">
                     <columns>
                       <TableColumn fx:id="tcCreerMatiereDemande" prefWidth="165.0" text="Choix de la matière :" />
                     </columns>
+                  </TableView>
+                  <TableView fx:id="tvCreerSMatiereDemande" layoutX="314.0" layoutY="133.0" onMouseClicked="#btnSMDemande" prefHeight="171.0" prefWidth="194.0">
+                     <columns>
+                        <TableColumn fx:id="tcCreerSMatiereDemande" prefWidth="191.0" text="Choix de la/les sous-matières" />
+                     </columns>
                   </TableView>
                </children></AnchorPane>
             <AnchorPane fx:id="apModifierDemande" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
@@ -190,39 +189,37 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apModifierCompetence" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apModifierCompetence" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="57.0" layoutY="65.0" prefHeight="32.0" prefWidth="216.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier une compétence :" textFill="#0f8fd1">
+                  <Label layoutX="57.0" layoutY="28.0" prefHeight="32.0" prefWidth="216.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier une compétence :" textFill="#0f8fd1">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="84.0" layoutY="128.0" prefHeight="32.0" prefWidth="150.0" text="Choix de la compétence : ">
+                  <Label layoutX="90.0" layoutY="79.0" prefHeight="32.0" prefWidth="150.0" text="Choix de la compétence : ">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="84.0" layoutY="181.0" prefHeight="32.0" prefWidth="194.0" text="Choix de la matière : ">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cboModifierCompetence" layoutX="311.0" layoutY="131.0" prefWidth="150.0" />
-                  <ComboBox fx:id="cboModiferChoixSousMatiereCompetence" layoutX="311.0" layoutY="238.0" prefHeight="26.0" prefWidth="150.0" />
-                  <Button fx:id="btnModifierCompetence" layoutX="84.0" layoutY="298.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Modifier">
+                  <ComboBox fx:id="cboModifierCompetence" layoutX="312.0" layoutY="83.0" prefWidth="150.0" />
+                  <Button fx:id="btnModifierCompetence" layoutX="84.0" layoutY="356.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Modifier">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Label layoutX="84.0" layoutY="235.0" prefHeight="32.0" prefWidth="194.0" text="Choix de la/les sous-matière(s) : ">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cboModiferChoixMatiereCompetence" layoutX="311.0" layoutY="184.0" prefHeight="26.0" prefWidth="150.0" />
+                  <TableView fx:id="tvModifMatiereCompetence" layoutX="82.0" layoutY="157.0" onMouseClicked="#lvChoixMatiereDemandeClicked" prefHeight="171.0" prefWidth="167.0">
+                     <columns>
+                        <TableColumn fx:id="tcModifMatiereCompetence" prefWidth="165.0" text="Choix de la matière :" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="tvModifSMatiereCompetence" layoutX="305.0" layoutY="157.0" onMouseClicked="#btnSMDemande" prefHeight="171.0" prefWidth="194.0">
+                     <columns>
+                        <TableColumn fx:id="tcModifSMatiereCompetence" prefWidth="191.0" text="Choix de la/les sous-matières" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apLesDemandes" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apLesDemandes" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <TreeView fx:id="tvLesDemandes" layoutX="17.0" layoutY="59.0" prefHeight="345.0" prefWidth="530.0" />
                   <Label layoutX="14.0" layoutY="24.0" prefHeight="32.0" prefWidth="150.0" text="Les demandes actuelles :">
@@ -232,7 +229,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false" />
+            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" />
          </children>
       </AnchorPane>
    </children>
