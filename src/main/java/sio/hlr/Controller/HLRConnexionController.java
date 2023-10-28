@@ -23,7 +23,6 @@ public class HLRConnexionController implements Initializable {
     @FXML
     private PasswordField pfMdp;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

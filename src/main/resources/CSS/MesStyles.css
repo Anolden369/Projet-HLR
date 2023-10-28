@@ -6,10 +6,9 @@
 .btnMenu:hover
 {
     /*-fx-font-color: #010408;*/
-    -fx-background-color: #FF5733;
+    -fx-background-color: grey;
     -fx-background-radius: 30 0 0 30;
-    -fx-font-family: "System";
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .ap

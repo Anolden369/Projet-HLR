@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sio.hlr.Entities.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ServicesUsers {
     private Connection uneCnx;
@@ -46,4 +43,46 @@ public class ServicesUsers {
 
         return lesUsers;
     }
+    public boolean checkCredentials(String prenom, String password) throws SQLException {
+
+        String query = "SELECT * FROM user WHERE prenom=? AND password=?";
+        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
+            ps.setString(1, prenom);
+            ps.setString(2, password);
+            ResultSet resultSet = ps.executeQuery();
+
+
+            boolean isValidUser = resultSet.next();
+
+
+            resultSet.close();
+            return isValidUser;
+        }
+    }
+    public boolean isUserClient(String prenom) throws SQLException {
+        String query = "SELECT * FROM user WHERE prenom=? AND role='Etudiant'";
+        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
+            ps.setString(1, prenom);
+            ResultSet resultSet = ps.executeQuery();
+
+            boolean isClient = resultSet.next();
+            resultSet.close();
+            return isClient;
+        }
+    }
+
+    public boolean isUserAdmin(String prenom) throws SQLException {
+        String query = "SELECT * FROM user WHERE prenom=? AND role='admin'";
+        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
+            ps.setString(1, prenom);
+            ResultSet resultSet = ps.executeQuery();
+
+            boolean isAdmin = resultSet.next();
+            resultSet.close();
+            return isAdmin;
+        }
+    }
+
+
+
 }

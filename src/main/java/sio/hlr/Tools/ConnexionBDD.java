@@ -11,7 +11,7 @@ public class ConnexionBDD
 
 
     public ConnexionBDD() throws ClassNotFoundException, SQLException {
-        String pilote = "com.mysql.jdbc.Driver";
+        String pilote = "com.mysql.cj.jdbc.Driver";
         //String pilote = "com.mysql.cj.jdbc.Driver";
         // chargement du pilote
         Class.forName(pilote);
