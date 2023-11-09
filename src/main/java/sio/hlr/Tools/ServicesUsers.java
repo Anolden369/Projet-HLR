@@ -2,12 +2,19 @@ package sio.hlr.Tools;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import sio.hlr.Entities.User;
+import sio.hlr.HLRApplication;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class ServicesUsers {
-    private Connection uneCnx;
+    private static Connection uneCnx;
     private PreparedStatement ps;
     private ResultSet rs;
 
@@ -16,72 +23,65 @@ public class ServicesUsers {
         uneCnx = ConnexionBDD.getCnx();
     }
 
-    public ObservableList<User> verifLogin(String email, String password) throws SQLException {
-        ObservableList<User> lesUsers = FXCollections.observableArrayList();
+    public static boolean verifLogin(String email, String password) throws SQLException {
 
-        ps = uneCnx.prepareCall("SELECT * FROM user WHERE email = ? AND password = ?");
-        ps.setString(1, email);
-        ps.setString(2, password);
-
-        rs = ps.executeQuery();
-
-        while(rs.next())
-        {
-            User unUser = new User(rs.getInt(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getString(6),
-                    rs.getInt(7),
-                    rs.getInt(8));
-            //l'ajouter à une collection
-            lesUsers.add(unUser);
-        }
-
-        return lesUsers;
-    }
-    public boolean checkCredentials(String prenom, String password) throws SQLException {
-
-        String query = "SELECT * FROM user WHERE prenom=? AND password=?";
+        boolean statut = false;
+        String query = "SELECT count(*) FROM user WHERE email=? AND password=?";
         try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
-            ps.setString(1, prenom);
+            ps.setString(1, email);
             ps.setString(2, password);
             ResultSet resultSet = ps.executeQuery();
 
+            while (resultSet.next()) {
+                if (resultSet.getInt(1) == 1) {
+                    statut = true;
+                    String query1 = "SELECT count(*) FROM user WHERE email=? AND password=? AND role='Etudiant'";
+                    try (PreparedStatement ps1 = uneCnx.prepareStatement(query1)) {
+                        ps1.setString(1, email);
+                        ps1.setString(2, password);
+                        ResultSet resultSet1 = ps1.executeQuery();
+                        while (resultSet1.next()) {
+                            if (resultSet1.getInt(1) == 1) {
+                                // Fermer la scène actuelle
+                                Stage stage = (Stage) HLRApplication.getMainScene().getWindow();
+                                stage.close();
 
-            boolean isValidUser = resultSet.next();
+                                // Ouvrir une nouvelle scène
+                                FXMLLoader loader = new FXMLLoader(HLRApplication.class.getResource("menu-etudiant-view.fxml"));
+                                Parent root = loader.load();
+                                Stage newStage = new Stage();
+                                newStage.setTitle("Menu Etudiant");
+                                newStage.setScene(new Scene(root));
+                                newStage.show();
+                            } else if (resultSet1.getInt(1) == 0) {
+                                Stage stage = (Stage) HLRApplication.getMainScene().getWindow();
+                                stage.close();
 
+                                // Ouvrir une nouvelle scène
+                                FXMLLoader loader = new FXMLLoader(HLRApplication.class.getResource("menu-admin-view.fxml"));
+                                Parent root = loader.load();
+                                Stage newStage = new Stage();
+                                newStage.setTitle("Menu Administrateur");
+                                newStage.setScene(new Scene(root));
+                                newStage.show();
+                            }
+                        }
+                    }
 
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur de connexion");
+                    alert.setContentText("Veuillez saisir les bons identifiants !");
+                    alert.setHeaderText("");
+                    alert.showAndWait();
+                }
+            }
             resultSet.close();
-            return isValidUser;
+            return statut;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
     }
-    public boolean isUserClient(String prenom) throws SQLException {
-        String query = "SELECT * FROM user WHERE prenom=? AND role='Etudiant'";
-        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
-            ps.setString(1, prenom);
-            ResultSet resultSet = ps.executeQuery();
-
-            boolean isClient = resultSet.next();
-            resultSet.close();
-            return isClient;
-        }
-    }
-
-    public boolean isUserAdmin(String prenom) throws SQLException {
-        String query = "SELECT * FROM user WHERE prenom=? AND role='admin'";
-        try (PreparedStatement ps = uneCnx.prepareStatement(query)) {
-            ps.setString(1, prenom);
-            ResultSet resultSet = ps.executeQuery();
-
-            boolean isAdmin = resultSet.next();
-            resultSet.close();
-            return isAdmin;
-        }
-    }
-
-
 
 }
