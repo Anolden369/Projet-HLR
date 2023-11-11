@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import sio.hlr.Tools.ConnexionBDD;
 import sio.hlr.Tools.ServicesUsers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -51,13 +52,13 @@ public class HLRConnexionController implements Initializable {
             } else {
                 maCnx = new ConnexionBDD();
                 servicesUsers = new ServicesUsers();
-                servicesUsers.verifLogin(txtLogin.getText().toString(), pfMdp.getText().toString());
+                servicesUsers.verifLogin(txtLogin.getText(), pfMdp.getText());
 
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
