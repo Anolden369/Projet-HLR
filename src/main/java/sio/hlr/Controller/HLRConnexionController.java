@@ -51,7 +51,7 @@ public class HLRConnexionController implements Initializable {
             } else {
                 maCnx = new ConnexionBDD();
                 servicesUsers = new ServicesUsers();
-                ServicesUsers.verifLogin(txtLogin.getText().toString(), pfMdp.getText().toString());
+                servicesUsers.verifLogin(txtLogin.getText().toString(), pfMdp.getText().toString());
 
             }
 

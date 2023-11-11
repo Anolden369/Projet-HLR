@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class ServicesUsers {
-    private static Connection uneCnx;
+    private  Connection uneCnx;
     private PreparedStatement ps;
     private ResultSet rs;
 
@@ -23,7 +23,7 @@ public class ServicesUsers {
         uneCnx = ConnexionBDD.getCnx();
     }
 
-    public static boolean verifLogin(String email, String password) throws SQLException {
+    public  boolean verifLogin(String email, String password) throws SQLException {
 
         boolean statut = false;
         String query = "SELECT count(*) FROM user WHERE email=? AND password=?";
