@@ -1,5 +1,6 @@
 package sio.hlr.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sio.hlr.Tools.ConnexionBDD;
 import sio.hlr.Tools.ServicesUsers;
 
@@ -27,10 +29,11 @@ public class HLRConnexionController implements Initializable {
     private Button btnConnexion;
     @FXML
     private PasswordField pfMdp;
+    @FXML
+    private Button btnExit;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
 
@@ -61,5 +64,12 @@ public class HLRConnexionController implements Initializable {
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void exit(ActionEvent actionEvent) {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
+
     }
 }

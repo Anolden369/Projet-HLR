@@ -41,5 +41,6 @@
          </font>
       </Button>
       <PasswordField fx:id="pfMdp" layoutX="249.0" layoutY="243.0" prefHeight="27.0" prefWidth="208.0" promptText="Password" />
+      <Button fx:id="btnExit" layoutX="536.0" layoutY="112.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="56.0" text="Exit" />
    </children>
 </AnchorPane>
