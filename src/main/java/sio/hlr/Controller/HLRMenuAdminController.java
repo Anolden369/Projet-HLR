@@ -241,16 +241,6 @@ public class HLRMenuAdminController implements Initializable {
 
     @javafx.fxml.FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
-        // Fermer la scène actuelle
-        Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
-        stage.close();
-
-        // Ouvrir une nouvelle scène
-        FXMLLoader loader = new FXMLLoader(HLRApplication.class.getResource("hlr-connexion-view.fxml"));
-        Parent root = loader.load();
-        Stage newStage = new Stage();
-        newStage.setTitle("Connexion");
-        newStage.setScene(new Scene(root));
-        newStage.show();
+        HLRApplication.LoginScene();
     }
 }
