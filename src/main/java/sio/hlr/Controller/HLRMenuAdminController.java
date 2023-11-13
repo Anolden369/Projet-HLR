@@ -1,10 +1,17 @@
 package sio.hlr.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import sio.hlr.HLRApplication;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,13 +50,7 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     private Button btnValiderCreerSalle;
     @javafx.fxml.FXML
-    private TextField txtModfNumSalle;
-    @javafx.fxml.FXML
-    private TextField txtModifEtage;
-    @javafx.fxml.FXML
     private Button btnValiderModifSalles;
-    @javafx.fxml.FXML
-    private TreeView tvSoutiensAdmin;
     @javafx.fxml.FXML
     private AnchorPane apCreerMatieres;
     @javafx.fxml.FXML
@@ -62,6 +63,30 @@ public class HLRMenuAdminController implements Initializable {
     private AnchorPane apVisuSoutients;
     @javafx.fxml.FXML
     private AnchorPane apStatistiques;
+    @javafx.fxml.FXML
+    private ComboBox cboNomSalle;
+    @javafx.fxml.FXML
+    private ComboBox cboModifNumSalle;
+    @javafx.fxml.FXML
+    private ComboBox cboModifEtageSalle;
+    @javafx.fxml.FXML
+    private TableView tvSoutien;
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienDemandes;
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienAides;
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienMatiere;
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienSMatiere;
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienDescription;
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienStatut;
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienDateLimite;
+    @javafx.fxml.FXML
+    private Button btnDeconnexion;
 
     @javafx.fxml.FXML
     public void btnCreerMatiereClicked(Event event) {
@@ -173,14 +198,14 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     public void btnValiderModifSallesClicked(Event event) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if (txtModfNumSalle.getText().isEmpty())
+        if (cboModifNumSalle.getValue()==null)
         {
             alert.setTitle("Erreur de saisie");
             alert.setHeaderText("");
             alert.setContentText("Veuillez saisir le numéro de la salle");
             alert.showAndWait();
         }
-        else if (txtModifEtage.getText().isEmpty())
+        else if (cboModifEtageSalle.getValue()==null)
         {
             alert.setTitle("Erreur de saisie");
             alert.setHeaderText("");
@@ -196,5 +221,26 @@ public class HLRMenuAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         apCreerMatieres.toFront();
+    }
+
+    @javafx.fxml.FXML
+    public void cboNomSalleClicked(Event event) {
+    }
+
+    @javafx.fxml.FXML
+    public void cboModifNumSalleClicked(Event event) {
+    }
+
+    @javafx.fxml.FXML
+    public void cboModifEtageSalleClicked(Event event) {
+    }
+
+    @javafx.fxml.FXML
+    public void tvSoutienClicked(Event event) {
+    }
+
+    @javafx.fxml.FXML
+    public void deconnexion(ActionEvent actionEvent) throws IOException {
+        HLRApplication.LoginScene();
     }
 }

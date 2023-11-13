@@ -2,17 +2,24 @@ package sio.hlr.Controller;
 
 import javafx.collections.ObservableList;
 import javafx.css.converter.StringConverter;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sio.hlr.Entities.Matiere;
 import sio.hlr.Entities.User;
+import sio.hlr.HLRApplication;
 import sio.hlr.Tools.ConnexionBDD;
 import sio.hlr.Tools.ServicesMatieres;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -54,8 +61,6 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private AnchorPane apMesCompetences;
     @javafx.fxml.FXML
-    private TreeView tvMesCompetences;
-    @javafx.fxml.FXML
     private Button btnMenuModifierCompetence;
     @javafx.fxml.FXML
     private Button btnMenuCreerCompetence;
@@ -72,13 +77,9 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private Button btnMesDemandes;
     @javafx.fxml.FXML
-    private TreeView tvLesDemandes;
-    @javafx.fxml.FXML
     private AnchorPane apStatistiques;
     @javafx.fxml.FXML
     private AnchorPane apLesDemandes;
-    @javafx.fxml.FXML
-    private DatePicker dpDateCreation;
     @javafx.fxml.FXML
     private DatePicker dpDateFin;
     ServicesMatieres servicesMatieres;
@@ -116,6 +117,24 @@ public class HLRMenuEtudiantController implements Initializable{
     private TableView tvModifSMatiereCompetence;
     @FXML
     private TableColumn tcModifSMatiereCompetence;
+    @FXML
+    private TableView tvCreerCompetence;
+    @FXML
+    private TableColumn tcCreerCompetenceMatiere;
+    @FXML
+    private TableColumn tcCreerCompetenceSMatiere;
+    @FXML
+    private TableView tvLesDemandes;
+    @FXML
+    private TableColumn tcLesDemandesDemandeurs;
+    @FXML
+    private TableColumn tcLesDemandesMatiere;
+    @FXML
+    private TableColumn tcLesDemandesSMatiere;
+    @FXML
+    private TableColumn tcLesDemandesDateLimite;
+    @FXML
+    private Button btnDeconnexion;
 
 
     @Override
@@ -124,9 +143,6 @@ public class HLRMenuEtudiantController implements Initializable{
         try {
             maCnx = new ConnexionBDD();
             LocalDate currentDate = LocalDate.now();
-            dpDateCreation.setValue(currentDate);
-            dpDateFin.setValue(currentDate.plusDays(7));
-            dpModifierDateActuelle.setValue(currentDate);
 
             //ServicesMatieres servicesMatieres = new ServicesMatieres();
             //ObservableList<Matiere> lesMatieres = servicesMatieres.GetAllMatiere();
@@ -211,5 +227,18 @@ public class HLRMenuEtudiantController implements Initializable{
             tvModifSMatiereDemande.setItems(servicesSousMatieres.GetSousMatiereAnglais());
             tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("sousMatiere"));
         }
+    }
+
+    @FXML
+    public void tvCompetencesClicked(Event event) {
+    }
+
+    @FXML
+    public void tvLesDemandesClicked(Event event) {
+    }
+
+    @FXML
+    public void deconnexion(ActionEvent actionEvent) throws IOException {
+        HLRApplication.LoginScene();
     }
 }

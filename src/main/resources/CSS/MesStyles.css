@@ -9,9 +9,13 @@
     -fx-background-color: grey;
     -fx-background-radius: 30 0 0 30;
     -fx-text-fill: white;
+    cursor: hand;
 }
 
 .ap
 {
     -fx-background-color: white;
+}
+.cursePoint:hover {
+  cursor: pointer;
 }
