@@ -18,12 +18,12 @@ public class ServicesSousMatieres {
 
     public ServicesSousMatieres() {uneCnx = ConnexionBDD.getCnx();}
 
-    public ObservableList<Matiere> GetSousMatiereAnglais(int idMatiere) throws SQLException {
+    public ObservableList<Matiere> GetSousMatiereAnglais() throws SQLException {
         ObservableList<Matiere> sousMatiereAnglais = FXCollections.observableArrayList();
         ps = uneCnx.prepareStatement("SELECT matiere.sous_matiere\n" +
                 "from matiere\n" +
-                "WHERE matiere.designation=?");
-        ps.setInt(1,idMatiere);
+                "WHERE matiere.designation=\"Anglais\"");
+
         rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -40,7 +40,17 @@ public class ServicesSousMatieres {
         return sousMatiereAnglais;
     }
 
+    public String GetSousMatiere(String nomMatiere) throws SQLException {
+        String lesSousMatieres;
+        ps = uneCnx.prepareStatement("SELECT matiere.sous_matiere\n" +
+                "from matiere\n" +
+                "WHERE matiere.designation=?");
+        ps.setString(1,nomMatiere);
+        rs = ps.executeQuery();
+        rs.next();
+        lesSousMatieres = rs.getString(1);
+        return lesSousMatieres;
+    }
+
 
 }
-
-

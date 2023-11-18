@@ -1,5 +1,7 @@
 package sio.hlr.Controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +11,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sio.hlr.Entities.Matiere;
 import sio.hlr.HLRApplication;
+import sio.hlr.Tools.ServicesMatieres;
+import sio.hlr.Tools.ServicesSousMatieres;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HLRMenuAdminController implements Initializable {
-
+    //ServicesMatieres servicesMatieres; //marche pas
     @javafx.fxml.FXML
     private Button btnCreerMatiere;
     @javafx.fxml.FXML
@@ -89,13 +95,22 @@ public class HLRMenuAdminController implements Initializable {
     private Button btnDeconnexion;
 
     @javafx.fxml.FXML
-    public void btnCreerMatiereClicked(Event event) {
-        apCreerMatieres.toFront();
-    }
+    public void btnCreerMatiereClicked(Event event){apCreerMatieres.toFront();}
 
     @javafx.fxml.FXML
-    public void btnModifMatiereClicked(Event event) {
+    public void btnModifMatiereClicked(Event event) throws SQLException {
         apModifMatiere.toFront();
+
+        // Remplissage de la liste déroulante (cboNomMatiere)
+        ServicesMatieres servicesMatieres = new ServicesMatieres();
+        ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
+        ObservableList<String> lesMatieres = FXCollections.observableArrayList();
+        for (Matiere uneMatiere : servicesMatieres.GetAllMatiere()){
+            lesMatieres.add(uneMatiere.getDesignation());
+        }
+        cboNomMatiere.setItems(lesMatieres);
+        cboNomMatiere.getSelectionModel().selectFirst();
+        //--------------------------------------------------------------//
     }
 
     @javafx.fxml.FXML
@@ -119,8 +134,9 @@ public class HLRMenuAdminController implements Initializable {
     }
 
     @javafx.fxml.FXML
-    public void btnValiderCreerMatiere(Event event) {
+    public void btnValiderCreerMatiere(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
         if (txtCreerNomMatiere.getText().isEmpty())
         {
             alert.setTitle("Erreur de saisie");
@@ -138,6 +154,12 @@ public class HLRMenuAdminController implements Initializable {
         else
         {
             // a compléter
+            ServicesMatieres servicesMatieres = new ServicesMatieres();
+            servicesMatieres.ajoutMatiereSousMatiere(txtCreerNomMatiere.getText(),txtCreerNomSousMatiere.getText());
+            alert1.setTitle("Ajout affectué");
+            alert1.setHeaderText("");
+            alert1.setContentText("La matière a bien été ajouté !");
+            alert1.showAndWait();
         }
     }
 
@@ -243,5 +265,13 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
+    }
+
+    @javafx.fxml.FXML
+    public void cboNomMatiereClicked(Event event) throws SQLException {
+        ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
+        String matiereCbo = cboNomMatiere.getSelectionModel().getSelectedItem().toString();
+        txtModifNomSousMatiere.setText(servicesSousMatieres.GetSousMatiere(matiereCbo));
+
     }
 }

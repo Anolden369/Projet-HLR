@@ -34,4 +34,12 @@ public class ServicesMatieres {
         return lesMatieres;
     }
 
+    public void ajoutMatiereSousMatiere(String nomMatiere,String sousMatiere) throws SQLException {
+    ps = uneCnx.prepareStatement("INSERT INTO matiere (id, designation, sous_matiere) VALUES (NULL,?,?)");
+    ps.setString(1,nomMatiere);
+    ps.setString(2,sousMatiere);
+    ps.executeUpdate();
+
+    }
+
 }
