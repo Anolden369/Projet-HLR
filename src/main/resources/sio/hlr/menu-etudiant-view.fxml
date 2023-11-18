@@ -7,13 +7,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="515.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuEtudiantController">
+<AnchorPane prefHeight="515.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuEtudiantController">
    <children>
       <HBox layoutX="166.0" prefHeight="90.0" prefWidth="562.0" style="-fx-background-color: #0f8fd1;">
          <children>
@@ -81,7 +80,6 @@
          <children>
             <AnchorPane fx:id="apMesDemandes" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <TreeView fx:id="tvMesDemandes" layoutX="17.0" layoutY="70.0" prefHeight="334.0" prefWidth="530.0" />
                   <Label layoutX="14.0" layoutY="24.0" prefHeight="32.0" prefWidth="150.0" text="Mes demandes en cours :">
                      <font>
                         <Font size="13.0" />
@@ -89,6 +87,15 @@
                   </Label>
                   <Button fx:id="btnMenuModifierDemande" layoutX="445.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnModifierDemandeClicked" prefHeight="26.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Modifier" />
                   <Button fx:id="btnMenuCreerDemande" layoutX="328.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerDemandeClicked" prefHeight="26.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer" />
+                  <TableView fx:id="tvMesDemandes" layoutX="11.0" layoutY="65.0" prefHeight="345.0" prefWidth="541.0">
+                     <columns>
+                        <TableColumn fx:id="tcNumVoirMesDemandes" prefWidth="52.0" text="Numéro" />
+                        <TableColumn fx:id="tcDateVoirMesDemandes" prefWidth="97.0" text="Date Expiration" />
+                        <TableColumn fx:id="tcMatiereVoirMesDemandes" prefWidth="89.0" text="Matière" />
+                        <TableColumn fx:id="tcSousMatiereVoirMesDemandes" prefWidth="214.0" text="Sous-matière" />
+                        <TableColumn fx:id="tcStatutVoirMesDemandes" prefWidth="88.0" text="Statut" />
+                     </columns>
+                  </TableView>
                </children></AnchorPane>
             <AnchorPane fx:id="apCreerDemande" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
@@ -233,7 +240,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tvLesDemandes" layoutX="14.0" layoutY="46.0" onMouseClicked="#tvLesDemandesClicked" prefHeight="368.0" prefWidth="541.0">
+                  <TableView fx:id="tvLesDemandes" layoutX="14.0" layoutY="46.0" onMouseClicked="#tvLesDemandesClicked" prefHeight="368.0" prefWidth="541.0" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="tcLesDemandesDemandeurs" prefWidth="145.0" text="Demandeur" />
                       <TableColumn fx:id="tcLesDemandesMatiere" prefWidth="149.0" text="Matière" />

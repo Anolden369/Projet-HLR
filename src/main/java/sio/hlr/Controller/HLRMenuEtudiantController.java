@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sio.hlr.Entities.Demandes;
 import sio.hlr.Entities.Matiere;
 import sio.hlr.Entities.User;
 import sio.hlr.HLRApplication;
@@ -24,9 +25,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.scene.control.TreeTableView;
+import sio.hlr.Tools.ServicesMesDemandes;
 import sio.hlr.Tools.ServicesSousMatieres;
 
 
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class HLRMenuEtudiantController implements Initializable{
@@ -39,7 +42,7 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private Button btnMesStatistiques;
     @javafx.fxml.FXML
-    private TreeView tvMesDemandes;
+    private TableView tvMesDemandes;
     @javafx.fxml.FXML
     private Button btnModifierDemande;
     @javafx.fxml.FXML
@@ -83,6 +86,8 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private DatePicker dpDateFin;
     ServicesMatieres servicesMatieres;
+    ServicesSousMatieres servicesSousMatieres;
+    ServicesMesDemandes servicesMesDemandes;
     ConnexionBDD maCnx;
 
     @FXML
@@ -135,6 +140,16 @@ public class HLRMenuEtudiantController implements Initializable{
     private TableColumn tcLesDemandesDateLimite;
     @FXML
     private Button btnDeconnexion;
+    @FXML
+    private TableColumn tcNumVoirMesDemandes;
+    @FXML
+    private TableColumn tcDateVoirMesDemandes;
+    @FXML
+    private TableColumn tcSousMatiereVoirMesDemandes;
+    @FXML
+    private TableColumn tcStatutVoirMesDemandes;
+    @FXML
+    private TableColumn tcMatiereVoirMesDemandes;
 
 
     @Override
@@ -148,8 +163,9 @@ public class HLRMenuEtudiantController implements Initializable{
             //ObservableList<Matiere> lesMatieres = servicesMatieres.GetAllMatiere();
             //cboCreerChoixMatiere.setItems(lesMatieres);
 
-            ServicesMatieres servicesMatieres = new ServicesMatieres();
-            ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
+            servicesMatieres = new ServicesMatieres();
+            servicesSousMatieres = new ServicesSousMatieres();
+            servicesMesDemandes = new ServicesMesDemandes();
 
             tvCreerMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
             tcCreerMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
@@ -166,8 +182,13 @@ public class HLRMenuEtudiantController implements Initializable{
             tvModifSMatiereDemande.setItems(servicesSousMatieres.GetSousMatiereAnglais());
             tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("sousMatiere"));
 
+            tcNumVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, Integer>("id"));
+            tcMatiereVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, String>("matiere"));
+            tcSousMatiereVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, String>("sousMatiere"));
+            tcDateVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, Date>("dateFinDemande"));
+            tcStatutVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, Integer>("status"));
 
-
+            tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
 
 
         } catch (SQLException e) {

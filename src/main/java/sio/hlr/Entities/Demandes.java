@@ -1,21 +1,32 @@
 package sio.hlr.Entities;
 
+import java.util.Date;
+
 public class Demandes {
     private int id;
-    private int dateUpdated;
-    private int dateFinDemande;
+    private Date dateUpdated;
+    private Date dateFinDemande;
+    private String matiere;
     private String sousMatiere;
     private int idUser;
     private int idMatiere;
     private int status;
 
-    public Demandes(int id, int dateUpdated, int dateFinDemande, String sousMatiere, int idUser, int idMatiere, int status) {
+    public Demandes(int id, Date dateUpdated, Date dateFinDemande,String matiere, String sousMatiere, int idUser, int status) {
         this.id = id;
         this.dateUpdated = dateUpdated;
         this.dateFinDemande = dateFinDemande;
         this.sousMatiere = sousMatiere;
         this.idUser = idUser;
-        this.idMatiere = idMatiere;
+        this.matiere = matiere;
+        this.status = status;
+    }
+
+    public Demandes(int id, Date dateFinDemande, String matiere, String sousMatiere, int status) {
+        this.id = id;
+        this.dateFinDemande = dateFinDemande;
+        this.matiere = matiere;
+        this.sousMatiere = sousMatiere;
         this.status = status;
     }
 
@@ -23,11 +34,11 @@ public class Demandes {
         return id;
     }
 
-    public int getDateUpdated() {
+    public Date getDateUpdated() {
         return dateUpdated;
     }
 
-    public int getDateFinDemande() {
+    public Date getDateFinDemande() {
         return dateFinDemande;
     }
 
@@ -49,5 +60,12 @@ public class Demandes {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getMatiere() {
+        return matiere;
+    }
+    public void setMatiere(String matiere) {
+        this.matiere = matiere;
     }
 }
