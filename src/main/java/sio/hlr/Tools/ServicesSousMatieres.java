@@ -40,6 +40,25 @@ public class ServicesSousMatieres {
         return sousMatiereAnglais;
     }
 
+    public ObservableList<Matiere> GetAllSousMatieres(String designation) throws SQLException {
+        ObservableList<Matiere> lesSousMatieres = FXCollections.observableArrayList();
+        ps = uneCnx.prepareStatement("SELECT matiere.sous_matiere from matiere WHERE matiere.designation= ?");
+        ps.setString(1, designation);
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String sousMatieres = rs.getString("sous_matiere");
+            String[] sousMatieresArray = sousMatieres.split("#");
+            for (String sousMatiereString : sousMatieresArray) {
+                Matiere sousMatiere = new Matiere();
+                sousMatiere.setSousMatiere(sousMatiereString);
+                lesSousMatieres.add(sousMatiere);
+            }
+        }
+        lesSousMatieres.remove(0);
+        return lesSousMatieres;
+    }
+
     public String GetSousMatiere(String nomMatiere) throws SQLException {
         String lesSousMatieres;
         ps = uneCnx.prepareStatement("SELECT matiere.sous_matiere\n" +
