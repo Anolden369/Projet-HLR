@@ -40,5 +40,17 @@ public class ServicesSousMatieres {
         return sousMatiereAnglais;
     }
 
+    public String GetSousMatiere(String nomMatiere) throws SQLException {
+        String lesSousMatieres;
+        ps = uneCnx.prepareStatement("SELECT matiere.sous_matiere\n" +
+                "from matiere\n" +
+                "WHERE matiere.designation=?");
+        ps.setString(1,nomMatiere);
+        rs = ps.executeQuery();
+        rs.next();
+        lesSousMatieres = rs.getString(1);
+        return lesSousMatieres;
+    }
+
 
 }
