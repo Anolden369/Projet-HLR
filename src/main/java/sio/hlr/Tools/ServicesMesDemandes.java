@@ -33,7 +33,7 @@ public class ServicesMesDemandes {
         ps.setDate(2, date);
         rs = ps.executeQuery();
         while(rs.next()){
-            Demandes uneDemande = new Demandes(rs.getInt(1),rs.getDate(2),rs.getString(3),rs.getString(4),rs.getInt(5));
+            Demandes uneDemande = new Demandes(rs.getInt(1), rs.getDate(2).toLocalDate(),rs.getString(3),rs.getString(4),rs.getInt(5));
             mesDemandes.add(uneDemande);
         }
         return mesDemandes;
@@ -54,6 +54,24 @@ public class ServicesMesDemandes {
         ps.setInt(4, idUser);
         ps.setInt(5, idMatiere);
         ps.setInt(6, statut);
+        ps.executeUpdate();
+
+    }
+
+    public void modifierDemande(int idDemande, ArrayList<String> lesSousMatieres, DatePicker dateFinDemande, String nomMatiere) throws SQLException {
+        int idUser = servicesUsers.getIdUser();
+        int idMatiere = servicesMatieres.GetIdMatiere(nomMatiere);
+        String sousMatiere = "";
+        for (String uneSousMatiere:lesSousMatieres) {
+            sousMatiere = sousMatiere + "#" + uneSousMatiere;
+        }
+        ps = uneCnx.prepareStatement("UPDATE demande SET date_updated = ?, date_fin_demande = ?, sous_matiere = ?, id_matiere = ? WHERE demande.id = ? AND demande.id_user = ?");
+        ps.setDate(1, Date.valueOf(DateActuelle));
+        ps.setDate(2, Date.valueOf(dateFinDemande.getValue()));
+        ps.setString(3,sousMatiere);
+        ps.setInt(4, idMatiere);
+        ps.setInt(5, idDemande);
+        ps.setInt(6, idUser);
         ps.executeUpdate();
 
     }

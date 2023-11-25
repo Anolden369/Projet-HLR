@@ -1,18 +1,20 @@
 package sio.hlr.Entities;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
 
 public class Demandes {
     private int id;
     private Date dateUpdated;
-    private Date dateFinDemande;
+    private LocalDate dateFinDemande;
     private String matiere;
     private String sousMatiere;
     private int idUser;
     private int idMatiere;
     private int status;
 
-    public Demandes(int id, Date dateUpdated, Date dateFinDemande,String matiere, String sousMatiere, int idUser, int status) {
+    public Demandes(int id, Date dateUpdated, LocalDate dateFinDemande,String matiere, String sousMatiere, int idUser, int status) {
         this.id = id;
         this.dateUpdated = dateUpdated;
         this.dateFinDemande = dateFinDemande;
@@ -22,7 +24,7 @@ public class Demandes {
         this.status = status;
     }
 
-    public Demandes(int id, Date dateFinDemande, String matiere, String sousMatiere, int status) {
+    public Demandes(int id, LocalDate dateFinDemande, String matiere, String sousMatiere, int status) {
         this.id = id;
         this.dateFinDemande = dateFinDemande;
         this.matiere = matiere;
@@ -38,7 +40,7 @@ public class Demandes {
         return dateUpdated;
     }
 
-    public Date getDateFinDemande() {
+    public LocalDate getDateFinDemande() {
         return dateFinDemande;
     }
 
