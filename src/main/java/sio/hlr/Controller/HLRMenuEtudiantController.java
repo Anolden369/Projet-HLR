@@ -1,5 +1,6 @@
 package sio.hlr.Controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
@@ -10,8 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Material;
 import javafx.stage.Stage;
 import sio.hlr.Entities.Demandes;
 import sio.hlr.Entities.Matiere;
@@ -29,6 +32,7 @@ import sio.hlr.Tools.ServicesMesDemandes;
 import sio.hlr.Tools.ServicesSousMatieres;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -42,7 +46,7 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private Button btnMesStatistiques;
     @javafx.fxml.FXML
-    private TableView tvMesDemandes;
+    private TableView<Demandes> tvMesDemandes;
     @javafx.fxml.FXML
     private Button btnModifierDemande;
     @javafx.fxml.FXML
@@ -59,8 +63,6 @@ public class HLRMenuEtudiantController implements Initializable{
     private AnchorPane apModifierDemande;
     @javafx.fxml.FXML
     private ComboBox cboModifierDemande;
-    @javafx.fxml.FXML
-    private DatePicker dpModifierDateActuelle;
     @javafx.fxml.FXML
     private AnchorPane apMesCompetences;
     @javafx.fxml.FXML
@@ -95,15 +97,15 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcCreerMatiereCompetence;
     @FXML
-    private TableView tvCreerMatiereDemande;
+    private TableView<Matiere> tvCreerMatiereDemande;
     @FXML
     private TableColumn tcCreerMatiereDemande;
     @FXML
-    private TableView tvModifMatiereDemande;
+    private TableView<Matiere> tvModifMatiereDemande;
     @FXML
     private TableColumn tcModifMatiereDemande;
     @FXML
-    private TableView tvModifSMatiereDemande;
+    private TableView<Matiere> tvModifSMatiereDemande;
     @FXML
     private TableColumn tcModifSMatiereDemande;
     @FXML
@@ -111,7 +113,7 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcCreerSMatiereCompetence;
     @FXML
-    private TableView tvCreerSMatiereDemande;
+    private TableView<Matiere> tvCreerSMatiereDemande;
     @FXML
     private TableColumn tcCreerSMatiereDemande;
     @FXML
@@ -150,6 +152,14 @@ public class HLRMenuEtudiantController implements Initializable{
     private TableColumn tcStatutVoirMesDemandes;
     @FXML
     private TableColumn tcMatiereVoirMesDemandes;
+    @FXML
+    private TableColumn tcChoixSMatiereCreerDemande;
+
+    LocalDate DateActuelle = LocalDate.now();
+    @FXML
+    private DatePicker dpModifierDemandeDateFin;
+    @FXML
+    private TableColumn tcChoixSMatiereModifDemande;
 
 
     @Override
@@ -157,31 +167,13 @@ public class HLRMenuEtudiantController implements Initializable{
         apMesDemandes.toFront();
         try {
             maCnx = new ConnexionBDD();
-            LocalDate currentDate = LocalDate.now();
-
-            //ServicesMatieres servicesMatieres = new ServicesMatieres();
-            //ObservableList<Matiere> lesMatieres = servicesMatieres.GetAllMatiere();
-            //cboCreerChoixMatiere.setItems(lesMatieres);
 
             servicesMatieres = new ServicesMatieres();
             servicesSousMatieres = new ServicesSousMatieres();
             servicesMesDemandes = new ServicesMesDemandes();
 
-            tvCreerMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
-            tcCreerMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
 
-            tvCreerMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
-            tcCreerMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
-
-            tvModifMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
-            tcModifMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
-
-            tvModifMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
-            tcModifMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
-
-            tvModifSMatiereDemande.setItems(servicesSousMatieres.GetSousMatiereAnglais());
-            tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("sousMatiere"));
-
+            //Afficher toutes mes demandes en cours
             tcNumVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, Integer>("id"));
             tcMatiereVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, String>("matiere"));
             tcSousMatiereVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, String>("sousMatiere"));
@@ -191,6 +183,26 @@ public class HLRMenuEtudiantController implements Initializable{
             tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
 
 
+
+            //Creer une matiere dans Demande
+            tvCreerMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
+            tcCreerMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+            //Modifier une matiere dans Demande
+            tvModifMatiereDemande.setItems(servicesMatieres.GetAllMatiere());
+            tcModifMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+
+            //Creer une matiere dans Compétences
+            tvCreerMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
+            tcCreerMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+            //Modifier une matiere dans Compétences
+            tvModifMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
+            tcModifMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
+
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -198,8 +210,157 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
+    @FXML
+    public void tvChoixMatiereDemandeClicked(Event event) throws SQLException {
+        servicesMatieres = new ServicesMatieres();
+        servicesSousMatieres = new ServicesSousMatieres();
+        String designation = tvCreerMatiereDemande.getSelectionModel().getSelectedItem().getDesignation();
+        tcCreerSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere,String>("sousMatiere"));
+        tcChoixSMatiereCreerDemande.setCellValueFactory(new PropertyValueFactory<Matiere, CheckBox>("uneSelection"));
+        tvCreerSMatiereDemande.setItems(servicesSousMatieres.GetAllSousMatieres(designation));
+    }
+
+    @FXML
+    public void onBtn2CreerDemandeClicked(Event event) throws SQLException {
+        // je vérifie s'il y a au moins une sous matière qui a été selectionnée par le user
+        boolean AuMoinsUneSelectionSousMatiere = false;
+        for (Matiere matiere : tvCreerSMatiereDemande.getItems()) {
+            if (matiere.getUneSelection() != null && matiere.getUneSelection().isSelected()) {
+                AuMoinsUneSelectionSousMatiere = true;
+                break;
+            }
+        }
+        // je gère les erreurs
+        if(tvCreerMatiereDemande.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une matière !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else if(!AuMoinsUneSelectionSousMatiere) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner au moins une sous matière !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else if(dpDateFin.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de date");
+            alert.setContentText("Veuillez selectionner une date !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            servicesMesDemandes = new ServicesMesDemandes();
+            ObservableList<Matiere> lesSelectionsSousMatieres = tvCreerSMatiereDemande.getItems();
+            ArrayList<String> lesSousMatieres = new ArrayList<>();
+
+            for (Matiere uneMatiere : lesSelectionsSousMatieres) {
+                if (uneMatiere.getUneSelection().isSelected()) {
+                    lesSousMatieres.add(uneMatiere.getSousMatiere());
+                }
+            }
+            String designation = tvCreerMatiereDemande.getSelectionModel().getSelectedItem().getDesignation();
+            servicesMesDemandes.creerDemande(lesSousMatieres, dpDateFin, designation);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Créer demande");
+            alert.setContentText("Votre demande a bien été créer!");
+            alert.setHeaderText("");
+            alert.showAndWait();
+            apMesDemandes.toFront();
+            tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
+        }
+    }
+
     @javafx.fxml.FXML
-    public void onBtnMesDemandesClicked(Event event) {
+    public void onBtnModifierDemandeClicked(Event event) throws SQLException {
+        if(tvMesDemandes.getSelectionModel().getSelectedItem() == null){
+            apMesDemandes.toFront();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une demande pour la modifier !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            servicesMesDemandes = new ServicesMesDemandes();
+            ObservableList<Integer> lesIdDemandesSelectionne = FXCollections.observableArrayList();
+            int idDemandesSelectionne = tvMesDemandes.getSelectionModel().getSelectedItem().getId();
+            lesIdDemandesSelectionne.add(idDemandesSelectionne);
+            cboModifierDemande.setItems(lesIdDemandesSelectionne);
+            cboModifierDemande.getSelectionModel().selectFirst();
+            dpModifierDemandeDateFin.setValue(tvMesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande());
+            apModifierDemande.toFront();
+        }
+    }
+    @FXML
+    public void tvModifMatiereDemandeClicked(Event event) throws SQLException {
+        servicesMatieres = new ServicesMatieres();
+        servicesSousMatieres = new ServicesSousMatieres();
+        String designation = tvModifMatiereDemande.getSelectionModel().getSelectedItem().getDesignation();
+        tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere,String>("sousMatiere"));
+        tcChoixSMatiereModifDemande.setCellValueFactory(new PropertyValueFactory<Matiere, CheckBox>("uneSelection"));
+        tvModifSMatiereDemande.setItems(servicesSousMatieres.GetAllSousMatieres(designation));
+    }
+
+    @FXML
+    public void onBtn2ModifierDemandeClicked(Event event) throws SQLException {
+        // je vérifie s'il y a au moins une sous matière qui a été selectionnée par le user
+        boolean AuMoinsUneSelectionSousMatiere = false;
+        for (Matiere matiere : tvModifSMatiereDemande.getItems()) {
+            if (matiere.getUneSelection() != null && matiere.getUneSelection().isSelected()) {
+                AuMoinsUneSelectionSousMatiere = true;
+                break;
+            }
+        }
+        // je gère les erreurs
+        if(tvModifMatiereDemande.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une matière !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else if(!AuMoinsUneSelectionSousMatiere) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner au moins une sous matière !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else if(dpModifierDemandeDateFin.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de date");
+            alert.setContentText("Veuillez selectionner une date !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            servicesMesDemandes = new ServicesMesDemandes();
+            ObservableList<Matiere> lesSelectionsSousMatieres = tvModifSMatiereDemande.getItems();
+            ArrayList<String> lesSousMatieres = new ArrayList<>();
+
+            for (Matiere uneMatiere : lesSelectionsSousMatieres) {
+                if (uneMatiere.getUneSelection().isSelected()) {
+                    lesSousMatieres.add(uneMatiere.getSousMatiere());
+                }
+            }
+            String designation = tvModifMatiereDemande.getSelectionModel().getSelectedItem().getDesignation();
+            servicesMesDemandes.modifierDemande(Integer.parseInt(cboModifierDemande.getSelectionModel().getSelectedItem().toString()),lesSousMatieres, dpModifierDemandeDateFin, designation);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Modifier demande");
+            alert.setContentText("Votre demande a bien été modifier!");
+            alert.setHeaderText("");
+            alert.showAndWait();
+            apMesDemandes.toFront();
+            tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
+        }
+    }
+
+    @FXML
+    public void btnSMDemande(Event event) throws SQLException {
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnMesDemandesClicked(Event event) throws SQLException {
+        tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
         apMesDemandes.toFront();
     }
 
@@ -218,13 +379,10 @@ public class HLRMenuEtudiantController implements Initializable{
         apStatistiques.toFront();
     }
 
-    @javafx.fxml.FXML
-    public void onBtnModifierDemandeClicked(Event event) {
-        apModifierDemande.toFront();
-    }
-
     @FXML
-    public void onBtnCreerDemandeClicked(Event event) {apCreerDemande.toFront();}
+    public void onBtnCreerDemandeClicked(Event event) {
+        apCreerDemande.toFront();
+    }
 
     @javafx.fxml.FXML
     public void onBtnModifierCompetenceClicked(Event event) {
@@ -234,20 +392,6 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     public void onBtnCreerCompetenceClicked(Event event) {
         apCreerCompetence.toFront();
-    }
-
-    @FXML
-    public void btnSMDemande(Event event) throws SQLException {
-
-    }
-
-    @FXML
-    public void lvChoixMatiereDemandeClicked(Event event) throws SQLException {
-        if (tvCreerMatiereDemande.getSelectionModel().getSelectedItem().equals("Anglais")){
-            ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
-            tvModifSMatiereDemande.setItems(servicesSousMatieres.GetSousMatiereAnglais());
-            tcModifSMatiereDemande.setCellValueFactory(new PropertyValueFactory<Matiere, String>("sousMatiere"));
-        }
     }
 
     @FXML
@@ -261,5 +405,9 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
+    }
+
+    @FXML
+    public void lvChoixMatiereDemandeClicked(Event event) {
     }
 }

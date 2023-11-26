@@ -34,11 +34,21 @@ public class ServicesMatieres {
         return lesMatieres;
     }
 
+    public int GetIdMatiere(String nomMatiere) throws SQLException {
+        ps = uneCnx.prepareStatement("SELECT matiere.id FROM matiere WHERE matiere.designation=?");
+        ps.setString(1,nomMatiere);
+        rs = ps.executeQuery();
+        rs.next();
+        int idMatiere = rs.getInt(1);
+        return idMatiere;
+    }
+
+    //Partie Menu Admin
     public void ajoutMatiereSousMatiere(String nomMatiere,String sousMatiere) throws SQLException {
-    ps = uneCnx.prepareStatement("INSERT INTO matiere (id, designation, sous_matiere) VALUES (NULL,?,?)");
-    ps.setString(1,nomMatiere);
-    ps.setString(2,sousMatiere);
-    ps.executeUpdate();
+        ps = uneCnx.prepareStatement("INSERT INTO matiere (id, designation, sous_matiere) VALUES (NULL,?,?)");
+        ps.setString(1,nomMatiere);
+        ps.setString(2,sousMatiere);
+        ps.executeUpdate();
 
     }
 

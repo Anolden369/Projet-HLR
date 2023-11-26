@@ -20,13 +20,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HLRConnexionController implements Initializable {
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("menu-etudiant-view.fxml"));
     ServicesUsers servicesUsers = new ServicesUsers();
     ConnexionBDD maCnx;
     @FXML
     private TextField txtLogin;
-    @FXML
-    private Button btnConnexion;
     @FXML
     private PasswordField pfMdp;
     @FXML
