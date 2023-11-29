@@ -17,6 +17,8 @@ public class ServicesUsers {
     private  Connection uneCnx;
     private PreparedStatement ps;
     private ResultSet rs;
+    private static String emailUser;
+    private static String passwordUser;
 
     public ServicesUsers()
     {
@@ -26,24 +28,37 @@ public class ServicesUsers {
     public User verifLogin(String email, String password) throws SQLException, IOException {
         User user = null;
         String query = "SELECT email,password,role FROM user WHERE email=? AND password=?";
-        PreparedStatement ps = uneCnx.prepareStatement(query);
+        ps = uneCnx.prepareStatement(query);
         ps.setString(1, email);
         ps.setString(2, password);
-        ResultSet resultSet = ps.executeQuery();
-        if (!resultSet.next()) {
+        rs = ps.executeQuery();
+        if (!rs.next()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de connexion");
             alert.setContentText("Veuillez saisir les bons identifiants !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else {
-            user = new User(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3));
-            if ((resultSet.getString(3)).equals("Etudiant")) {
+            user = new User(rs.getString(1),rs.getString(2),rs.getString(3));
+            emailUser = user.getEmail();
+            passwordUser = user.getPassword();
+            if ((rs.getString(3)).equals("Etudiant")) {
                 HLRApplication.EtudiantScene();
             } else {
                 HLRApplication.AdminScene();
             }
         }
         return user;
+    }
+
+    public int getIdUser() throws SQLException {
+        int userId = 0;
+        ps = uneCnx.prepareStatement("SELECT user.id FROM user WHERE user.email=? AND user.password= ?");
+        ps.setString(1, emailUser);
+        ps.setString(2, passwordUser);
+        rs = ps.executeQuery();
+        rs.next();
+        userId = rs.getInt(1);
+        return userId;
     }
 }
