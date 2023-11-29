@@ -39,6 +39,24 @@ public class ServicesMatieres {
     ps.setString(1,nomMatiere);
     ps.setString(2,sousMatiere);
     ps.executeUpdate();
+    }
+
+    public void ModifMatiereSousMatiere(String txtNomNewMatiere,String sousMatiere,String nomMatiere) throws SQLException {
+        ps = uneCnx.prepareStatement("UPDATE `matiere` SET `designation`=?,`sous_matiere`=? WHERE designation=?");
+        ps.setString(1,txtNomNewMatiere);
+        ps.setString(2,sousMatiere);
+        ps.setString(3,nomMatiere);
+        ps.executeUpdate();
+    }
+
+    public String getNomMatiere(String nomMatiere) throws SQLException{
+        String laMatiere;
+        ps = uneCnx.prepareStatement("SELECT  `designation` FROM `matiere` WHERE matiere.designation=?");
+        ps.setString(1,nomMatiere);
+        rs = ps.executeQuery();
+        rs.next();
+        laMatiere = rs.getString(1);
+        return laMatiere;
 
     }
 

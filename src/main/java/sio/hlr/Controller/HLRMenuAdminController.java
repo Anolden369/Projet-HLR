@@ -100,7 +100,6 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     public void btnModifMatiereClicked(Event event) throws SQLException {
         apModifMatiere.toFront();
-
         // Remplissage de la liste déroulante (cboNomMatiere)
         ServicesMatieres servicesMatieres = new ServicesMatieres();
         ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
@@ -109,8 +108,18 @@ public class HLRMenuAdminController implements Initializable {
             lesMatieres.add(uneMatiere.getDesignation());
         }
         cboNomMatiere.setItems(lesMatieres);
-        cboNomMatiere.getSelectionModel().selectFirst();
+
         //--------------------------------------------------------------//
+    }
+    @javafx.fxml.FXML
+    public void cboNomMatiereClicked(Event event) throws SQLException {
+        ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
+        ServicesMatieres servicesMatieres = new ServicesMatieres();
+
+        String matiereCbo = cboNomMatiere.getSelectionModel().getSelectedItem().toString(); // récupération du nom de la matière du cbo pour le mettre dnas une variable String qui sera paramètre
+        txtModifNomSousMatiere.setText(servicesSousMatieres.GetSousMatiere(matiereCbo)); // remplissage de zone texte des sous matières par
+        txtModifNomMatiere.setText(servicesMatieres.getNomMatiere(matiereCbo));
+
     }
 
     @javafx.fxml.FXML
@@ -164,7 +173,7 @@ public class HLRMenuAdminController implements Initializable {
     }
 
     @javafx.fxml.FXML
-    public void btnValiderModifMatiereClicked(Event event) {
+    public void btnValiderModifMatiereClicked(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         if (cboNomMatiere.getSelectionModel().getSelectedItem()==null)
         {
@@ -189,7 +198,13 @@ public class HLRMenuAdminController implements Initializable {
         }
         else
         {
-            // a compléter
+            ServicesMatieres servicesMatieres = new ServicesMatieres();
+            String newMatiere = txtModifNomMatiere.getText().toString();
+            String newSousMatiere = txtModifNomSousMatiere.getText().toString();
+            String cbo = cboNomMatiere.getSelectionModel().getSelectedItem().toString();
+            servicesMatieres.ModifMatiereSousMatiere(newMatiere,newSousMatiere,cbo);
+
+
         }
 
     }
@@ -244,6 +259,7 @@ public class HLRMenuAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         apCreerMatieres.toFront();
+        cboNomMatiere.setValue("Choix de la matiere");
     }
 
     @javafx.fxml.FXML
@@ -267,11 +283,5 @@ public class HLRMenuAdminController implements Initializable {
         HLRApplication.LoginScene();
     }
 
-    @javafx.fxml.FXML
-    public void cboNomMatiereClicked(Event event) throws SQLException {
-        ServicesSousMatieres servicesSousMatieres = new ServicesSousMatieres();
-        String matiereCbo = cboNomMatiere.getSelectionModel().getSelectedItem().toString();
-        txtModifNomSousMatiere.setText(servicesSousMatieres.GetSousMatiere(matiereCbo));
 
-    }
 }

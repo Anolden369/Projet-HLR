@@ -6,7 +6,6 @@ public class Matiere {
     private String sousMatiere;
 
 
-
     public int getId() {
         return id;
     }
