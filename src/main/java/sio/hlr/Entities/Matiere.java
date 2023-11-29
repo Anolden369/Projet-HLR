@@ -39,8 +39,6 @@ public class Matiere {
     public void setUneSelection(CheckBox uneSelection) {
         this.uneSelection = uneSelection;
     }
-
-
     public String getSousMatiere() {
         return sousMatiere;
     }

@@ -16,20 +16,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Material;
 import javafx.stage.Stage;
+import sio.hlr.Entities.Competences;
 import sio.hlr.Entities.Demandes;
 import sio.hlr.Entities.Matiere;
 import sio.hlr.Entities.User;
 import sio.hlr.HLRApplication;
-import sio.hlr.Tools.ConnexionBDD;
-import sio.hlr.Tools.ServicesMatieres;
+import sio.hlr.Tools.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.scene.control.TreeTableView;
-import sio.hlr.Tools.ServicesMesDemandes;
-import sio.hlr.Tools.ServicesSousMatieres;
 
 
 import java.util.ArrayList;
@@ -66,19 +64,11 @@ public class HLRMenuEtudiantController implements Initializable{
     @javafx.fxml.FXML
     private AnchorPane apMesCompetences;
     @javafx.fxml.FXML
-    private Button btnMenuModifierCompetence;
-    @javafx.fxml.FXML
     private Button btnMenuCreerCompetence;
     @javafx.fxml.FXML
     private AnchorPane apCreerCompetence;
     @javafx.fxml.FXML
     private Button btnCreerCompetence;
-    @javafx.fxml.FXML
-    private AnchorPane apModifierCompetence;
-    @javafx.fxml.FXML
-    private ComboBox cboModifierCompetence;
-    @javafx.fxml.FXML
-    private Button btnModifierCompetence;
     @javafx.fxml.FXML
     private Button btnMesDemandes;
     @javafx.fxml.FXML
@@ -90,10 +80,12 @@ public class HLRMenuEtudiantController implements Initializable{
     ServicesMatieres servicesMatieres;
     ServicesSousMatieres servicesSousMatieres;
     ServicesMesDemandes servicesMesDemandes;
+    ServicesMesCompetences servicesMesCompetences;
+    ServicesUsers servicesUsers;
     ConnexionBDD maCnx;
 
     @FXML
-    private TableView tvCreerMatiereCompetence;
+    private TableView<Matiere> tvCreerMatiereCompetence;
     @FXML
     private TableColumn tcCreerMatiereCompetence;
     @FXML
@@ -109,27 +101,11 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcModifSMatiereDemande;
     @FXML
-    private TableView tvCreerSMatiereCompetence;
-    @FXML
-    private TableColumn tcCreerSMatiereCompetence;
+    private TableView<Matiere> tvCreerSMatiereCompetence;
     @FXML
     private TableView<Matiere> tvCreerSMatiereDemande;
     @FXML
     private TableColumn tcCreerSMatiereDemande;
-    @FXML
-    private TableView tvModifMatiereCompetence;
-    @FXML
-    private TableColumn tcModifMatiereCompetence;
-    @FXML
-    private TableView tvModifSMatiereCompetence;
-    @FXML
-    private TableColumn tcModifSMatiereCompetence;
-    @FXML
-    private TableView tvCreerCompetence;
-    @FXML
-    private TableColumn tcCreerCompetenceMatiere;
-    @FXML
-    private TableColumn tcCreerCompetenceSMatiere;
     @FXML
     private TableView tvLesDemandes;
     @FXML
@@ -154,12 +130,23 @@ public class HLRMenuEtudiantController implements Initializable{
     private TableColumn tcMatiereVoirMesDemandes;
     @FXML
     private TableColumn tcChoixSMatiereCreerDemande;
-
     LocalDate DateActuelle = LocalDate.now();
     @FXML
     private DatePicker dpModifierDemandeDateFin;
     @FXML
     private TableColumn tcChoixSMatiereModifDemande;
+    @FXML
+    private TableView<Competences> tvMesCompetences;
+    @FXML
+    private TableColumn tcVoirMesCompetencesMatiere;
+    @FXML
+    private TableColumn tcVoirMesCompetencesSMatiere;
+    @FXML
+    private TableColumn tcCreerSMatiereComptence;
+    @FXML
+    private TableColumn tcChoixSMatiereCreerCompetence;
+    @FXML
+    private Button btnMenuSupprimerCompetence;
 
 
     @Override
@@ -171,6 +158,7 @@ public class HLRMenuEtudiantController implements Initializable{
             servicesMatieres = new ServicesMatieres();
             servicesSousMatieres = new ServicesSousMatieres();
             servicesMesDemandes = new ServicesMesDemandes();
+            servicesMesCompetences = new ServicesMesCompetences();
 
 
             //Afficher toutes mes demandes en cours
@@ -182,6 +170,11 @@ public class HLRMenuEtudiantController implements Initializable{
 
             tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
 
+            //Afficher toutes mes compétences
+            tcVoirMesCompetencesMatiere.setCellValueFactory(new PropertyValueFactory<Competences, String>("matiere"));
+            tcVoirMesCompetencesSMatiere.setCellValueFactory(new PropertyValueFactory<Competences, String>("sousMatiere"));
+
+            tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
 
 
             //Creer une matiere dans Demande
@@ -196,10 +189,6 @@ public class HLRMenuEtudiantController implements Initializable{
             //Creer une matiere dans Compétences
             tvCreerMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
             tcCreerMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
-
-            //Modifier une matiere dans Compétences
-            tvModifMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
-            tcModifMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
 
 
 
@@ -354,6 +343,110 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
+// Partie mes Competences
+    @FXML
+    public void tvChoixMatiereCompetenceClicked(Event event) throws SQLException {
+        servicesMatieres = new ServicesMatieres();
+        servicesSousMatieres = new ServicesSousMatieres();
+        servicesMesCompetences = new ServicesMesCompetences();
+        servicesUsers =new ServicesUsers();
+
+        String designation = tvCreerMatiereCompetence.getSelectionModel().getSelectedItem().getDesignation();
+        tcCreerSMatiereComptence.setCellValueFactory(new PropertyValueFactory<Matiere,String>("sousMatiere"));
+        tcChoixSMatiereCreerCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, CheckBox>("uneSelection"));
+        tvCreerSMatiereCompetence.setItems(servicesSousMatieres.GetAllSousMatieres(designation));
+        for (Competences competence : servicesMesCompetences.GetAllMesCompetences()) {
+            if (competence.getIdUser() == servicesUsers.getIdUser()) {
+                String[] sousMatieres = competence.getSousMatiere().split("#");
+
+                for (Matiere matiere : tvCreerSMatiereCompetence.getItems()) {
+                    for (String sousMatiere : sousMatieres) {
+                        if (matiere.getSousMatiere().equals(sousMatiere)) {
+                            matiere.getUneSelection().setSelected(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @FXML
+    public void onBtn2CreerCompetenceClicked(Event event) throws SQLException {
+        // je vérifie s'il y a au moins une sous matière qui a été selectionnée par le user
+        boolean AuMoinsUneSelectionSousMatiere = false;
+        for (Matiere matiere : tvCreerSMatiereCompetence.getItems()) {
+            if (matiere.getUneSelection() != null && matiere.getUneSelection().isSelected()) {
+                AuMoinsUneSelectionSousMatiere = true;
+                break;
+            }
+        }
+        // je gère les erreurs
+        if(tvCreerMatiereCompetence.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une matière !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else if(!AuMoinsUneSelectionSousMatiere) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner au moins une sous matière !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            ObservableList<Matiere> lesSelectionsSousMatieres = tvCreerSMatiereCompetence.getItems();
+            ArrayList<String> lesSousMatieres = new ArrayList<>();
+
+            for (Matiere uneMatiere : lesSelectionsSousMatieres) {
+                if (uneMatiere.getUneSelection().isSelected()) {
+                    lesSousMatieres.add(uneMatiere.getSousMatiere());
+                }
+            }
+            String designation = tvCreerMatiereCompetence.getSelectionModel().getSelectedItem().getDesignation();
+            servicesMesCompetences.creerCompetence(lesSousMatieres,designation);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Créer compétence");
+            alert.setContentText("Votre compétence a bien été créer !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+            apMesCompetences.toFront();
+            tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
+        }
+
+    }
+
+    @FXML
+    public void onBtnSupprimerCompetenceClicked(Event event) throws SQLException {
+        if(tvMesCompetences.getSelectionModel().getSelectedItem() == null){
+            apMesCompetences.toFront();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une compétence pour supprimer la matière de vos compétences!");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            servicesMesCompetences = new ServicesMesCompetences();
+            String nomMatiereMesCompetencesSelectionne = tvMesCompetences.getSelectionModel().getSelectedItem().getMatiere();
+            servicesMesCompetences.supprimerCompetence(nomMatiereMesCompetencesSelectionne);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Suppression compétence");
+            alert.setContentText("Votre compétence a bien été supprimer !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+            apMesCompetences.toFront();
+            tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
+        }
+    }
+
+
+
+
+
+
+
     @FXML
     public void btnSMDemande(Event event) throws SQLException {
     }
@@ -365,7 +458,8 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
     @javafx.fxml.FXML
-    public void onBtnMesCompetencesClicked(Event event) {
+    public void onBtnMesCompetencesClicked(Event event) throws SQLException {
+        tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
         apMesCompetences.toFront();
     }
 
@@ -385,17 +479,8 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
     @javafx.fxml.FXML
-    public void onBtnModifierCompetenceClicked(Event event) {
-        apModifierCompetence.toFront();
-    }
-
-    @javafx.fxml.FXML
     public void onBtnCreerCompetenceClicked(Event event) {
         apCreerCompetence.toFront();
-    }
-
-    @FXML
-    public void tvCompetencesClicked(Event event) {
     }
 
     @FXML
@@ -405,9 +490,5 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
-    }
-
-    @FXML
-    public void lvChoixMatiereDemandeClicked(Event event) {
     }
 }
