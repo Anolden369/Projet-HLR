@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -165,83 +164,49 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apMesCompetences" layoutY="-8.0" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apMesCompetences" layoutY="-8.0" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="64.0" layoutY="24.0" prefHeight="32.0" prefWidth="150.0" text="Mes compétences  :">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnMenuModifierCompetence" layoutX="64.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#onBtnModifierCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Modifier" />
-                  <Button fx:id="btnMenuCreerCompetence" layoutX="64.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer" />
-                  <TableView fx:id="tvCreerCompetence" layoutX="218.0" layoutY="24.0" onMouseClicked="#tvCompetencesClicked" prefHeight="356.0" prefWidth="304.0">
-                    <columns>
-                      <TableColumn fx:id="tcCreerCompetenceMatiere" prefWidth="149.0" text="Matière" />
-                      <TableColumn fx:id="tcCreerCompetenceSMatiere" prefWidth="154.0" text="Sous-matière(s)" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="apCreerCompetence" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
-               <children>
-                  <Label layoutX="62.0" layoutY="29.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une compétence :" textFill="#0f8fd1">
+                  <Label layoutX="30.0" layoutY="30.0" prefHeight="32.0" prefWidth="160.0" stylesheets="@../../CSS/MesStyles.css" text="Mes compétences :" textFill="#0f8fd1">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnCreerCompetence" layoutX="92.0" layoutY="372.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-                  <TableView fx:id="tvCreerMatiereCompetence" layoutX="62.0" layoutY="108.0" prefHeight="171.0" prefWidth="167.0">
+                  <Button fx:id="btnMenuSupprimerCompetence" layoutX="427.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnSupprimerCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Supprimer" />
+                  <Button fx:id="btnMenuCreerCompetence" layoutX="301.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer/Modifier" />
+                  <TableView fx:id="tvMesCompetences" layoutX="16.0" layoutY="84.0" prefHeight="323.0" prefWidth="523.0">
                     <columns>
-                      <TableColumn fx:id="tcCreerMatiereCompetence" prefWidth="165.0" text="Choix de la matière : " />
+                      <TableColumn fx:id="tcVoirMesCompetencesMatiere" prefWidth="168.0" text="Matière" />
+                      <TableColumn fx:id="tcVoirMesCompetencesSMatiere" prefWidth="354.0" text="Sous-matière(s)" />
                     </columns>
-                  </TableView>
-                  <TableView fx:id="tvCreerSMatiereCompetence" layoutX="281.0" layoutY="108.0" prefHeight="171.0" prefWidth="194.0">
-                     <columns>
-                        <TableColumn fx:id="tcCreerSMatiereCompetence" prefWidth="196.0" text="Choix de la/les sous-matière(s) : " />
-                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apModifierCompetence" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apCreerCompetence" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="57.0" layoutY="28.0" prefHeight="32.0" prefWidth="216.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier une compétence :" textFill="#0f8fd1">
+                  <Label layoutX="26.0" layoutY="14.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une compétence :" textFill="#0f8fd1">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="90.0" layoutY="67.0" prefHeight="32.0" prefWidth="150.0" text="Choix de la compétence : ">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cboModifierCompetence" layoutX="312.0" layoutY="71.0" prefWidth="150.0" />
-                  <Button fx:id="btnModifierCompetence" layoutX="84.0" layoutY="356.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Modifier">
+                  <Button fx:id="btnCreerCompetence" layoutX="92.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#onBtn2CreerCompetenceClicked" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <TableView fx:id="tvModifMatiereCompetence" layoutX="34.0" layoutY="115.0" onMouseClicked="#lvChoixMatiereDemandeClicked" prefHeight="221.0" prefWidth="194.0">
-                     <columns>
-                        <TableColumn fx:id="tcModifMatiereCompetence" prefWidth="193.0" text="Choix de la matière :" />
-                     </columns>
+                  <TableView fx:id="tvCreerMatiereCompetence" layoutX="26.0" layoutY="58.0" onMouseClicked="#tvChoixMatiereCompetenceClicked" prefHeight="281.0" prefWidth="177.0">
+                    <columns>
+                      <TableColumn fx:id="tcCreerMatiereCompetence" prefWidth="174.0" text="Choix de la matière : " />
+                    </columns>
                   </TableView>
-                  <TableView fx:id="tvModifSMatiereCompetence" layoutX="257.0" layoutY="115.0" onMouseClicked="#btnSMDemande" prefHeight="221.0" prefWidth="276.0">
+                  <TableView fx:id="tvCreerSMatiereCompetence" layoutX="227.0" layoutY="58.0" onMouseClicked="#btnSMDemande" prefHeight="281.0" prefWidth="316.0">
                      <columns>
-                        <TableColumn fx:id="tcModifSMatiereCompetence" prefWidth="222.0" text="Choix de la/les sous-matières" />
-                        <TableColumn prefWidth="53.0" text="Choix">
-                           <graphic>
-                              <CheckBox mnemonicParsing="false" text="CheckBox" />
-                           </graphic>
-                        </TableColumn>
+                        <TableColumn fx:id="tcCreerSMatiereComptence" prefWidth="249.0" text="Choix de la/les sous-matières" />
+                        <TableColumn fx:id="tcChoixSMatiereCreerCompetence" prefWidth="64.0" text="Choix" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apLesDemandes" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apLesDemandes" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="189.0" layoutY="8.0" prefHeight="32.0" prefWidth="150.0" text="Les demandes actuelles :">
                      <font>

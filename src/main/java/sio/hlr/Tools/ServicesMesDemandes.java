@@ -33,7 +33,12 @@ public class ServicesMesDemandes {
         ps.setDate(2, date);
         rs = ps.executeQuery();
         while(rs.next()){
-            Demandes uneDemande = new Demandes(rs.getInt(1), rs.getDate(2).toLocalDate(),rs.getString(3),rs.getString(4),rs.getInt(5));
+            Demandes uneDemande = new Demandes(
+                    rs.getInt(1),
+                    rs.getDate(2).toLocalDate(),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getInt(5));
             mesDemandes.add(uneDemande);
         }
         return mesDemandes;
