@@ -52,34 +52,47 @@ public class ServicesLesDemandes {
     }
 
     public ObservableList<Demandes> getDemandesCorrespondantesCompetences() throws SQLException {
-
         ObservableList<Demandes> allLesDemandes = GetAllLesDemandes();
         ObservableList<Competences> mesCompetences = servicesMesCompetences.GetAllMesCompetences();
         ObservableList<Demandes> demandesCorrespondantes = FXCollections.observableArrayList();
 
-        ArrayList<String> matieresDemandes = new ArrayList<>();
-        for (Demandes demande : allLesDemandes) {
-            String matiereDemande = demande.getMatiere();
-            matieresDemandes.add(matiereDemande);
-        }
-
         ArrayList<String> matieresCompetences = new ArrayList<>();
+        ArrayList<ArrayList<String>> sousMatieresCompetences = new ArrayList<>();
+
         for (Competences competence : mesCompetences) {
-            int idMatiere = servicesMatieres.GetIdMatiere(competence.getMatiere());
-            String nomMatiere = servicesMatieres.GetNomMatiere(idMatiere);
-            matieresCompetences.add(nomMatiere);
+            String[] sousMatieres = competence.getSousMatiere().split("#");
+            ArrayList<String> sousMatieresList = new ArrayList<>(Arrays.asList(sousMatieres));
+
+            if (!sousMatieresList.isEmpty()) {
+                sousMatieresList.remove(0);
+            }
+
+            matieresCompetences.add(competence.getMatiere());
+            sousMatieresCompetences.add(sousMatieresList);
         }
 
         for (Demandes uneDemande : allLesDemandes) {
             String matiereDemande = uneDemande.getMatiere();
+            String[] sousMatieresDemande = uneDemande.getSousMatiere().split("#");
+            ArrayList<String> sousMatieresDemandeList = new ArrayList<>(Arrays.asList(sousMatieresDemande));
+
+            if (!sousMatieresDemandeList.isEmpty()) {
+                sousMatieresDemandeList.remove(0);
+            }
+
             if (matieresCompetences.contains(matiereDemande)) {
-                demandesCorrespondantes.add(uneDemande);
+                int index = matieresCompetences.indexOf(matiereDemande);
+                ArrayList<String> sousMatieresCompetence = sousMatieresCompetences.get(index);
+
+                for (String sousMatiere : sousMatieresDemandeList) {
+                    if (sousMatieresCompetence.contains(sousMatiere)) {
+                        demandesCorrespondantes.add(uneDemande);
+                        break;
+                    }
+                }
             }
         }
         return demandesCorrespondantes;
     }
-
-
-
 
 }
