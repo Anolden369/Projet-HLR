@@ -11,6 +11,7 @@ public class Demandes {
     private String matiere;
     private String sousMatiere;
     private int idUser;
+    private String nomUser;
     private int idMatiere;
     private int status;
 
@@ -21,6 +22,16 @@ public class Demandes {
         this.sousMatiere = sousMatiere;
         this.idUser = idUser;
         this.matiere = matiere;
+        this.status = status;
+    }
+
+    public Demandes(int id, Date dateUpdated, LocalDate dateFinDemande, String matiere, String sousMatiere, String nomUser, int status) {
+        this.id = id;
+        this.dateUpdated = dateUpdated;
+        this.dateFinDemande = dateFinDemande;
+        this.sousMatiere = sousMatiere;
+        this.matiere = matiere;
+        this.nomUser = nomUser;
         this.status = status;
     }
 
@@ -69,5 +80,14 @@ public class Demandes {
     }
     public void setMatiere(String matiere) {
         this.matiere = matiere;
+    }
+
+
+    public String getNomUser() {
+        return nomUser;
+    }
+
+    public void setNomUser(String nomUser) {
+        this.nomUser = nomUser;
     }
 }

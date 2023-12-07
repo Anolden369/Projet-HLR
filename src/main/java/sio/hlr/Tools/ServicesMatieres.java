@@ -43,6 +43,15 @@ public class ServicesMatieres {
         return idMatiere;
     }
 
+    public String GetNomMatiere(int idMatiere) throws SQLException {
+        ps = uneCnx.prepareStatement("SELECT matiere.designation FROM matiere WHERE matiere.id=?");
+        ps.setInt(1,idMatiere);
+        rs = ps.executeQuery();
+        rs.next();
+        String nomMatiere = rs.getString(1);
+        return nomMatiere;
+    }
+
     //Partie Menu Admin
     public void ajoutMatiereSousMatiere(String nomMatiere,String sousMatiere) throws SQLException {
         ps = uneCnx.prepareStatement("INSERT INTO matiere (id, designation, sous_matiere) VALUES (NULL,?,?)");

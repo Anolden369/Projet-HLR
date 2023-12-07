@@ -215,10 +215,10 @@
                   </Label>
                   <TableView fx:id="tvLesDemandes" layoutX="14.0" layoutY="46.0" onMouseClicked="#tvLesDemandesClicked" prefHeight="368.0" prefWidth="541.0" tableMenuButtonVisible="true">
                     <columns>
-                      <TableColumn fx:id="tcLesDemandesDemandeurs" prefWidth="145.0" text="Demandeur" />
-                      <TableColumn fx:id="tcLesDemandesMatiere" prefWidth="149.0" text="Matière" />
-                        <TableColumn fx:id="tcLesDemandesSMatiere" prefWidth="146.0" text="Sous-matière(s)" />
-                        <TableColumn fx:id="tcLesDemandesDateLimite" prefWidth="100.0" text="date limite" />
+                      <TableColumn fx:id="tcLesDemandesDemandeurs" prefWidth="79.0" text="Demandeur" />
+                      <TableColumn fx:id="tcLesDemandesMatiere" prefWidth="90.0" text="Matière" />
+                        <TableColumn fx:id="tcLesDemandesSMatiere" prefWidth="287.0" text="Sous-matière(s)" />
+                        <TableColumn fx:id="tcLesDemandesDateLimite" prefWidth="78.0" text="date limite" />
                     </columns>
                   </TableView>
                </children>

@@ -18,28 +18,6 @@ public class ServicesSousMatieres {
 
     public ServicesSousMatieres() {uneCnx = ConnexionBDD.getCnx();}
 
-    public ObservableList<Matiere> GetSousMatiereAnglais() throws SQLException {
-        ObservableList<Matiere> sousMatiereAnglais = FXCollections.observableArrayList();
-        ps = uneCnx.prepareStatement("SELECT matiere.sous_matiere\n" +
-                "from matiere\n" +
-                "WHERE matiere.designation=\"Anglais\"");
-
-        rs = ps.executeQuery();
-
-        while (rs.next()) {
-            String sousMatieres = rs.getString("sous_matiere");
-            String[] sousMatieresArray = sousMatieres.split("#");
-
-            for (String sousMatiereString : sousMatieresArray) {
-                Matiere sousMatiere = new Matiere();
-                sousMatiere.setSousMatiere(sousMatiereString);
-                sousMatiereAnglais.add(sousMatiere);
-            }
-        }
-
-        return sousMatiereAnglais;
-    }
-
     public ObservableList<Matiere> GetAllSousMatieres(String designation) throws SQLException {
         ObservableList<Matiere> lesSousMatieres = FXCollections.observableArrayList();
         ps = uneCnx.prepareStatement("SELECT matiere.sous_matiere from matiere WHERE matiere.designation= ?");
@@ -48,8 +26,8 @@ public class ServicesSousMatieres {
 
         while (rs.next()) {
             String sousMatieres = rs.getString("sous_matiere");
-            String[] sousMatieresArray = sousMatieres.split("#");
-            for (String sousMatiereString : sousMatieresArray) {
+            String[] LeSousMatieres = sousMatieres.split("#");
+            for (String sousMatiereString : LeSousMatieres) {
                 Matiere sousMatiere = new Matiere();
                 sousMatiere.setSousMatiere(sousMatiereString);
                 lesSousMatieres.add(sousMatiere);
