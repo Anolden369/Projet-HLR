@@ -60,4 +60,13 @@ public class ServicesMatieres {
 
     }
 
+    public int GetIdMatiere(String nomMatiere) throws SQLException {
+        ps = uneCnx.prepareStatement("SELECT matiere.id FROM matiere WHERE matiere.designation=?");
+        ps.setString(1,nomMatiere);
+        rs = ps.executeQuery();
+        rs.next();
+        int idMatiere = rs.getInt(1);
+        return idMatiere;
+    }
+
 }
