@@ -81,6 +81,7 @@ public class HLRMenuEtudiantController implements Initializable{
     ServicesSousMatieres servicesSousMatieres;
     ServicesMesDemandes servicesMesDemandes;
     ServicesMesCompetences servicesMesCompetences;
+    ServicesLesDemandes servicesLesDemandes;
     ServicesUsers servicesUsers;
     ConnexionBDD maCnx;
 
@@ -107,7 +108,7 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcCreerSMatiereDemande;
     @FXML
-    private TableView tvLesDemandes;
+    private TableView<Demandes> tvLesDemandes;
     @FXML
     private TableColumn tcLesDemandesDemandeurs;
     @FXML
@@ -159,6 +160,7 @@ public class HLRMenuEtudiantController implements Initializable{
             servicesSousMatieres = new ServicesSousMatieres();
             servicesMesDemandes = new ServicesMesDemandes();
             servicesMesCompetences = new ServicesMesCompetences();
+            servicesLesDemandes = new ServicesLesDemandes();
 
 
             //Afficher toutes mes demandes en cours
@@ -190,6 +192,14 @@ public class HLRMenuEtudiantController implements Initializable{
             tvCreerMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
             tcCreerMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
 
+            //Les demandes des autres
+            tcLesDemandesDemandeurs.setCellValueFactory(new PropertyValueFactory<Demandes, String>("nomUser"));
+            tcLesDemandesMatiere.setCellValueFactory(new PropertyValueFactory<Demandes, String>("matiere"));
+            tcLesDemandesSMatiere.setCellValueFactory(new PropertyValueFactory<Demandes, String>("sousMatiere"));
+            tcLesDemandesDateLimite.setCellValueFactory(new PropertyValueFactory<Demandes, Date>("dateFinDemande"));
+
+            tvLesDemandes.setItems(servicesLesDemandes.GetAllLesDemandes());
+            //a continuer
 
 
         } catch (SQLException e) {
@@ -442,6 +452,16 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
 
+// Les demandes des autres
+    @javafx.fxml.FXML
+    public void onBtnLesDemandesClicked(Event event) throws SQLException {
+        servicesLesDemandes = new ServicesLesDemandes();
+        apLesDemandes.toFront();
+
+        tvLesDemandes.setItems(servicesLesDemandes.getDemandesCorrespondantesCompetences());
+    }
+
+
 
 
 
@@ -461,11 +481,6 @@ public class HLRMenuEtudiantController implements Initializable{
     public void onBtnMesCompetencesClicked(Event event) throws SQLException {
         tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
         apMesCompetences.toFront();
-    }
-
-    @javafx.fxml.FXML
-    public void onBtnLesDemandesClicked(Event event) {
-        apLesDemandes.toFront();
     }
 
     @javafx.fxml.FXML
