@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.DatePicker;
 import sio.hlr.Entities.Competences;
 import sio.hlr.Entities.Demandes;
+import sio.hlr.Entities.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -15,9 +16,7 @@ public class ServicesLesDemandes {
     private Connection uneCnx;
     private PreparedStatement ps;
     private ResultSet rs;
-    LocalDate DateActuelle = LocalDate.now();
     ServicesUsers servicesUsers = new ServicesUsers();
-    ServicesMatieres servicesMatieres = new ServicesMatieres();
     ServicesMesCompetences servicesMesCompetences = new ServicesMesCompetences();
 
     public ServicesLesDemandes() {
@@ -51,6 +50,17 @@ public class ServicesLesDemandes {
         return lesDemandes;
     }
 
+    public ArrayList<Integer> GetAllNiveaux() throws SQLException{
+
+        ArrayList<Integer> lesNiveaux = new ArrayList<>();
+        ps = uneCnx.prepareStatement("SELECT niveau.id FROM niveau");
+        rs = ps.executeQuery();
+        while(rs.next()){
+            lesNiveaux.add(rs.getInt(1));
+        }
+        return lesNiveaux;
+    }
+
     public ObservableList<Demandes> getDemandesCorrespondantesCompetences() throws SQLException {
         ObservableList<Demandes> allLesDemandes = GetAllLesDemandes();
         ObservableList<Competences> mesCompetences = servicesMesCompetences.GetAllMesCompetences();
@@ -58,6 +68,9 @@ public class ServicesLesDemandes {
 
         ArrayList<String> matieresCompetences = new ArrayList<>();
         ArrayList<ArrayList<String>> sousMatieresCompetences = new ArrayList<>();
+
+        int niveauUser = servicesUsers.getUser(servicesUsers.getIdUser()).getNiveau();
+        ArrayList<Integer> lesNiveaux = GetAllNiveaux();
 
         for (Competences competence : mesCompetences) {
             String[] sousMatieres = competence.getSousMatiere().split("#");
@@ -92,7 +105,21 @@ public class ServicesLesDemandes {
                 }
             }
         }
-        return demandesCorrespondantes;
+
+        ObservableList<Demandes> lesDemandesParNiveau = FXCollections.observableArrayList();
+
+        int niveauMin = niveauUser + 2;
+
+        for (Demandes demande : demandesCorrespondantes) {
+            String nomUser = demande.getNomUser();
+            int niveauDemande = servicesUsers.getUser(servicesUsers.getIdUserByNom(nomUser)).getNiveau();
+
+            if (niveauDemande > niveauMin && lesNiveaux.contains(niveauDemande)) {
+                lesDemandesParNiveau.add(demande);
+            }
+        }
+
+        return lesDemandesParNiveau;
     }
 
 }
