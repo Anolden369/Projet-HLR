@@ -18,6 +18,7 @@ public class ServicesLesDemandes {
     private ResultSet rs;
     ServicesUsers servicesUsers = new ServicesUsers();
     ServicesMesCompetences servicesMesCompetences = new ServicesMesCompetences();
+    LocalDate DateActuelle = LocalDate.now();
 
     public ServicesLesDemandes() {
         uneCnx = ConnexionBDD.getCnx();
@@ -27,14 +28,16 @@ public class ServicesLesDemandes {
 
         ObservableList<Demandes> lesDemandes = FXCollections.observableArrayList();
         int idUser = servicesUsers.getIdUser();
-        LocalDate dateActuelle = LocalDate.now();
-        Date date = Date.valueOf(dateActuelle);
-        ps = uneCnx.prepareStatement("SELECT demande.id, demande.date_updated, demande.date_fin_demande, matiere.designation, demande.sous_matiere, user.nom, demande.status " +
-                "FROM demande " +
-                "INNER JOIN matiere ON demande.id_matiere=matiere.id " +
-                "INNER JOIN user ON demande.id_user=user.id " +
-                "WHERE demande.id_user NOT IN (SELECT demande.id_user FROM demande WHERE demande.id_user=?);");
-        ps.setInt(1,idUser);
+        Date date = Date.valueOf(LocalDate.now());
+        ps = uneCnx.prepareStatement("SELECT demande.id, demande.date_updated, demande.date_fin_demande, matiere.designation, demande.sous_matiere, user.nom, demande.status\n" +
+                "FROM demande\n" +
+                "INNER JOIN matiere ON demande.id_matiere=matiere.id\n" +
+                "INNER JOIN user ON demande.id_user=user.id\n" +
+                "WHERE demande.status=1\n" +
+                "AND demande.date_fin_demande > ?\n" +
+                "AND demande.id_user NOT IN (SELECT demande.id_user FROM demande WHERE demande.id_user=?);");
+        ps.setDate(1, date);
+        ps.setInt(2,idUser);
         rs = ps.executeQuery();
         while(rs.next()){
             Demandes uneDemande = new Demandes(
@@ -120,6 +123,25 @@ public class ServicesLesDemandes {
         }
 
         return lesDemandesParNiveau;
+    }
+
+    public void ajoutSoutien(int idDemande,int idCompetence,LocalDate date,String commentaire) throws SQLException {
+
+        ps = uneCnx.prepareStatement("INSERT INTO soutien(soutien.id_demande, soutien.id_competence, soutien.date_du_soutien,soutien.date_updated, soutien.description, soutien.status)" +
+                "VALUES (?,?,?,?,?,'2')");
+        ps.setInt(1,idDemande);
+        ps.setInt(2,idCompetence);
+        ps.setDate(3, Date.valueOf(date));
+        ps.setDate(4, Date.valueOf(DateActuelle));
+        ps.setString(5,commentaire);
+        ps.executeUpdate();
+
+        ps = uneCnx.prepareStatement("UPDATE demande SET date_updated=?,status='2' \n" +
+                "WHERE demande.id = ?");
+        ps.setInt(2,idDemande);
+        ps.setDate(1, Date.valueOf(DateActuelle));
+
+        ps.executeUpdate();
     }
 
 }

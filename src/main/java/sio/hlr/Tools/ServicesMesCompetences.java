@@ -94,5 +94,15 @@ public class ServicesMesCompetences {
         ps.executeUpdate();
     }
 
+    public int getIdCompetenceByUser(String Matiere) throws SQLException {
+        int idMatiere = servicesMatieres.GetIdMatiere(Matiere);
+        ps = uneCnx.prepareCall("SELECT competence.id FROM competence WHERE competence.id_matiere=? AND competence.id_user=?");
+        ps.setInt(1,idMatiere);
+        ps.setInt(2,servicesUsers.getIdUser());
+        rs = ps.executeQuery();
+        rs.next();
+        int idComp = rs.getInt(1);
+        return idComp;
+    }
 
 }

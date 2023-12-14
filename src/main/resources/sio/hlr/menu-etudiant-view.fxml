@@ -7,12 +7,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="515.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuEtudiantController">
+<AnchorPane prefHeight="515.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuEtudiantController">
    <children>
       <HBox layoutX="166.0" prefHeight="90.0" prefWidth="562.0" style="-fx-background-color: #0f8fd1;">
          <children>
@@ -116,9 +117,9 @@
                      </font>
                   </Label>
                   <TableView fx:id="tvCreerMatiereDemande" layoutX="49.0" layoutY="67.0" onMouseClicked="#tvChoixMatiereDemandeClicked" prefHeight="221.0" prefWidth="167.0">
-                    <columns>
-                      <TableColumn fx:id="tcCreerMatiereDemande" prefWidth="165.0" text="Choix de la matière :" />
-                    </columns>
+                     <columns>
+                        <TableColumn fx:id="tcCreerMatiereDemande" prefWidth="165.0" text="Choix de la matière :" />
+                     </columns>
                   </TableView>
                   <TableView fx:id="tvCreerSMatiereDemande" layoutX="237.0" layoutY="67.0" onMouseClicked="#btnSMDemande" prefHeight="221.0" prefWidth="298.0">
                      <columns>
@@ -174,10 +175,10 @@
                   <Button fx:id="btnMenuSupprimerCompetence" layoutX="427.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnSupprimerCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Supprimer" />
                   <Button fx:id="btnMenuCreerCompetence" layoutX="301.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer/Modifier" />
                   <TableView fx:id="tvMesCompetences" layoutX="16.0" layoutY="84.0" prefHeight="323.0" prefWidth="523.0">
-                    <columns>
-                      <TableColumn fx:id="tcVoirMesCompetencesMatiere" prefWidth="168.0" text="Matière" />
-                      <TableColumn fx:id="tcVoirMesCompetencesSMatiere" prefWidth="354.0" text="Sous-matière(s)" />
-                    </columns>
+                     <columns>
+                        <TableColumn fx:id="tcVoirMesCompetencesMatiere" prefWidth="168.0" text="Matière" />
+                        <TableColumn fx:id="tcVoirMesCompetencesSMatiere" prefWidth="354.0" text="Sous-matière(s)" />
+                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
@@ -194,9 +195,9 @@
                      </font>
                   </Button>
                   <TableView fx:id="tvCreerMatiereCompetence" layoutX="26.0" layoutY="58.0" onMouseClicked="#tvChoixMatiereCompetenceClicked" prefHeight="281.0" prefWidth="177.0">
-                    <columns>
-                      <TableColumn fx:id="tcCreerMatiereCompetence" prefWidth="174.0" text="Choix de la matière : " />
-                    </columns>
+                     <columns>
+                        <TableColumn fx:id="tcCreerMatiereCompetence" prefWidth="174.0" text="Choix de la matière : " />
+                     </columns>
                   </TableView>
                   <TableView fx:id="tvCreerSMatiereCompetence" layoutX="227.0" layoutY="58.0" onMouseClicked="#btnSMDemande" prefHeight="281.0" prefWidth="316.0">
                      <columns>
@@ -214,16 +215,35 @@
                      </font>
                   </Label>
                   <TableView fx:id="tvLesDemandes" layoutX="14.0" layoutY="46.0" onMouseClicked="#tvLesDemandesClicked" prefHeight="368.0" prefWidth="541.0" tableMenuButtonVisible="true">
-                    <columns>
-                      <TableColumn fx:id="tcLesDemandesDemandeurs" prefWidth="79.0" text="Demandeur" />
-                      <TableColumn fx:id="tcLesDemandesMatiere" prefWidth="90.0" text="Matière" />
+                     <columns>
+                        <TableColumn fx:id="tcLesDemandesDemandeurs" prefWidth="79.0" text="Demandeur" />
+                        <TableColumn fx:id="tcLesDemandesMatiere" prefWidth="90.0" text="Matière" />
                         <TableColumn fx:id="tcLesDemandesSMatiere" prefWidth="287.0" text="Sous-matière(s)" />
                         <TableColumn fx:id="tcLesDemandesDateLimite" prefWidth="78.0" text="date limite" />
-                    </columns>
+                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false" />
+            <AnchorPane fx:id="apLesDemandes2" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+               <children>
+                  <TextField fx:id="txtValidationCommentaire" alignment="TOP_LEFT" layoutX="72.0" layoutY="239.0" prefHeight="108.0" prefWidth="418.0" />
+                  <Label layoutX="75.0" layoutY="212.0" text="Commentaire : " />
+                  <Button fx:id="btnValidationDemande" layoutX="107.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#btnValidationDemandeClicked" prefHeight="27.0" prefWidth="316.0" text="Valider" />
+                  <TextField fx:id="txtNomValidation" editable="false" layoutX="75.0" layoutY="66.0" prefHeight="27.0" prefWidth="138.0" />
+                  <TextField fx:id="dateValidation" editable="false" layoutX="329.0" layoutY="14.0" prefHeight="27.0" prefWidth="138.0" />
+                  <TextField fx:id="txtMatiereValidation" editable="false" layoutX="329.0" layoutY="57.0" prefHeight="27.0" prefWidth="138.0" />
+                  <TextField fx:id="txtSousMatieres" editable="false" layoutX="102.0" layoutY="115.0" prefHeight="27.0" prefWidth="418.0" />
+                  <Label layoutX="17.0" layoutY="70.0" text="Nom" />
+                  <Label layoutX="276.0" layoutY="18.0" text="Date" />
+                  <Label layoutX="267.0" layoutY="61.0" text="Matière" />
+                  <TextField fx:id="idValidation" editable="false" layoutX="75.0" layoutY="14.0" prefHeight="27.0" prefWidth="138.0" />
+                  <Label layoutX="25.0" layoutY="18.0" text="ID" />
+                  <Label layoutX="5.0" layoutY="119.0" text="Sous-matières" />
+                  <DatePicker fx:id="dpDateUpdateSoutien" layoutX="297.0" layoutY="166.0" />
+                  <Label layoutX="75.0" layoutY="170.0" text="Choix de la date du soutien" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" />
          </children>
       </AnchorPane>
    </children>
