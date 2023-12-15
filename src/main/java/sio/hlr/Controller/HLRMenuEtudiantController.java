@@ -118,6 +118,8 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcLesDemandesDateLimite;
     @FXML
+    private Button btnDeconnexion;
+    @FXML
     private TableColumn tcNumVoirMesDemandes;
     @FXML
     private TableColumn tcDateVoirMesDemandes;
@@ -155,8 +157,6 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TextField txtNomValidation;
     @FXML
-    private TextField dateValidation;
-    @FXML
     private TextField txtMatiereValidation;
     @FXML
     private TextField txtSousMatieres;
@@ -164,6 +164,8 @@ public class HLRMenuEtudiantController implements Initializable{
     private TextField idValidation;
     @FXML
     private DatePicker dpDateUpdateSoutien;
+    @FXML
+    private TextField dateLimiteValidationSoutien;
 
 
     @Override
@@ -249,11 +251,12 @@ public class HLRMenuEtudiantController implements Initializable{
                     setDisable(empty || date.isBefore(DateActuelle));
                 }
             });
-            dpModifierDemandeDateFin.setDayCellFactory(picker -> new DateCell() {
+            dpDateUpdateSoutien.setDayCellFactory(picker -> new DateCell() {
                 @Override
                 public void updateItem(LocalDate date, boolean empty) {
                     super.updateItem(date, empty);
-                    setDisable(empty || date.isBefore(DateActuelle));
+                    LocalDate dateLimite = LocalDate.parse(dateLimiteValidationSoutien.getText());
+                    setDisable(empty || date.isBefore(DateActuelle) || date.isAfter(dateLimite));
                 }
             });
             tvLesDemandes.setItems(servicesLesDemandes.GetAllLesDemandes());
@@ -545,13 +548,14 @@ public class HLRMenuEtudiantController implements Initializable{
 
 
         txtNomValidation.setText(nom);
-        dateValidation.setText(String.valueOf(date));
+        dateLimiteValidationSoutien.setText(String.valueOf(date));
         txtMatiereValidation.setText(matiere);
         txtSousMatieres.setText(sousMatiere);
         idValidation.setText(String.valueOf(id));
 
     }
 
+    @FXML
     public void btnValidationDemandeClicked(Event event) throws SQLException {
         if(dpDateUpdateSoutien.getValue()==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -615,8 +619,9 @@ public class HLRMenuEtudiantController implements Initializable{
         apCreerCompetence.toFront();
     }
 
-    @Deprecated
+    @FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
     }
+
 }

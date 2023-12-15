@@ -1,13 +1,13 @@
 .couleurDeFond
 {
-    -fx-background-color: #079876;
+    -fx-background-color: #01796F;
 }
 .couleurDeFondBtn
 {
     -fx-background-color: linear-gradient(to right, #1dbbdd44, #93f9b944);
 }
 .couleurDeFondAcceuil {
-    -fx-background-color: linear-gradient(to right, #079876, #7DCEA0);
+    -fx-background-color: linear-gradient(to right,#1fbb7c ,#034a45);
 }
 .monAnchorPane {
     -fx-background-radius: 25;
@@ -56,19 +56,24 @@
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
 }
-.table-row-cell: hover {
+.table-row-cell:hover {
     -fx-background-color: #93f9b911;
-    -fx-text-background-color: #079876;
+    -fx-text-background-color: #19be69;
 }
-.table-row-cell: odd{
+.table-row-cell:odd{
     -fx-background-color: #93f9b911;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
-.table-row-cell: even{
+.table-row-cell:even{
     -fx-background-color: #1dbbdd11;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
+}
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #079876;
+    -fx-background-radius: 15px;
+    -fx-text-fill: white;
 }
 
 
@@ -92,7 +97,7 @@
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color:  linear-gradient(to right, #1dbbdd44, #93f9b944);
 }
-.table-row-cell: highlighted {
+.table-row-cell:highlighted {
     -fx-background-color: #81c483;
     -fx-background-radius: 15px;
 }
