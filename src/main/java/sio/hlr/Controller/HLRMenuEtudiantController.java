@@ -118,8 +118,6 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcLesDemandesDateLimite;
     @FXML
-    private Button btnDeconnexion;
-    @FXML
     private TableColumn tcNumVoirMesDemandes;
     @FXML
     private TableColumn tcDateVoirMesDemandes;
@@ -429,7 +427,7 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
-// Partie mes Competences
+    // Partie mes Competences
     @FXML
     public void tvChoixMatiereCompetenceClicked(Event event) throws SQLException {
         servicesMatieres = new ServicesMatieres();
@@ -528,7 +526,7 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
 
-// Les demandes des autres
+    // Les demandes des autres
     @javafx.fxml.FXML
     public void onBtnLesDemandesClicked(Event event) throws SQLException {
         servicesLesDemandes = new ServicesLesDemandes();
@@ -617,7 +615,7 @@ public class HLRMenuEtudiantController implements Initializable{
         apCreerCompetence.toFront();
     }
 
-    @FXML
+    @Deprecated
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
     }

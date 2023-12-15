@@ -8,129 +8,148 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="515.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuEtudiantController">
+<AnchorPane prefHeight="841.0" prefWidth="993.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuEtudiantController">
    <children>
-      <HBox layoutX="166.0" prefHeight="90.0" prefWidth="562.0" style="-fx-background-color: #0f8fd1;">
+      <AnchorPane layoutX="124.0" layoutY="136.0" prefHeight="98.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
          <children>
-            <Label alignment="CENTER" prefHeight="91.0" prefWidth="276.0" text="Help Le Rebours" textFill="WHITE">
-               <font>
-                  <Font name="Monotype Corsiva" size="32.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <VBox prefHeight="515.0" prefWidth="166.0" spacing="20.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css">
-         <children>
-            <Label alignment="CENTER" prefHeight="91.0" prefWidth="166.0" text="MON ESPACE ETUDIANT" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="11.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnMesDemandes" mnemonicParsing="false" onMouseClicked="#onBtnMesDemandesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Demandes" textFill="WHITE">
+            <Button fx:id="btnMesCompetences" layoutX="207.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#onBtnMesCompetencesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Compétences" textFill="WHITE">
                <styleClass>
-                  <String fx:value="couleurDeFond" />
+                  <String fx:value="couleurDeFondBtn" />
                   <String fx:value="btnMenu" />
                </styleClass>
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/competences.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="btnMesCompetences" mnemonicParsing="false" onMouseClicked="#onBtnMesCompetencesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Compétences" textFill="WHITE">
+            <Button fx:id="btnLesDemandes" layoutX="388.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#onBtnLesDemandesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Les Demandes" textFill="WHITE">
                <styleClass>
-                  <String fx:value="couleurDeFond" />
+                  <String fx:value="couleurDeFondBtn" />
                   <String fx:value="btnMenu" />
                </styleClass>
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/soutien.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="btnLesDemandes" mnemonicParsing="false" onMouseClicked="#onBtnLesDemandesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Les Demandes" textFill="WHITE">
+            <Button fx:id="btnMesStatistiques" layoutX="566.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#onBtnMesStatistiquesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Statistiques" textAlignment="CENTER" textFill="WHITE">
                <styleClass>
-                  <String fx:value="couleurDeFond" />
                   <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnMesStatistiques" mnemonicParsing="false" onMouseClicked="#onBtnMesStatistiquesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Statistiques" textFill="WHITE">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
+                  <String fx:value="couleurDeFondBtn" />
                   <String fx:value="cursePoint" />
                </styleClass>
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/statistique.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="btnDeconnexion" mnemonicParsing="false" onAction="#deconnexion" prefHeight="15.0" prefWidth="166.0" text="Déconnexion">
+            <Button fx:id="btnMesDemandes" layoutX="26.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#onBtnMesDemandesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Demandes" textFill="WHITE">
                <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="souris" />
+                  <String fx:value="couleurDeFondBtn" />
                   <String fx:value="btnMenu" />
                </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/besoin.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
-      </VBox>
-      <AnchorPane layoutX="166.0" layoutY="90.0" prefHeight="419.0" prefWidth="562.0">
+         <styleClass>
+            <String fx:value="couleurDeFondAcceuil" />
+            <String fx:value="monAnchorPane" />
+         </styleClass>
+      </AnchorPane>
+      <AnchorPane layoutX="132.0" layoutY="271.0" prefHeight="520.0" prefWidth="746.0" styleClass="monAnchorPane" stylesheets="@../../CSS/MesStyles.css">
          <children>
-            <AnchorPane fx:id="apMesDemandes" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane fx:id="apMesDemandes" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="14.0" layoutY="24.0" prefHeight="32.0" prefWidth="150.0" text="Mes demandes en cours :">
+                  <Label layoutX="22.0" layoutY="11.0" prefHeight="32.0" prefWidth="150.0" text="Mes demandes en cours :">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnMenuModifierDemande" layoutX="445.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnModifierDemandeClicked" prefHeight="26.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Modifier" />
-                  <Button fx:id="btnMenuCreerDemande" layoutX="328.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerDemandeClicked" prefHeight="26.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer" />
-                  <TableView fx:id="tvMesDemandes" layoutX="11.0" layoutY="65.0" prefHeight="345.0" prefWidth="541.0">
+                  <Button fx:id="btnMenuModifierDemande" layoutX="447.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#onBtnModifierDemandeClicked" prefHeight="26.0" prefWidth="150.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Modifier" />
+                  <Button fx:id="btnMenuCreerDemande" layoutX="264.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerDemandeClicked" prefHeight="26.0" prefWidth="150.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Créer" />
+                  <TableView fx:id="tvMesDemandes" layoutX="11.0" layoutY="50.0" prefHeight="456.0" prefWidth="725.0">
                      <columns>
                         <TableColumn fx:id="tcNumVoirMesDemandes" prefWidth="52.0" text="Numéro" />
                         <TableColumn fx:id="tcDateVoirMesDemandes" prefWidth="97.0" text="Date Expiration" />
                         <TableColumn fx:id="tcMatiereVoirMesDemandes" prefWidth="89.0" text="Matière" />
                         <TableColumn fx:id="tcSousMatiereVoirMesDemandes" prefWidth="214.0" text="Sous-matière" />
-                        <TableColumn fx:id="tcStatutVoirMesDemandes" prefWidth="88.0" text="Statut" />
+                        <TableColumn fx:id="tcStatutVoirMesDemandes" prefWidth="258.0" text="Statut" />
                      </columns>
                   </TableView>
-               </children></AnchorPane>
-            <AnchorPane fx:id="apCreerDemande" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+               </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass></AnchorPane>
+            <AnchorPane fx:id="apCreerDemande" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="52.0" layoutY="25.0" prefHeight="32.0" prefWidth="160.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une demande :" textFill="#0f8fd1">
+                  <Label layoutX="52.0" layoutY="25.0" prefHeight="32.0" prefWidth="160.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une demande :">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnCreerDemande" layoutX="92.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#onBtn2CreerDemandeClicked" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer">
+                  <Button fx:id="btnCreerDemande" layoutX="173.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#onBtn2CreerDemandeClicked" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Créer">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <DatePicker fx:id="dpDateFin" layoutX="212.0" layoutY="304.0" prefHeight="26.0" prefWidth="150.0" />
-                  <Label layoutX="115.0" layoutY="301.0" prefHeight="32.0" prefWidth="81.0" text="Date de fin  : ">
+                  <DatePicker fx:id="dpDateFin" layoutX="274.0" layoutY="406.0" prefHeight="26.0" prefWidth="150.0" styleClass="couleurDeFondBtn" />
+                  <Label layoutX="176.0" layoutY="403.0" prefHeight="32.0" prefWidth="81.0" text="Date de fin  : ">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tvCreerMatiereDemande" layoutX="49.0" layoutY="67.0" onMouseClicked="#tvChoixMatiereDemandeClicked" prefHeight="221.0" prefWidth="167.0">
+                  <TableView fx:id="tvCreerMatiereDemande" layoutX="90.0" layoutY="117.0" onMouseClicked="#tvChoixMatiereDemandeClicked" prefHeight="221.0" prefWidth="167.0">
                      <columns>
                         <TableColumn fx:id="tcCreerMatiereDemande" prefWidth="165.0" text="Choix de la matière :" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="tvCreerSMatiereDemande" layoutX="237.0" layoutY="67.0" onMouseClicked="#btnSMDemande" prefHeight="221.0" prefWidth="298.0">
+                  <TableView fx:id="tvCreerSMatiereDemande" layoutX="325.0" layoutY="117.0" onMouseClicked="#btnSMDemande" prefHeight="221.0" prefWidth="298.0">
                      <columns>
                         <TableColumn fx:id="tcCreerSMatiereDemande" prefWidth="188.0" text="Choix de la/les sous-matières" />
                         <TableColumn fx:id="tcChoixSMatiereCreerDemande" prefWidth="107.0" text="Choix" />
                      </columns>
                   </TableView>
-               </children></AnchorPane>
-            <AnchorPane fx:id="apModifierDemande" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+               </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass></AnchorPane>
+            <AnchorPane fx:id="apModifierDemande" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="31.0" layoutY="8.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier une demande :" textFill="#0f8fd1">
+                  <Label layoutX="31.0" layoutY="8.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier une demande :">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -140,111 +159,150 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cboModifierDemande" layoutX="273.0" layoutY="50.0" prefWidth="150.0" />
-                  <Button fx:id="btnModifierDemande" layoutX="84.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#onBtn2ModifierDemandeClicked" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Modifier">
+                  <ComboBox fx:id="cboModifierDemande" layoutX="208.0" layoutY="50.0" prefWidth="150.0" styleClass="couleurDeFondBtn" />
+                  <Button fx:id="btnModifierDemande" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#onBtn2ModifierDemandeClicked" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Modifier">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Label layoutX="48.0" layoutY="86.0" prefHeight="32.0" prefWidth="150.0" text="Date de fin  : ">
+                  <Label layoutX="379.0" layoutY="47.0" prefHeight="32.0" prefWidth="150.0" text="Date de fin  : ">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dpModifierDemandeDateFin" layoutX="273.0" layoutY="89.0" prefHeight="26.0" prefWidth="150.0" />
-                  <TableView fx:id="tvModifMatiereDemande" layoutX="32.0" layoutY="134.0" onMouseClicked="#tvModifMatiereDemandeClicked" prefHeight="221.0" prefWidth="166.0">
+                  <DatePicker fx:id="dpModifierDemandeDateFin" layoutX="462.0" layoutY="50.0" prefHeight="26.0" prefWidth="150.0" styleClass="couleurDeFondBtn" />
+                  <TableView fx:id="tvModifMatiereDemande" layoutX="125.0" layoutY="137.0" onMouseClicked="#tvModifMatiereDemandeClicked" prefHeight="221.0" prefWidth="166.0">
                      <columns>
                         <TableColumn fx:id="tcModifMatiereDemande" prefWidth="165.0" text="Choix de la matière :" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="tvModifSMatiereDemande" layoutX="230.0" layoutY="133.0" onMouseClicked="#btnSMDemande" prefHeight="221.0" prefWidth="298.0">
+                  <TableView fx:id="tvModifSMatiereDemande" layoutX="358.0" layoutY="137.0" onMouseClicked="#btnSMDemande" prefHeight="221.0" prefWidth="298.0">
                      <columns>
                         <TableColumn fx:id="tcModifSMatiereDemande" prefWidth="206.0" text="Choix de la/les sous-matières" />
                         <TableColumn fx:id="tcChoixSMatiereModifDemande" prefWidth="91.0" text="Choix" />
                      </columns>
                   </TableView>
                </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apMesCompetences" layoutY="-8.0" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane fx:id="apMesCompetences" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="30.0" layoutY="30.0" prefHeight="32.0" prefWidth="160.0" stylesheets="@../../CSS/MesStyles.css" text="Mes compétences :" textFill="#0f8fd1">
+                  <Label layoutX="30.0" layoutY="30.0" prefHeight="32.0" prefWidth="160.0" stylesheets="@../../CSS/MesStyles.css" text="Mes compétences :">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnMenuSupprimerCompetence" layoutX="427.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnSupprimerCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Supprimer" />
-                  <Button fx:id="btnMenuCreerCompetence" layoutX="301.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerCompetenceClicked" prefHeight="32.0" prefWidth="95.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer/Modifier" />
-                  <TableView fx:id="tvMesCompetences" layoutX="16.0" layoutY="84.0" prefHeight="323.0" prefWidth="523.0">
+                  <Button fx:id="btnMenuSupprimerCompetence" layoutX="468.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnSupprimerCompetenceClicked" prefHeight="32.0" prefWidth="150.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Supprimer" />
+                  <Button fx:id="btnMenuCreerCompetence" layoutX="289.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#onBtnCreerCompetenceClicked" prefHeight="32.0" prefWidth="150.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Créer/Modifier" />
+                  <TableView fx:id="tvMesCompetences" layoutX="12.0" layoutY="81.0" prefHeight="433.0" prefWidth="725.0">
                      <columns>
                         <TableColumn fx:id="tcVoirMesCompetencesMatiere" prefWidth="168.0" text="Matière" />
                         <TableColumn fx:id="tcVoirMesCompetencesSMatiere" prefWidth="354.0" text="Sous-matière(s)" />
                      </columns>
                   </TableView>
                </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apCreerCompetence" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane fx:id="apCreerCompetence" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="26.0" layoutY="14.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une compétence :" textFill="#0f8fd1">
+                  <Label layoutX="276.0" layoutY="20.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une compétence :">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnCreerCompetence" layoutX="92.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#onBtn2CreerCompetenceClicked" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css" text="Créer">
+                  <Button fx:id="btnCreerCompetence" layoutX="184.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#onBtn2CreerCompetenceClicked" prefHeight="27.0" prefWidth="378.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Créer">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <TableView fx:id="tvCreerMatiereCompetence" layoutX="26.0" layoutY="58.0" onMouseClicked="#tvChoixMatiereCompetenceClicked" prefHeight="281.0" prefWidth="177.0">
+                  <TableView fx:id="tvCreerMatiereCompetence" layoutX="81.0" layoutY="85.0" onMouseClicked="#tvChoixMatiereCompetenceClicked" prefHeight="281.0" prefWidth="177.0">
                      <columns>
                         <TableColumn fx:id="tcCreerMatiereCompetence" prefWidth="174.0" text="Choix de la matière : " />
                      </columns>
                   </TableView>
-                  <TableView fx:id="tvCreerSMatiereCompetence" layoutX="227.0" layoutY="58.0" onMouseClicked="#btnSMDemande" prefHeight="281.0" prefWidth="316.0">
+                  <TableView fx:id="tvCreerSMatiereCompetence" layoutX="324.0" layoutY="85.0" onMouseClicked="#btnSMDemande" prefHeight="281.0" prefWidth="316.0">
                      <columns>
                         <TableColumn fx:id="tcCreerSMatiereComptence" prefWidth="249.0" text="Choix de la/les sous-matières" />
                         <TableColumn fx:id="tcChoixSMatiereCreerCompetence" prefWidth="64.0" text="Choix" />
                      </columns>
                   </TableView>
                </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apLesDemandes" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane fx:id="apLesDemandes" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="189.0" layoutY="8.0" prefHeight="32.0" prefWidth="150.0" text="Les demandes actuelles :">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="tvLesDemandes" layoutX="14.0" layoutY="46.0" onMouseClicked="#tvLesDemandesClicked" prefHeight="368.0" prefWidth="541.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="tvLesDemandes" layoutX="14.0" layoutY="10.0" onMouseClicked="#tvLesDemandesClicked" prefHeight="489.0" prefWidth="725.0">
                      <columns>
-                        <TableColumn fx:id="tcLesDemandesDemandeurs" prefWidth="79.0" text="Demandeur" />
-                        <TableColumn fx:id="tcLesDemandesMatiere" prefWidth="90.0" text="Matière" />
-                        <TableColumn fx:id="tcLesDemandesSMatiere" prefWidth="287.0" text="Sous-matière(s)" />
-                        <TableColumn fx:id="tcLesDemandesDateLimite" prefWidth="78.0" text="date limite" />
+                        <TableColumn fx:id="tcLesDemandesDemandeurs" prefWidth="87.0" text="Demandeur" />
+                        <TableColumn fx:id="tcLesDemandesMatiere" prefWidth="128.0" text="Matière" />
+                        <TableColumn fx:id="tcLesDemandesSMatiere" prefWidth="385.0" text="Sous-matière(s)" />
+                        <TableColumn fx:id="tcLesDemandesDateLimite" prefWidth="110.0" text="date limite" />
                      </columns>
                   </TableView>
                </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apLesDemandes2" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane fx:id="apLesDemandes2" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <TextField fx:id="txtValidationCommentaire" alignment="TOP_LEFT" layoutX="72.0" layoutY="239.0" prefHeight="108.0" prefWidth="418.0" />
-                  <Label layoutX="75.0" layoutY="212.0" text="Commentaire : " />
-                  <Button fx:id="btnValidationDemande" layoutX="107.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#btnValidationDemandeClicked" prefHeight="27.0" prefWidth="316.0" text="Valider" />
-                  <TextField fx:id="txtNomValidation" editable="false" layoutX="75.0" layoutY="66.0" prefHeight="27.0" prefWidth="138.0" />
-                  <TextField fx:id="dateValidation" editable="false" layoutX="329.0" layoutY="14.0" prefHeight="27.0" prefWidth="138.0" />
-                  <TextField fx:id="txtMatiereValidation" editable="false" layoutX="329.0" layoutY="57.0" prefHeight="27.0" prefWidth="138.0" />
-                  <TextField fx:id="txtSousMatieres" editable="false" layoutX="102.0" layoutY="115.0" prefHeight="27.0" prefWidth="418.0" />
-                  <Label layoutX="17.0" layoutY="70.0" text="Nom" />
-                  <Label layoutX="276.0" layoutY="18.0" text="Date" />
-                  <Label layoutX="267.0" layoutY="61.0" text="Matière" />
-                  <TextField fx:id="idValidation" editable="false" layoutX="75.0" layoutY="14.0" prefHeight="27.0" prefWidth="138.0" />
-                  <Label layoutX="25.0" layoutY="18.0" text="ID" />
-                  <Label layoutX="5.0" layoutY="119.0" text="Sous-matières" />
-                  <DatePicker fx:id="dpDateUpdateSoutien" layoutX="297.0" layoutY="166.0" />
-                  <Label layoutX="75.0" layoutY="170.0" text="Choix de la date du soutien" />
+                  <TextField fx:id="txtValidationCommentaire" alignment="TOP_LEFT" layoutX="125.0" layoutY="269.0" prefHeight="108.0" prefWidth="418.0" />
+                  <Label layoutX="32.0" layoutY="269.0" text="Commentaire : " />
+                  <Button fx:id="btnValidationDemande" layoutX="177.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#btnValidationDemandeClicked" prefHeight="27.0" prefWidth="316.0" styleClass="couleurDeFondBtn" text="Valider" />
+                  <TextField fx:id="txtNomValidation" editable="false" layoutX="265.0" layoutY="22.0" prefHeight="27.0" prefWidth="138.0" styleClass="couleurDeFondBtn" />
+                  <TextField fx:id="dateValidation" editable="false" layoutX="490.0" layoutY="22.0" prefHeight="27.0" prefWidth="138.0" styleClass="couleurDeFondBtn" />
+                  <TextField fx:id="txtMatiereValidation" editable="false" layoutX="116.0" layoutY="88.0" prefHeight="27.0" prefWidth="138.0" styleClass="couleurDeFondBtn" />
+                  <TextField fx:id="txtSousMatieres" editable="false" layoutX="116.0" layoutY="132.0" prefHeight="27.0" prefWidth="418.0" styleClass="couleurDeFondBtn" />
+                  <Label layoutX="220.0" layoutY="27.0" text="Nom" />
+                  <Label layoutX="435.0" layoutY="27.0" text="Date" />
+                  <Label layoutX="31.0" layoutY="93.0" text="Matière" />
+                  <TextField fx:id="idValidation" editable="false" layoutX="57.0" layoutY="22.0" prefHeight="27.0" prefWidth="138.0" styleClass="couleurDeFondBtn" />
+                  <Label layoutX="31.0" layoutY="27.0" text="ID" />
+                  <Label layoutX="31.0" layoutY="137.0" text="Sous-matières" />
+                  <DatePicker fx:id="dpDateUpdateSoutien" layoutX="195.0" layoutY="200.0" styleClass="couleurDeFondBtn" />
+                  <Label layoutX="35.0" layoutY="204.0" text="Choix de la date du soutien" />
                </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" />
+            <AnchorPane fx:id="apStatistiques" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css" visible="false">
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
+            </AnchorPane>
          </children>
       </AnchorPane>
+      <Button fx:id="btnDeconnexion" layoutX="862.0" layoutY="14.0" mnemonicParsing="false" onAction="#deconnexion" prefHeight="32.0" prefWidth="117.0" stylesheets="@../../CSS/MesStyles.css" text="déconnexion">
+         <styleClass>
+            <String fx:value="ap" />
+            <String fx:value="btnMenu" />
+            <String fx:value="monAnchorPane" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/se-deconnecter.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="108.0" fitWidth="316.0" layoutX="332.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/Outlook-gawwclqp.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
