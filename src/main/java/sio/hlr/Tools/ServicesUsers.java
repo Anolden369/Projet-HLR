@@ -70,4 +70,14 @@ public class ServicesUsers {
         User unUser = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
         return unUser;
     }
+
+    public int getIdUserByNom(String nomUser) throws SQLException {
+        int userId = 0;
+        ps = uneCnx.prepareStatement("SELECT user.id FROM user WHERE user.nom=?");
+        ps.setString(1, nomUser);
+        rs = ps.executeQuery();
+        rs.next();
+        userId = rs.getInt(1);
+        return userId;
+    }
 }
