@@ -61,4 +61,13 @@ public class ServicesUsers {
         userId = rs.getInt(1);
         return userId;
     }
+
+    public User getUser(int idUser) throws SQLException {
+        ps = uneCnx.prepareStatement("SELECT user.id, user.nom, user.prenom, user.email, user.role, user.id_niveau FROM user WHERE user.id = ?");
+        ps.setInt(1, idUser);
+        rs = ps.executeQuery();
+        rs.next();
+        User unUser = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
+        return unUser;
+    }
 }

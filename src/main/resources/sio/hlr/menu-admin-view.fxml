@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -117,14 +118,13 @@
             <AnchorPane fx:id="apCreerSalles" nodeOrientation="RIGHT_TO_LEFT" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="390.0" layoutY="62.0" text="Numéro de la salle :" />
-                  <TextField fx:id="txtCreerNumSalle" layoutX="208.0" layoutY="58.0" />
                   <Label layoutX="445.0" layoutY="155.0" prefHeight="19.0" prefWidth="56.0" text="Etage : " />
-                  <TextField fx:id="txtCreerEtage" layoutX="211.0" layoutY="152.0" />
                   <Button fx:id="btnValiderCreerSalle" layoutX="112.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#btnValiderCreerSalleClicked" prefHeight="27.0" prefWidth="338.0" text="Valider" />
-                  <ComboBox fx:id="cboNomSalle" layoutX="208.0" layoutY="108.0" onMouseClicked="#cboNomSalleClicked" prefWidth="150.0" />
-                  <Label layoutX="401.0" layoutY="112.0" text="Nom de la salle :" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="apModifSalles" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+                  <ChoiceBox layoutX="208.0" layoutY="151.0" prefHeight="27.0" prefWidth="162.0" />
+                  <TextField fx:id="txtCreerNumSalle" alignment="CENTER" editable="false" layoutX="208.0" layoutY="58.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apModifSalles" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
                <children>
                   <Label layoutX="29.0" layoutY="151.0" text="Modification étage : " />
                   <Label layoutX="29.0" layoutY="67.0" text="Modification salle :" />
@@ -132,7 +132,7 @@
                   <ComboBox fx:id="cboModifNumSalle" layoutX="232.0" layoutY="63.0" onMouseClicked="#cboModifNumSalleClicked" prefWidth="150.0" />
                   <ComboBox fx:id="cboModifEtageSalle" layoutX="232.0" layoutY="147.0" onMouseClicked="#cboModifEtageSalleClicked" prefWidth="150.0" />
                </children></AnchorPane>
-            <AnchorPane fx:id="apVisuSoutients" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane fx:id="apVisuSoutients" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
                <children>
                   <Label layoutX="254.0" layoutY="6.0" text="Soutiens : " />
                   <TableView fx:id="tvSoutien" layoutX="2.0" layoutY="31.0" onMouseClicked="#tvSoutienClicked" prefHeight="386.0" prefWidth="556.0">
@@ -147,7 +147,7 @@
                     </columns>
                   </TableView>
                </children></AnchorPane>
-            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" />
+            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false" />
          </children>
       </AnchorPane>
    </children>

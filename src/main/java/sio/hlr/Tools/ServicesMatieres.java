@@ -34,19 +34,13 @@ public class ServicesMatieres {
         return lesMatieres;
     }
 
-    public void ajoutMatiereSousMatiere(String nomMatiere,String sousMatiere) throws SQLException {
-    ps = uneCnx.prepareStatement("INSERT INTO matiere (id, designation, sous_matiere) VALUES (NULL,?,?)");
-    ps.setString(1,nomMatiere);
-    ps.setString(2,sousMatiere);
-    ps.executeUpdate();
-    }
-
-    public void ModifMatiereSousMatiere(String txtNomNewMatiere,String sousMatiere,String nomMatiere) throws SQLException {
-        ps = uneCnx.prepareStatement("UPDATE `matiere` SET `designation`=?,`sous_matiere`=? WHERE designation=?");
-        ps.setString(1,txtNomNewMatiere);
-        ps.setString(2,sousMatiere);
-        ps.setString(3,nomMatiere);
-        ps.executeUpdate();
+    public int GetIdMatiere(String nomMatiere) throws SQLException {
+        ps = uneCnx.prepareStatement("SELECT matiere.id FROM matiere WHERE matiere.designation=?");
+        ps.setString(1,nomMatiere);
+        rs = ps.executeQuery();
+        rs.next();
+        int idMatiere = rs.getInt(1);
+        return idMatiere;
     }
 
     public String getNomMatiere(String nomMatiere) throws SQLException{
@@ -60,13 +54,21 @@ public class ServicesMatieres {
 
     }
 
-    public int GetIdMatiere(String nomMatiere) throws SQLException {
-        ps = uneCnx.prepareStatement("SELECT matiere.id FROM matiere WHERE matiere.designation=?");
+    //Partie Menu Admin
+    public void ajoutMatiereSousMatiere(String nomMatiere,String sousMatiere) throws SQLException {
+        ps = uneCnx.prepareStatement("INSERT INTO matiere (id, designation, sous_matiere) VALUES (NULL,?,?)");
         ps.setString(1,nomMatiere);
-        rs = ps.executeQuery();
-        rs.next();
-        int idMatiere = rs.getInt(1);
-        return idMatiere;
+        ps.setString(2,sousMatiere);
+        ps.executeUpdate();
+
     }
+    public void ModifMatiereSousMatiere(String txtNomNewMatiere,String sousMatiere,String nomMatiere) throws SQLException {
+        ps = uneCnx.prepareStatement("UPDATE `matiere` SET `designation`=?,`sous_matiere`=? WHERE designation=?");
+        ps.setString(1,txtNomNewMatiere);
+        ps.setString(2,sousMatiere);
+        ps.setString(3,nomMatiere);
+        ps.executeUpdate();
+    }
+
 
 }

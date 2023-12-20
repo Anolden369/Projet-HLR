@@ -81,6 +81,7 @@ public class HLRMenuEtudiantController implements Initializable{
     ServicesSousMatieres servicesSousMatieres;
     ServicesMesDemandes servicesMesDemandes;
     ServicesMesCompetences servicesMesCompetences;
+    ServicesLesDemandes servicesLesDemandes;
     ServicesUsers servicesUsers;
     ConnexionBDD maCnx;
 
@@ -107,7 +108,7 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcCreerSMatiereDemande;
     @FXML
-    private TableView tvLesDemandes;
+    private TableView<Demandes> tvLesDemandes;
     @FXML
     private TableColumn tcLesDemandesDemandeurs;
     @FXML
@@ -147,6 +148,24 @@ public class HLRMenuEtudiantController implements Initializable{
     private TableColumn tcChoixSMatiereCreerCompetence;
     @FXML
     private Button btnMenuSupprimerCompetence;
+    @FXML
+    private AnchorPane apLesDemandes2;
+    @FXML
+    private Button btnValidationDemande;
+    @FXML
+    private TextField txtNomValidation;
+    @FXML
+    private TextField dateValidation;
+    @FXML
+    private TextField txtMatiereValidation;
+    @FXML
+    private TextField idValidation;
+    @FXML
+    private TextField txtSousMatieres;
+    @FXML
+    private TextField txtValidationCommentaire;
+    @FXML
+    private DatePicker dpDateUpdateSoutien;
 
 
     @Override
@@ -159,6 +178,7 @@ public class HLRMenuEtudiantController implements Initializable{
             servicesSousMatieres = new ServicesSousMatieres();
             servicesMesDemandes = new ServicesMesDemandes();
             servicesMesCompetences = new ServicesMesCompetences();
+            servicesLesDemandes = new ServicesLesDemandes();
 
 
             //Afficher toutes mes demandes en cours
@@ -190,6 +210,14 @@ public class HLRMenuEtudiantController implements Initializable{
             tvCreerMatiereCompetence.setItems(servicesMatieres.GetAllMatiere());
             tcCreerMatiereCompetence.setCellValueFactory(new PropertyValueFactory<Matiere, String>("designation"));
 
+            //Les demandes des autres
+            tcLesDemandesDemandeurs.setCellValueFactory(new PropertyValueFactory<Demandes, String>("nomUser"));
+            tcLesDemandesMatiere.setCellValueFactory(new PropertyValueFactory<Demandes, String>("matiere"));
+            tcLesDemandesSMatiere.setCellValueFactory(new PropertyValueFactory<Demandes, String>("sousMatiere"));
+            tcLesDemandesDateLimite.setCellValueFactory(new PropertyValueFactory<Demandes, Date>("dateFinDemande"));
+
+            tvLesDemandes.setItems(servicesLesDemandes.GetAllLesDemandes());
+            //a continuer
 
 
         } catch (SQLException e) {
@@ -343,7 +371,7 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
-// Partie mes Competences
+    // Partie mes Competences
     @FXML
     public void tvChoixMatiereCompetenceClicked(Event event) throws SQLException {
         servicesMatieres = new ServicesMatieres();
@@ -442,6 +470,16 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
 
+    // Les demandes des autres
+    @javafx.fxml.FXML
+    public void onBtnLesDemandesClicked(Event event) throws SQLException {
+        servicesLesDemandes = new ServicesLesDemandes();
+        apLesDemandes.toFront();
+
+        tvLesDemandes.setItems(servicesLesDemandes.getDemandesCorrespondantesCompetences());
+    }
+
+
 
 
 
@@ -464,11 +502,6 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
     @javafx.fxml.FXML
-    public void onBtnLesDemandesClicked(Event event) {
-        apLesDemandes.toFront();
-    }
-
-    @javafx.fxml.FXML
     public void onBtnMesStatistiquesClicked(Event event) {
         apStatistiques.toFront();
     }
@@ -484,11 +517,42 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
     @FXML
-    public void tvLesDemandesClicked(Event event) {
+    public void tvLesDemandesClicked(Event event) throws SQLException {
+        apLesDemandes2.toFront();
+        String nom = tvLesDemandes.getSelectionModel().getSelectedItem().getNomUser();
+        String matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
+        LocalDate date = tvLesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande();
+        String sousMatiere = tvLesDemandes.getSelectionModel().getSelectedItem().getSousMatiere();
+        int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
+
+
+        txtNomValidation.setText(nom);
+        dateValidation.setText(String.valueOf(date));
+        txtMatiereValidation.setText(matiere);
+        txtSousMatieres.setText(sousMatiere);
+        idValidation.setText(String.valueOf(id));
+
     }
 
     @FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
+    }
+    @FXML
+    public void btnValidationDemandeClicked(Event event) throws SQLException {
+        String nom = txtNomValidation.getText();
+        //String matiere = txtMatiereValidation.getText();
+        LocalDate date = dpDateUpdateSoutien.getValue();
+        String sousMatiere = txtSousMatieres.getText();
+        int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
+
+        String matiere;
+        matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
+        int idCompetence = servicesMesCompetences.getCompetenceBy(matiere);
+
+        String commentaire = txtValidationCommentaire.getText();
+
+
+        servicesLesDemandes.ajoutSoutien(id, idCompetence,date,commentaire);
     }
 }

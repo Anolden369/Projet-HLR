@@ -2,9 +2,7 @@ package sio.hlr.Tools;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.DatePicker;
 import sio.hlr.Entities.Competences;
-import sio.hlr.Entities.Demandes;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -94,5 +92,14 @@ public class ServicesMesCompetences {
         ps.executeUpdate();
     }
 
-
+    public int getCompetenceBy(String Matiere) throws SQLException {
+        int idMatiere = servicesMatieres.GetIdMatiere(Matiere);
+        ps = uneCnx.prepareCall("SELECT competence.id FROM competence WHERE competence.id_matiere=? AND competence.id_user=?");
+        ps.setInt(1,idMatiere);
+        ps.setInt(2,servicesUsers.getIdUser());
+        rs = ps.executeQuery();
+        rs.next();
+        int idComp = rs.getInt(1);
+        return idComp;
+    }
 }
