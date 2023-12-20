@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,9 +31,8 @@ import java.time.LocalDate;
 import javafx.scene.control.TreeTableView;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
+
+import java.util.*;
 
 public class HLRMenuEtudiantController implements Initializable{
 
@@ -83,6 +83,7 @@ public class HLRMenuEtudiantController implements Initializable{
     ServicesMesCompetences servicesMesCompetences;
     ServicesLesDemandes servicesLesDemandes;
     ServicesUsers servicesUsers;
+    ServicesStatistiques servicesStatistiques;
     ConnexionBDD maCnx;
 
     @FXML
@@ -169,7 +170,14 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private PieChart graph2;
     @FXML
-    private LineChart graph1;
+    private BarChart graph1;
+    XYChart.Series<String, Number> serieGraph1;
+    @FXML
+    private Button btnGraphique2;
+    @FXML
+    private AnchorPane apStatistiques2;
+    @FXML
+    private Button btnGraphique1;
 
 
     @Override
@@ -265,7 +273,7 @@ public class HLRMenuEtudiantController implements Initializable{
             });
             tvLesDemandes.setItems(servicesLesDemandes.GetAllLesDemandes());
             //a continuer
-
+            graphique1();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -616,10 +624,28 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
     @javafx.fxml.FXML
-    public void onBtnMesStatistiquesClicked(Event event) {
+    public void onBtnMesStatistiquesClicked(Event event) throws SQLException {
         apStatistiques.toFront();
+        graphique1();
     }
+    public void graphique1() throws SQLException {
+        graph1.getData().clear();
 
+        servicesStatistiques = new ServicesStatistiques();
+        HashMap<String, Double> datasGraphique = servicesStatistiques.GetDatasGraphique1();
+        graph1.setTitle("Nombre de demandes par matière");
+
+        for (String xValue : datasGraphique.keySet()) {
+            Double yValue = datasGraphique.get(xValue);
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(xValue);
+
+            series.getData().add(new XYChart.Data<>(xValue, yValue));
+
+            graph1.getData().add(series);
+        }
+    }
     @FXML
     public void onBtnCreerDemandeClicked(Event event) {
         apCreerDemande.toFront();
@@ -635,4 +661,36 @@ public class HLRMenuEtudiantController implements Initializable{
         HLRApplication.LoginScene();
     }
 
+    @FXML
+    public void onBtnGraphique2Clicked(Event event) throws SQLException {
+        apStatistiques2.toFront();
+        graph2.getData().clear();
+        servicesStatistiques = new ServicesStatistiques();
+
+        ObservableList<PieChart.Data> datasGraph2 = FXCollections.observableArrayList();
+        HashMap<String, Integer> datasGraphique2 = servicesStatistiques.GetDatasGraphique2();
+        Iterator var12 = datasGraphique2.keySet().iterator();
+
+        while(var12.hasNext()) {
+            String valeur = (String)var12.next();
+            datasGraph2.add(new PieChart.Data(valeur, (double)(Integer)datasGraphique2.get(valeur)));
+        }
+
+        graph2.setData(datasGraph2);
+        graph2.setTitle("Nombre de soutiens réalisés par matière");
+        var12 = graph2.getData().iterator();
+
+        while(var12.hasNext()) {
+            PieChart.Data entry = (PieChart.Data) var12.next();
+            double var16 = entry.getPieValue();
+            Tooltip t = new Tooltip("" + var16 + " : " + entry.getName());
+            t.setStyle("-fx-background-color:#3D9ADA");
+            Tooltip.install(entry.getNode(), t);
+        }
+    }
+
+    @FXML
+    public void onBtnGraphique1Clicked(Event event) {
+        apStatistiques.toFront();
+    }
 }
