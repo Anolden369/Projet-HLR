@@ -18,10 +18,6 @@
       <AnchorPane layoutX="118.0" layoutY="138.0" prefHeight="98.0" prefWidth="780.0" stylesheets="@../../CSS/MesStyles.css">
          <children>
             <Button fx:id="btnMesCompetences" graphicTextGap="7.0" layoutX="203.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnMesCompetencesClicked" prefHeight="48.0" prefWidth="177.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Compétences" textFill="WHITE">
-               <styleClass>
-                  <String fx:value="couleurDeFondBtn" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -32,6 +28,10 @@
                      </image>
                   </ImageView>
                </graphic>
+               <styleClass>
+                  <String fx:value="couleurDeFondBtn" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
             </Button>
             <Button fx:id="btnLesDemandes" graphicTextGap="10.0" layoutX="396.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnLesDemandesClicked" prefHeight="48.0" prefWidth="177.0" stylesheets="@../../CSS/MesStyles.css" text="Les Demandes" textFill="WHITE">
                <styleClass>
@@ -49,7 +49,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnMesStatistiques" graphicTextGap="10.0" layoutX="589.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnMesStatistiquesClicked" prefHeight="48.0" prefWidth="177.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Statistiques" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnMesStatistiques" graphicTextGap="10.0" layoutX="589.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onBtnMesStatistiquesClicked" prefHeight="48.0" prefWidth="177.0" stylesheets="@../../CSS/MesStyles.css" text="Mes Statistiques" textFill="WHITE">
                <styleClass>
                   <String fx:value="btnMenu" />
                   <String fx:value="couleurDeFondBtn" />

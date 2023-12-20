@@ -18,12 +18,12 @@
       </Label>
       <Label layoutX="129.0" layoutY="200.0" text="Identifiant  : " textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label layoutX="129.0" layoutY="246.0" text="Mot de passe : " textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <TextField fx:id="txtLogin" layoutX="249.0" layoutY="197.0" prefHeight="26.0" prefWidth="208.0" promptText="Username" text="thien" />

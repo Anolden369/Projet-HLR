@@ -539,20 +539,27 @@ public class HLRMenuEtudiantController implements Initializable{
 
     @FXML
     public void tvLesDemandesClicked(Event event) throws SQLException {
-        apLesDemandes2.toFront();
-        String nom = tvLesDemandes.getSelectionModel().getSelectedItem().getNomUser();
-        String matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
-        LocalDate date = tvLesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande();
-        String sousMatiere = tvLesDemandes.getSelectionModel().getSelectedItem().getSousMatiere();
-        int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
+        if(tvLesDemandes.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une demande !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            apLesDemandes2.toFront();
+            String nom = tvLesDemandes.getSelectionModel().getSelectedItem().getNomUser();
+            String matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
+            LocalDate date = tvLesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande();
+            String sousMatiere = tvLesDemandes.getSelectionModel().getSelectedItem().getSousMatiere();
+            int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
 
 
-        txtNomValidation.setText(nom);
-        dateLimiteValidationSoutien.setText(String.valueOf(date));
-        txtMatiereValidation.setText(matiere);
-        txtSousMatieres.setText(sousMatiere);
-        idValidation.setText(String.valueOf(id));
-
+            txtNomValidation.setText(nom);
+            dateLimiteValidationSoutien.setText(String.valueOf(date));
+            txtMatiereValidation.setText(matiere);
+            txtSousMatieres.setText(sousMatiere);
+            idValidation.setText(String.valueOf(id));
+        }
     }
 
     @FXML
