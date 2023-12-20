@@ -151,21 +151,21 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private AnchorPane apLesDemandes2;
     @FXML
+    private TextField txtValidationCommentaire;
+    @FXML
     private Button btnValidationDemande;
     @FXML
     private TextField txtNomValidation;
     @FXML
-    private TextField dateValidation;
-    @FXML
     private TextField txtMatiereValidation;
-    @FXML
-    private TextField idValidation;
     @FXML
     private TextField txtSousMatieres;
     @FXML
-    private TextField txtValidationCommentaire;
+    private TextField idValidation;
     @FXML
     private DatePicker dpDateUpdateSoutien;
+    @FXML
+    private TextField dateLimiteValidationSoutien;
 
 
     @Override
@@ -187,6 +187,28 @@ public class HLRMenuEtudiantController implements Initializable{
             tcSousMatiereVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, String>("sousMatiere"));
             tcDateVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, Date>("dateFinDemande"));
             tcStatutVoirMesDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, Integer>("status"));
+            tcStatutVoirMesDemandes.setCellFactory(column -> {
+                return new TableCell<Demandes, Integer>() {
+                    @Override
+                    protected void updateItem(Integer status, boolean empty) {
+                        super.updateItem(status, empty);
+                        if (empty || status == null) {
+                            setText(null);
+                        } else {
+                            if (status == 1) {
+                                setText("En cours");
+                            } else if(status == 2){
+                                setText("Acceptée - En attente d'attribution d'une salle");
+                            } else if(status == 3){
+                                setText("Validée - Salle attribuée");
+                            } else {
+                                setText("Aucun statut");
+                            }
+                        }
+                    }
+                };
+            });
+
 
             tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
 
@@ -215,7 +237,28 @@ public class HLRMenuEtudiantController implements Initializable{
             tcLesDemandesMatiere.setCellValueFactory(new PropertyValueFactory<Demandes, String>("matiere"));
             tcLesDemandesSMatiere.setCellValueFactory(new PropertyValueFactory<Demandes, String>("sousMatiere"));
             tcLesDemandesDateLimite.setCellValueFactory(new PropertyValueFactory<Demandes, Date>("dateFinDemande"));
-
+            dpDateFin.setDayCellFactory(picker -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    setDisable(empty || date.isBefore(DateActuelle));
+                }
+            });
+            dpModifierDemandeDateFin.setDayCellFactory(picker -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    setDisable(empty || date.isBefore(DateActuelle));
+                }
+            });
+            dpDateUpdateSoutien.setDayCellFactory(picker -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    LocalDate dateLimite = LocalDate.parse(dateLimiteValidationSoutien.getText());
+                    setDisable(empty || date.isBefore(DateActuelle) || date.isAfter(dateLimite));
+                }
+            });
             tvLesDemandes.setItems(servicesLesDemandes.GetAllLesDemandes());
             //a continuer
 
@@ -298,7 +341,23 @@ public class HLRMenuEtudiantController implements Initializable{
             alert.setContentText("Veuillez selectionner une demande pour la modifier !");
             alert.setHeaderText("");
             alert.showAndWait();
-        } else {
+        } else if(tvMesDemandes.getSelectionModel().getSelectedItem().getStatus() == 2){
+            apMesDemandes.toFront();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Attention");
+            alert.setContentText("Vous ne pouvez pas modifier une demande qui a déjà été acceptée !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        }
+        else if(tvMesDemandes.getSelectionModel().getSelectedItem().getStatus() == 3){
+            apMesDemandes.toFront();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Attention");
+            alert.setContentText("Vous ne pouvez pas modifier une demande où la salle a été attribuée !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        }
+        else {
             servicesMesDemandes = new ServicesMesDemandes();
             ObservableList<Integer> lesIdDemandesSelectionne = FXCollections.observableArrayList();
             int idDemandesSelectionne = tvMesDemandes.getSelectionModel().getSelectedItem().getId();
@@ -475,13 +534,64 @@ public class HLRMenuEtudiantController implements Initializable{
     public void onBtnLesDemandesClicked(Event event) throws SQLException {
         servicesLesDemandes = new ServicesLesDemandes();
         apLesDemandes.toFront();
-
         tvLesDemandes.setItems(servicesLesDemandes.getDemandesCorrespondantesCompetences());
     }
 
+    @FXML
+    public void tvLesDemandesClicked(Event event) throws SQLException {
+        if(tvLesDemandes.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une demande !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            apLesDemandes2.toFront();
+            String nom = tvLesDemandes.getSelectionModel().getSelectedItem().getNomUser();
+            String matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
+            LocalDate date = tvLesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande();
+            String sousMatiere = tvLesDemandes.getSelectionModel().getSelectedItem().getSousMatiere();
+            int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
 
 
+            txtNomValidation.setText(nom);
+            dateLimiteValidationSoutien.setText(String.valueOf(date));
+            txtMatiereValidation.setText(matiere);
+            txtSousMatieres.setText(sousMatiere);
+            idValidation.setText(String.valueOf(id));
+        }
+    }
 
+    @FXML
+    public void btnValidationDemandeClicked(Event event) throws SQLException {
+        if(dpDateUpdateSoutien.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de date");
+            alert.setContentText("Veuillez selectionner une date pour le soutien !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            String nom = txtNomValidation.getText();
+            //String matiere = txtMatiereValidation.getText();
+            LocalDate date = dpDateUpdateSoutien.getValue();
+            String sousMatiere = txtSousMatieres.getText();
+            int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
+            String matiere;
+            matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
+            int idCompetence = servicesMesCompetences.getIdCompetenceByUser(matiere);
+            String commentaire = txtValidationCommentaire.getText();
+            servicesLesDemandes.ajoutSoutien(id, idCompetence, date, commentaire);
+
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Acceptation Soutien");
+            alert.setContentText("Merci pour votre soutien !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+            apLesDemandes.toFront();
+            tvLesDemandes.setItems(servicesLesDemandes.getDemandesCorrespondantesCompetences());
+        }
+    }
 
 
 
@@ -517,42 +627,8 @@ public class HLRMenuEtudiantController implements Initializable{
     }
 
     @FXML
-    public void tvLesDemandesClicked(Event event) throws SQLException {
-        apLesDemandes2.toFront();
-        String nom = tvLesDemandes.getSelectionModel().getSelectedItem().getNomUser();
-        String matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
-        LocalDate date = tvLesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande();
-        String sousMatiere = tvLesDemandes.getSelectionModel().getSelectedItem().getSousMatiere();
-        int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
-
-
-        txtNomValidation.setText(nom);
-        dateValidation.setText(String.valueOf(date));
-        txtMatiereValidation.setText(matiere);
-        txtSousMatieres.setText(sousMatiere);
-        idValidation.setText(String.valueOf(id));
-
-    }
-
-    @FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
     }
-    @FXML
-    public void btnValidationDemandeClicked(Event event) throws SQLException {
-        String nom = txtNomValidation.getText();
-        //String matiere = txtMatiereValidation.getText();
-        LocalDate date = dpDateUpdateSoutien.getValue();
-        String sousMatiere = txtSousMatieres.getText();
-        int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
 
-        String matiere;
-        matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
-        int idCompetence = servicesMesCompetences.getCompetenceBy(matiere);
-
-        String commentaire = txtValidationCommentaire.getText();
-
-
-        servicesLesDemandes.ajoutSoutien(id, idCompetence,date,commentaire);
-    }
 }
