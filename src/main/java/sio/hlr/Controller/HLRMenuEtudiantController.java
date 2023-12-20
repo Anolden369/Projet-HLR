@@ -166,6 +166,10 @@ public class HLRMenuEtudiantController implements Initializable{
     private DatePicker dpDateUpdateSoutien;
     @FXML
     private TextField dateLimiteValidationSoutien;
+    @FXML
+    private PieChart graph2;
+    @FXML
+    private LineChart graph1;
 
 
     @Override

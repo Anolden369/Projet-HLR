@@ -144,27 +144,4 @@ public class ServicesLesDemandes {
         ps.executeUpdate();
     }
 
-    public void ajoutSoutien(int idDemande,int idCompetence,LocalDate date,String commentaire) throws SQLException {
-
-        ps = uneCnx.prepareStatement("INSERT INTO `soutien`(`id_demande`, `id_competence`, `date_du_soutien`,date_updated, `description`, `status`) \n" +
-                "VALUES (?,?,?,?,?,'2')");
-        ps.setInt(1,idDemande);
-        ps.setInt(2,idCompetence);
-        ps.setDate(3, Date.valueOf(date));
-        ps.setDate(4, Date.valueOf(DateActuelle));
-        ps.setString(5,commentaire);
-        ps.executeUpdate();
-
-        ps = uneCnx.prepareStatement("UPDATE `demande` SET `date_updated`=?,`status`='2' \n" +
-                "WHERE demande.id = ?");
-        ps.setInt(2,idDemande);
-        ps.setDate(1, Date.valueOf(DateActuelle));
-
-        ps.executeUpdate();
-    }
-
-
-
-
-
 }
