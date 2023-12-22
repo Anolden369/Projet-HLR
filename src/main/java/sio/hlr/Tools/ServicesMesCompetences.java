@@ -84,16 +84,6 @@ public class ServicesMesCompetences {
         return false;
     }
 
-    public void supprimerCompetence(String nomMatiere) throws SQLException {
-        int idMatiere = servicesMatieres.GetIdMatiere(nomMatiere);
-        int idUser = servicesUsers.getIdUser();
-
-        ps = uneCnx.prepareStatement("DELETE FROM competence WHERE competence.id_user = ? AND competence.id_matiere = ?");
-        ps.setInt(1, idUser);
-        ps.setInt(2, idMatiere);
-        ps.executeUpdate();
-    }
-
     public int getIdCompetenceByUser(String Matiere) throws SQLException {
         int idMatiere = servicesMatieres.GetIdMatiere(Matiere);
         ps = uneCnx.prepareCall("SELECT competence.id FROM competence WHERE competence.id_matiere=? AND competence.id_user=?");

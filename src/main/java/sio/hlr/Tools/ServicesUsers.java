@@ -1,12 +1,6 @@
 package sio.hlr.Tools;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 import sio.hlr.Entities.User;
 import sio.hlr.HLRApplication;
 

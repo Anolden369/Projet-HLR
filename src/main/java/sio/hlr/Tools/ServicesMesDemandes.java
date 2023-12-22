@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.DatePicker;
 import sio.hlr.Entities.Demandes;
-import sio.hlr.Entities.Matiere;
 
 import java.sql.*;
 import java.time.LocalDate;

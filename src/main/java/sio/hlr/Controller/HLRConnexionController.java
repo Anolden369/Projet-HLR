@@ -26,14 +26,15 @@ public class HLRConnexionController implements Initializable {
     private PasswordField pfMdp;
     @FXML
     private Button btnExit;
+    @FXML
+    private Button btnConnexion;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-
     @FXML
-    public void btnConnexionClicked(Event event) {
+    public void onBtnConnexionClicked(ActionEvent actionEvent) {
         try{
             if(txtLogin.getText().equals("")){
                 Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -60,11 +61,9 @@ public class HLRConnexionController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
     @FXML
-    public void exit(ActionEvent actionEvent) {
+    public void onBtnExitClicked(Event event) {
         Stage stage = (Stage) btnExit.getScene().getWindow();
         stage.close();
-
     }
 }

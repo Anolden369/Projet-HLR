@@ -2,7 +2,6 @@ package sio.hlr.Entities;
 
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.Locale;
 
 public class Demandes {
     private int id;

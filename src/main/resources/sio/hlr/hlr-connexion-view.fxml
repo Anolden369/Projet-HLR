@@ -10,27 +10,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="841.0" prefWidth="993.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRConnexionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="841.0" prefWidth="993.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRConnexionController">
    <children>
       <AnchorPane layoutX="266.0" layoutY="221.0" prefHeight="400.0" prefWidth="475.0">
          <children>
             <Label layoutX="163.0" layoutY="135.0" text="Connectez-vous">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <Label layoutX="79.0" layoutY="199.0" text="Login :">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <Label layoutX="79.0" layoutY="237.0" text="Mot de passe : ">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txtLogin" layoutX="189.0" layoutY="196.0" prefHeight="26.0" prefWidth="208.0" promptText="Username" />
-            <Button fx:id="btnConnexion" layoutX="79.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#btnConnexionClicked" prefHeight="30.0" prefWidth="318.0" text="Connexion" textFill="WHITE">
+            <TextField fx:id="txtLogin" layoutX="189.0" layoutY="196.0" prefHeight="26.0" prefWidth="208.0" promptText="Username" text="thien" />
+            <Button fx:id="btnConnexion" layoutX="79.0" layoutY="280.0" mnemonicParsing="false" onAction="#onBtnConnexionClicked" onKeyPressed="#onBtnConnexionClicked" prefHeight="30.0" prefWidth="318.0" text="Connexion">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -39,7 +39,7 @@
                   <String fx:value="cursor" />
                </styleClass>
             </Button>
-            <PasswordField fx:id="pfMdp" layoutX="189.0" layoutY="234.0" prefHeight="27.0" prefWidth="208.0" promptText="Password" />
+            <PasswordField fx:id="pfMdp" layoutX="189.0" layoutY="234.0" prefHeight="27.0" prefWidth="208.0" promptText="Password" text="1234" />
             <ImageView fitHeight="117.0" fitWidth="288.0" layoutX="109.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/Outlook-gawwclqp.png" />
@@ -51,7 +51,7 @@
             <String fx:value="monAnchorPane" />
          </styleClass>
       </AnchorPane>
-      <Button fx:id="btnExit" layoutX="883.0" layoutY="33.0" mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="75.0" text="Exit">
+      <Button fx:id="btnExit" layoutX="883.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#onBtnExitClicked" prefHeight="30.0" prefWidth="75.0" text="Exit">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
