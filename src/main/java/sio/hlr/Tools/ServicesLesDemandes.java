@@ -115,7 +115,7 @@ public class ServicesLesDemandes {
             String nomUser = demande.getNomUser();
             int niveauDemande = servicesUsers.getUser(servicesUsers.getIdUserByNom(nomUser)).getNiveau();
 
-            if (niveauDemande > niveauMin && lesNiveaux.contains(niveauDemande)) {
+            if (niveauDemande >= niveauMin && lesNiveaux.contains(niveauDemande)) {
                 lesDemandesParNiveau.add(demande);
             }
         }

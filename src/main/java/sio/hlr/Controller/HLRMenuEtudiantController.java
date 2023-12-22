@@ -272,7 +272,6 @@ public class HLRMenuEtudiantController implements Initializable{
                 }
             });
             tvLesDemandes.setItems(servicesLesDemandes.GetAllLesDemandes());
-            //a continuer
             graphique1();
             graphique2();
             graphique3();
@@ -659,7 +658,6 @@ public class HLRMenuEtudiantController implements Initializable{
     }
     public void graphique1() throws SQLException {
         graph1.getData().clear();
-
         servicesStatistiques = new ServicesStatistiques();
         HashMap<String, Integer> datasGraphique = servicesStatistiques.GetDatasGraphique1();
         graph1.setTitle("Nombre de demandes par matière");
@@ -678,7 +676,6 @@ public class HLRMenuEtudiantController implements Initializable{
     public void graphique2() throws SQLException {
         graph2.getData().clear();
         servicesStatistiques = new ServicesStatistiques();
-
         ObservableList<PieChart.Data> datasGraph2 = FXCollections.observableArrayList();
         HashMap<String, Integer> datasGraphique2 = servicesStatistiques.GetDatasGraphique2();
         Iterator var12 = datasGraphique2.keySet().iterator();
@@ -702,7 +699,6 @@ public class HLRMenuEtudiantController implements Initializable{
     }
     public void graphique3() throws SQLException {
         graph3.getData().clear();
-
         servicesStatistiques = new ServicesStatistiques();
         HashMap<String, Integer> datasGraphique = servicesStatistiques.GetDatasGraphique3();
 
@@ -715,7 +711,6 @@ public class HLRMenuEtudiantController implements Initializable{
             int yValue = datasGraphique.get(xValue);
             series.getData().add(new XYChart.Data<>(xValue, yValue));
         }
-
         graph3.getData().add(series);
     }
 
