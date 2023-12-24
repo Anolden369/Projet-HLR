@@ -3,14 +3,12 @@ package sio.hlr.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import sio.hlr.Tools.ConnexionBDD;
 import sio.hlr.Tools.ServicesUsers;
 
@@ -28,14 +26,15 @@ public class HLRConnexionController implements Initializable {
     private PasswordField pfMdp;
     @FXML
     private Button btnExit;
+    @FXML
+    private Button btnConnexion;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-
     @FXML
-    public void btnConnexionClicked(Event event) {
+    public void onBtnConnexionClicked(ActionEvent actionEvent) {
         try{
             if(txtLogin.getText().equals("")){
                 Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -62,11 +61,9 @@ public class HLRConnexionController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
     @FXML
-    public void exit(ActionEvent actionEvent) {
+    public void onBtnExitClicked(Event event) {
         Stage stage = (Stage) btnExit.getScene().getWindow();
         stage.close();
-
     }
 }

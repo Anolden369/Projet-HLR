@@ -21,6 +21,10 @@
     -fx-text-fill: white;
     -fx-cursor: hand;
 }
+.cursor:hover
+{
+    -fx-cursor: hand;
+}
 
 .ap
 {

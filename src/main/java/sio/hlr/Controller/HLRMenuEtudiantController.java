@@ -2,24 +2,17 @@ package sio.hlr.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Material;
-import javafx.stage.Stage;
 import sio.hlr.Entities.Competences;
 import sio.hlr.Entities.Demandes;
 import sio.hlr.Entities.Matiere;
-import sio.hlr.Entities.User;
 import sio.hlr.HLRApplication;
 import sio.hlr.Tools.*;
 
@@ -27,12 +20,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import javafx.scene.control.TreeTableView;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
+
+import java.util.*;
 
 public class HLRMenuEtudiantController implements Initializable{
 
@@ -83,6 +74,7 @@ public class HLRMenuEtudiantController implements Initializable{
     ServicesMesCompetences servicesMesCompetences;
     ServicesLesDemandes servicesLesDemandes;
     ServicesUsers servicesUsers;
+    ServicesStatistiques servicesStatistiques;
     ConnexionBDD maCnx;
 
     @FXML
@@ -147,8 +139,6 @@ public class HLRMenuEtudiantController implements Initializable{
     @FXML
     private TableColumn tcChoixSMatiereCreerCompetence;
     @FXML
-    private Button btnMenuSupprimerCompetence;
-    @FXML
     private AnchorPane apLesDemandes2;
     @FXML
     private TextField txtValidationCommentaire;
@@ -166,6 +156,28 @@ public class HLRMenuEtudiantController implements Initializable{
     private DatePicker dpDateUpdateSoutien;
     @FXML
     private TextField dateLimiteValidationSoutien;
+    @FXML
+    private PieChart graph2;
+    @FXML
+    private BarChart graph1;
+    @FXML
+    private AnchorPane apStatistiques2;
+    @FXML
+    private AnchorPane apStatistiques3;
+    @FXML
+    private LineChart graph3;
+    @FXML
+    private Button btnGraphique2to3;
+    @FXML
+    private Button btnGraphique1to2;
+    @FXML
+    private Button btnGraphique1to3;
+    @FXML
+    private Button btnGraphique2to1;
+    @FXML
+    private Button btnGraphique3to1;
+    @FXML
+    private Button btnGraphique3to2;
 
 
     @Override
@@ -260,8 +272,9 @@ public class HLRMenuEtudiantController implements Initializable{
                 }
             });
             tvLesDemandes.setItems(servicesLesDemandes.GetAllLesDemandes());
-            //a continuer
-
+            graphique1();
+            graphique2();
+            graphique3();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -269,6 +282,12 @@ public class HLRMenuEtudiantController implements Initializable{
             throw new RuntimeException(e);
         }
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////// Mes Demandes  /////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     @FXML
     public void tvChoixMatiereDemandeClicked(Event event) throws SQLException {
@@ -290,7 +309,6 @@ public class HLRMenuEtudiantController implements Initializable{
                 break;
             }
         }
-        // je gère les erreurs
         if(tvCreerMatiereDemande.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
@@ -388,7 +406,6 @@ public class HLRMenuEtudiantController implements Initializable{
                 break;
             }
         }
-        // je gère les erreurs
         if(tvModifMatiereDemande.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
@@ -430,7 +447,10 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
-    // Partie mes Competences
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////// Mes Competences  //////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @FXML
     public void tvChoixMatiereCompetenceClicked(Event event) throws SQLException {
         servicesMatieres = new ServicesMatieres();
@@ -468,7 +488,6 @@ public class HLRMenuEtudiantController implements Initializable{
                 break;
             }
         }
-        // je gère les erreurs
         if(tvCreerMatiereCompetence.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
@@ -504,32 +523,11 @@ public class HLRMenuEtudiantController implements Initializable{
 
     }
 
-    @FXML
-    public void onBtnSupprimerCompetenceClicked(Event event) throws SQLException {
-        if(tvMesCompetences.getSelectionModel().getSelectedItem() == null){
-            apMesCompetences.toFront();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner une compétence pour supprimer la matière de vos compétences!");
-            alert.setHeaderText("");
-            alert.showAndWait();
-        } else {
-            servicesMesCompetences = new ServicesMesCompetences();
-            String nomMatiereMesCompetencesSelectionne = tvMesCompetences.getSelectionModel().getSelectedItem().getMatiere();
-            servicesMesCompetences.supprimerCompetence(nomMatiereMesCompetencesSelectionne);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Suppression compétence");
-            alert.setContentText("Votre compétence a bien été supprimer !");
-            alert.setHeaderText("");
-            alert.showAndWait();
-            apMesCompetences.toFront();
-            tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
-        }
-    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////// Les demandes des autres  //////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    // Les demandes des autres
     @javafx.fxml.FXML
     public void onBtnLesDemandesClicked(Event event) throws SQLException {
         servicesLesDemandes = new ServicesLesDemandes();
@@ -539,20 +537,27 @@ public class HLRMenuEtudiantController implements Initializable{
 
     @FXML
     public void tvLesDemandesClicked(Event event) throws SQLException {
-        apLesDemandes2.toFront();
-        String nom = tvLesDemandes.getSelectionModel().getSelectedItem().getNomUser();
-        String matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
-        LocalDate date = tvLesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande();
-        String sousMatiere = tvLesDemandes.getSelectionModel().getSelectedItem().getSousMatiere();
-        int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
+        if(tvLesDemandes.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setContentText("Veuillez selectionner une demande !");
+            alert.setHeaderText("");
+            alert.showAndWait();
+        } else {
+            apLesDemandes2.toFront();
+            String nom = tvLesDemandes.getSelectionModel().getSelectedItem().getNomUser();
+            String matiere = tvLesDemandes.getSelectionModel().getSelectedItem().getMatiere();
+            LocalDate date = tvLesDemandes.getSelectionModel().getSelectedItem().getDateFinDemande();
+            String sousMatiere = tvLesDemandes.getSelectionModel().getSelectedItem().getSousMatiere();
+            int id = tvLesDemandes.getSelectionModel().getSelectedItem().getId();
 
 
-        txtNomValidation.setText(nom);
-        dateLimiteValidationSoutien.setText(String.valueOf(date));
-        txtMatiereValidation.setText(matiere);
-        txtSousMatieres.setText(sousMatiere);
-        idValidation.setText(String.valueOf(id));
-
+            txtNomValidation.setText(nom);
+            dateLimiteValidationSoutien.setText(String.valueOf(date));
+            txtMatiereValidation.setText(matiere);
+            txtSousMatieres.setText(sousMatiere);
+            idValidation.setText(String.valueOf(id));
+        }
     }
 
     @FXML
@@ -586,12 +591,6 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
-
-
-    @FXML
-    public void btnSMDemande(Event event) throws SQLException {
-    }
-
     @javafx.fxml.FXML
     public void onBtnMesDemandesClicked(Event event) throws SQLException {
         tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
@@ -604,11 +603,6 @@ public class HLRMenuEtudiantController implements Initializable{
         apMesCompetences.toFront();
     }
 
-    @javafx.fxml.FXML
-    public void onBtnMesStatistiquesClicked(Event event) {
-        apStatistiques.toFront();
-    }
-
     @FXML
     public void onBtnCreerDemandeClicked(Event event) {
         apCreerDemande.toFront();
@@ -619,9 +613,114 @@ public class HLRMenuEtudiantController implements Initializable{
         apCreerCompetence.toFront();
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////// Mes Statistiques  /////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @javafx.fxml.FXML
+    public void onBtnMesStatistiquesClicked(Event event) throws SQLException {
+        apStatistiques.toFront();
+        graphique1();
+    }
+    @FXML
+    public void onBtnGraphique1to2Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques2.toFront();
+        graphique2();
+    }
+    @FXML
+    public void onBtnGraphique1to3Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques3.toFront();
+        graphique3();
+
+    }
+    @FXML
+    public void onBtnGraphique2to1Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques.toFront();
+        graphique1();
+    }
+    @FXML
+    public void onBtnGraphique2to3Clicked(Event event) throws SQLException {
+        apStatistiques3.toFront();
+        graphique3();
+    }
+    @FXML
+    public void onBtnGraphique3to1Clicked(Event event) throws SQLException {
+        apStatistiques.toFront();
+        graphique1();
+    }
+
+    @FXML
+    public void onBtnGraphique3to2Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques2.toFront();
+        graphique2();
+    }
+    public void graphique1() throws SQLException {
+        graph1.getData().clear();
+        servicesStatistiques = new ServicesStatistiques();
+        HashMap<String, Integer> datasGraphique = servicesStatistiques.GetDatasGraphique1();
+        graph1.setTitle("Nombre de demandes par matière");
+
+        for (String xValue : datasGraphique.keySet()) {
+            int yValue = datasGraphique.get(xValue);
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(xValue);
+
+            series.getData().add(new XYChart.Data<>(xValue, yValue));
+
+            graph1.getData().add(series);
+        }
+    }
+    public void graphique2() throws SQLException {
+        graph2.getData().clear();
+        servicesStatistiques = new ServicesStatistiques();
+        ObservableList<PieChart.Data> datasGraph2 = FXCollections.observableArrayList();
+        HashMap<String, Integer> datasGraphique2 = servicesStatistiques.GetDatasGraphique2();
+        Iterator var12 = datasGraphique2.keySet().iterator();
+
+        while(var12.hasNext()) {
+            String valeur = (String)var12.next();
+            datasGraph2.add(new PieChart.Data(valeur, (double)(Integer)datasGraphique2.get(valeur)));
+        }
+
+        graph2.setData(datasGraph2);
+        graph2.setTitle("Nombre de soutiens réalisés par matière");
+        var12 = graph2.getData().iterator();
+
+        while(var12.hasNext()) {
+            PieChart.Data entry = (PieChart.Data) var12.next();
+            double var16 = entry.getPieValue();
+            Tooltip t = new Tooltip("" + var16 + " : " + entry.getName());
+            t.setStyle("-fx-background-color:#3D9ADA");
+            Tooltip.install(entry.getNode(), t);
+        }
+    }
+    public void graphique3() throws SQLException {
+        graph3.getData().clear();
+        servicesStatistiques = new ServicesStatistiques();
+        HashMap<String, Integer> datasGraphique = servicesStatistiques.GetDatasGraphique3();
+
+        graph3.setTitle("Nombre de soutiens acceptés par niveau");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Soutiens acceptés");
+
+        for (String xValue : datasGraphique.keySet()) {
+            int yValue = datasGraphique.get(xValue);
+            series.getData().add(new XYChart.Data<>(xValue, yValue));
+        }
+        graph3.getData().add(series);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////// Deconnexion  //////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();
     }
-
 }
