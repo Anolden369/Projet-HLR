@@ -312,19 +312,19 @@ public class HLRMenuEtudiantController implements Initializable{
         if(tvCreerMatiereDemande.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner une matière !");
+            alert.setContentText("Veuillez selectionnez une matière !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else if(!AuMoinsUneSelectionSousMatiere) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner au moins une sous matière !");
+            alert.setContentText("Veuillez selectionnez au moins une sous matière !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else if(dpDateFin.getValue()==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de date");
-            alert.setContentText("Veuillez selectionner une date !");
+            alert.setContentText("Veuillez selectionnez une date !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else {
@@ -342,7 +342,7 @@ public class HLRMenuEtudiantController implements Initializable{
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Créer demande");
-            alert.setContentText("Votre demande a bien été créer!");
+            alert.setContentText("Votre demande a bien été crée!");
             alert.setHeaderText("");
             alert.showAndWait();
             apMesDemandes.toFront();
@@ -356,7 +356,7 @@ public class HLRMenuEtudiantController implements Initializable{
             apMesDemandes.toFront();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner une demande pour la modifier !");
+            alert.setContentText("Veuillez selectionnez une demande pour la modifier !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else if(tvMesDemandes.getSelectionModel().getSelectedItem().getStatus() == 2){
@@ -409,19 +409,19 @@ public class HLRMenuEtudiantController implements Initializable{
         if(tvModifMatiereDemande.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner une matière !");
+            alert.setContentText("Veuillez selectionnez une matière !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else if(!AuMoinsUneSelectionSousMatiere) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner au moins une sous matière !");
+            alert.setContentText("Veuillez selectionnez au moins une sous matière !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else if(dpModifierDemandeDateFin.getValue()==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de date");
-            alert.setContentText("Veuillez selectionner une date !");
+            alert.setContentText("Veuillez selectionnez une date !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else {
@@ -439,7 +439,7 @@ public class HLRMenuEtudiantController implements Initializable{
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Modifier demande");
-            alert.setContentText("Votre demande a bien été modifier!");
+            alert.setContentText("Votre demande a bien été modifiée!");
             alert.setHeaderText("");
             alert.showAndWait();
             apMesDemandes.toFront();
@@ -491,13 +491,13 @@ public class HLRMenuEtudiantController implements Initializable{
         if(tvCreerMatiereCompetence.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner une matière !");
+            alert.setContentText("Veuillez selectionnez une matière !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else if(!AuMoinsUneSelectionSousMatiere) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner au moins une sous matière !");
+            alert.setContentText("Veuillez selectionnez au moins une sous matière !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else {
@@ -514,7 +514,7 @@ public class HLRMenuEtudiantController implements Initializable{
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Créer compétence");
-            alert.setContentText("Votre compétence a bien été créer !");
+            alert.setContentText("Votre compétence a bien été crée !");
             alert.setHeaderText("");
             alert.showAndWait();
             apMesCompetences.toFront();
@@ -540,7 +540,7 @@ public class HLRMenuEtudiantController implements Initializable{
         if(tvLesDemandes.getSelectionModel().getSelectedItem() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");
-            alert.setContentText("Veuillez selectionner une demande !");
+            alert.setContentText("Veuillez selectionnez une demande !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else {
@@ -565,7 +565,7 @@ public class HLRMenuEtudiantController implements Initializable{
         if(dpDateUpdateSoutien.getValue()==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de date");
-            alert.setContentText("Veuillez selectionner une date pour le soutien !");
+            alert.setContentText("Veuillez selectionnez une date pour le soutien !");
             alert.setHeaderText("");
             alert.showAndWait();
         } else {
@@ -582,7 +582,7 @@ public class HLRMenuEtudiantController implements Initializable{
 
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Acceptation Soutien");
+            alert.setTitle("Acceptation du Soutien");
             alert.setContentText("Merci pour votre soutien !");
             alert.setHeaderText("");
             alert.showAndWait();
