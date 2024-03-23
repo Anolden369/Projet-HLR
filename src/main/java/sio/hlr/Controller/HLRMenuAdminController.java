@@ -99,8 +99,6 @@ public class HLRMenuAdminController implements Initializable {
     ServicesSousMatieres servicesSousMatieres;
 
     @javafx.fxml.FXML
-    private Button btnAffectation;
-    @javafx.fxml.FXML
     private AnchorPane apVisuSoutients2;
     @javafx.fxml.FXML
     private TableView<Salle> tvAffectationSalleSelection;
@@ -113,6 +111,9 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     private TableColumn tcNumSalle;
     LocalDate DateActuelle = LocalDate.now();
+    @javafx.fxml.FXML
+    private TableColumn tcSoutienAides;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         apCreerMatieres.toFront();
@@ -317,7 +318,7 @@ public class HLRMenuAdminController implements Initializable {
         HLRApplication.LoginScene();
     }
 
-    @javafx.fxml.FXML
+    @Deprecated
     public void btnValidationAffectionClicked(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         String matiere = tvSoutien.getSelectionModel().getSelectedItem().getMatiere();
