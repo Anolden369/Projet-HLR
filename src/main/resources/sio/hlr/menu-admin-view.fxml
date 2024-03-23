@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -97,7 +96,7 @@
       </VBox>
       <AnchorPane layoutX="166.0" layoutY="90.0" prefHeight="419.0" prefWidth="562.0">
          <children>
-            <AnchorPane fx:id="apCreerMatieres" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apCreerMatieres" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="10.0" layoutY="37.0" prefHeight="19.0" prefWidth="140.0" text="Nom de la matère :" />
                   <TextField fx:id="txtCreerNomMatiere" layoutX="174.0" layoutY="33.0" />
@@ -105,7 +104,7 @@
                   <Label layoutX="10.0" layoutY="94.0" text="Nom des sous-matères :" />
                   <TextField fx:id="txtCreerNomSousMatiere" layoutX="174.0" layoutY="90.0" prefHeight="77.0" prefWidth="329.0" />
                </children></AnchorPane>
-            <AnchorPane fx:id="apModifMatiere" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apModifMatiere" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="28.0" layoutY="238.0" text="Modification nom matière : " />
                   <TextField fx:id="txtModifNomMatiere" layoutX="226.0" layoutY="234.0" prefHeight="27.0" prefWidth="245.0" />
@@ -115,16 +114,14 @@
                   <ComboBox fx:id="cboNomMatiere" layoutX="226.0" layoutY="32.0" onAction="#cboNomMatiereClicked" prefHeight="27.0" prefWidth="209.0" />
                   <Label layoutX="28.0" layoutY="36.0" text="Nom de la matière :" />
                </children></AnchorPane>
-            <AnchorPane fx:id="apCreerSalles" nodeOrientation="RIGHT_TO_LEFT" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apCreerSalles" nodeOrientation="RIGHT_TO_LEFT" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="390.0" layoutY="62.0" text="Numéro de la salle :" />
-                  <Label layoutX="445.0" layoutY="155.0" prefHeight="19.0" prefWidth="56.0" text="Etage : " />
                   <Button fx:id="btnValiderCreerSalle" layoutX="112.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#btnValiderCreerSalleClicked" prefHeight="27.0" prefWidth="338.0" text="Valider" />
-                  <ChoiceBox layoutX="208.0" layoutY="151.0" prefHeight="27.0" prefWidth="162.0" />
                   <TextField fx:id="txtCreerNumSalle" alignment="CENTER" editable="false" layoutX="208.0" layoutY="58.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apModifSalles" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apModifSalles" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="29.0" layoutY="151.0" text="Modification étage : " />
                   <Label layoutX="29.0" layoutY="67.0" text="Modification salle :" />
@@ -137,31 +134,32 @@
                   <Label layoutX="254.0" layoutY="6.0" text="Soutiens : " />
                   <TableView fx:id="tvSoutien" layoutX="2.0" layoutY="60.0" onMouseClicked="#tvSoutienClicked" prefHeight="357.0" prefWidth="556.0">
                     <columns>
-                      <TableColumn fx:id="tcSoutienDemandes" prefWidth="87.0" text="demandeur" />
-                      <TableColumn fx:id="tcSoutienAides" prefWidth="74.0" text="aide" />
-                        <TableColumn fx:id="tcSoutienMatiere" prefWidth="69.0" text="matière" />
-                        <TableColumn fx:id="tcSoutienSMatiere" prefWidth="95.0" text="sous-matière(s)" />
-                        <TableColumn fx:id="tcSoutienDescription" prefWidth="85.0" text="description" />
-                        <TableColumn fx:id="tcSoutienStatut" prefWidth="56.0" text="statut" />
-                        <TableColumn fx:id="tcSoutienDateLimite" prefWidth="89.0" text="date limite" />
+                      <TableColumn fx:id="tcSoutienDemandes" maxWidth="870.0" minWidth="30.0" prefWidth="87.0" text="demandeur" />
+                        <TableColumn fx:id="tcSoutienMatiere" maxWidth="690.0" minWidth="30.0" prefWidth="69.0" text="Sous-matière" />
+                        <TableColumn fx:id="tcSoutienSMatiere" maxWidth="1140.0" minWidth="30.0" prefWidth="114.0" text="ID de la demande" />
+                        <TableColumn fx:id="tcSoutienDescription" maxWidth="750.0" minWidth="30.0" prefWidth="75.0" text="description" />
+                        <TableColumn fx:id="tcSoutienStatut" prefWidth="55.0" text="statut" />
+                        <TableColumn fx:id="tcSoutienDateLimite" prefWidth="134.0" text="date limite" />
                     </columns>
                   </TableView>
                   <Button fx:id="btnAffectation" layoutX="352.0" layoutY="16.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="175.0" text="Affecter" />
                </children></AnchorPane>
-            <AnchorPane fx:id="apVisuSoutients2" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apVisuSoutients2" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="254.0" layoutY="6.0" text="Affectation" />
                   <TableView fx:id="tvAffectationSalleSelection" layoutX="383.0" layoutY="45.0" prefHeight="236.0" prefWidth="140.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Salles" />
+                      <TableColumn fx:id="tcNumSalle" prefWidth="75.0" text="Salles" />
                     </columns>
                   </TableView>
                   <TextArea fx:id="txtAffectationInfo1" layoutX="39.0" layoutY="45.0" prefHeight="40.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAffectationInfo2" layoutX="39.0" layoutY="99.0" prefHeight="40.0" prefWidth="200.0" />
-                  <Button fx:id="btnValidationAffection" layoutX="139.0" layoutY="345.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="298.0" text="Valider" />
+                  <TextArea fx:id="txtAffectationInfo2" layoutX="39.0" layoutY="143.0" prefHeight="40.0" prefWidth="200.0" />
+                  <Button fx:id="btnValidationAffection" layoutX="139.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#btnValidationAffectionClicked" prefHeight="27.0" prefWidth="298.0" text="Valider" />
+                  <Label layoutX="39.0" layoutY="25.0" text="ID de la demande : " />
+                  <Label layoutX="39.0" layoutY="118.0" text="Nom du demandeur :" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false" />
+            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" />
          </children>
       </AnchorPane>
    </children>

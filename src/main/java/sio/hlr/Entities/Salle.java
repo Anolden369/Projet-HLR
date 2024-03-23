@@ -5,6 +5,12 @@ public class Salle {
     private String codeSalle;
     private int etage;
 
+    public Salle(int id, String codeSalle, int etage) {
+        this.id = id;
+        this.codeSalle = codeSalle;
+        this.etage = etage;
+    }
+
     public int getId() {
         return id;
     }
