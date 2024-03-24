@@ -142,4 +142,51 @@ public class ServicesLesDemandes {
         ps.executeUpdate();
     }
 
+
+    public ObservableList<Demandes> GetAllLesDemandesAdmin() throws SQLException{
+
+        ObservableList<Demandes> lesDemandes = FXCollections.observableArrayList();
+        int idUser = servicesUsers.getIdUser();
+        Date date = Date.valueOf(LocalDate.now());
+        ps = uneCnx.prepareStatement("SELECT demande.id, demande.date_updated, demande.date_fin_demande, matiere.designation, demande.sous_matiere, user.nom, demande.status\n" +
+                "FROM demande\n" +
+                "INNER JOIN matiere ON demande.id_matiere=matiere.id\n" +
+                "INNER JOIN user ON demande.id_user=user.id\n" +
+                "WHERE demande.status=2\n" +
+                "AND demande.date_fin_demande;");
+        rs = ps.executeQuery();
+        while(rs.next()){
+            Demandes uneDemande = new Demandes(
+                    rs.getInt(1),
+                    rs.getDate(2),
+                    rs.getDate(3).toLocalDate(),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getInt(7));
+            lesDemandes.add(uneDemande);
+        }
+        return lesDemandes;
+    }
+
+    public void affectationSoutien(int idCompetence,int idSalle,LocalDate date,int idDemande) throws SQLException {
+
+        ps = uneCnx.prepareStatement("UPDATE `soutien` SET `id_competence`=?,`id_salle`=?,`date_du_soutien`=?,`date_updated`=?,`status`='3' WHERE id_demande=?");
+        ps.setInt(1,idCompetence);
+        ps.setInt(2,idSalle);
+        ps.setDate(3, Date.valueOf(date));
+        ps.setDate(4, Date.valueOf(DateActuelle));
+        ps.setInt(5,idDemande);
+
+        ps.executeUpdate();
+
+        ps = uneCnx.prepareStatement("UPDATE demande SET date_updated=?,status='3' \n" +
+                "WHERE demande.id = ?");
+        ps.setInt(2,idDemande);
+        ps.setDate(1, Date.valueOf(DateActuelle));
+
+        ps.executeUpdate();
+    }
+
+
 }

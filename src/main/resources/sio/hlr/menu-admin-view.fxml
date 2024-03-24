@@ -2,167 +2,224 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="515.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuAdminController">
+<AnchorPane prefHeight="762.0" prefWidth="852.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sio.hlr.Controller.HLRMenuAdminController">
    <children>
-      <HBox layoutX="166.0" prefHeight="90.0" prefWidth="562.0" style="-fx-background-color: #0f8fd1;">
+      <AnchorPane layoutX="132.0" layoutY="271.0" prefHeight="520.0" prefWidth="746.0">
          <children>
-            <Label alignment="CENTER" prefHeight="91.0" prefWidth="276.0" text="Help Le Rebours" textFill="WHITE">
-               <font>
-                  <Font name="Monotype Corsiva" size="32.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <VBox prefHeight="515.0" prefWidth="166.0" spacing="20.0" styleClass="couleurDeFond" stylesheets="@../../CSS/MesStyles.css">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="91.0" prefWidth="170.0" text="MON ESPACE ADMINISTRATEUR" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="11.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnCreerMatiere" mnemonicParsing="false" onMouseClicked="#btnCreerMatiereClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Créer des matières" textFill="WHITE">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnModifMatiere" mnemonicParsing="false" onMouseClicked="#btnModifMatiereClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des matières" textFill="WHITE" wrapText="true">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnCreerSalles" mnemonicParsing="false" onMouseClicked="#btnCreerSallesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Créer des salles" textFill="WHITE" wrapText="true">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnModifSalles" mnemonicParsing="false" onMouseClicked="#btnModifSallesClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des salles" textFill="WHITE" wrapText="true">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnVisuSoutiens" mnemonicParsing="false" onMouseClicked="#btnVisuSoutiensClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Visualisation des soutients" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnStatistiquesAdmin" mnemonicParsing="false" onMouseClicked="#btnStatistiquesAdminClicked" prefHeight="47.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Les statistiques" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnDeconnexion" mnemonicParsing="false" onAction="#deconnexion" prefHeight="15.0" prefWidth="166.0" text="Déconnexion">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="souris" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-            </Button>
-         </children>
-      </VBox>
-      <AnchorPane layoutX="166.0" layoutY="90.0" prefHeight="419.0" prefWidth="562.0">
-         <children>
-            <AnchorPane fx:id="apCreerMatieres" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apCreerMatieres" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="10.0" layoutY="37.0" prefHeight="19.0" prefWidth="140.0" text="Nom de la matère :" />
-                  <TextField fx:id="txtCreerNomMatiere" layoutX="174.0" layoutY="33.0" />
-                  <Button fx:id="btnValiderCreerMatiere" layoutX="97.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#btnValiderCreerMatiere" prefHeight="27.0" prefWidth="369.0" text="Valider" />
-                  <Label layoutX="10.0" layoutY="94.0" text="Nom des sous-matères :" />
-                  <TextField fx:id="txtCreerNomSousMatiere" layoutX="174.0" layoutY="90.0" prefHeight="77.0" prefWidth="329.0" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="apModifMatiere" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
-               <children>
-                  <Label layoutX="28.0" layoutY="238.0" text="Modification nom matière : " />
-                  <TextField fx:id="txtModifNomMatiere" layoutX="226.0" layoutY="234.0" prefHeight="27.0" prefWidth="245.0" />
-                  <Label layoutX="28.0" layoutY="92.0" prefHeight="40.0" prefWidth="160.0" text="Modification noms sous-matières : " wrapText="true" />
-                  <TextArea fx:id="txtModifNomSousMatiere" layoutX="226.0" layoutY="92.0" prefHeight="99.0" prefWidth="310.0" />
-                  <Button fx:id="btnValiderModifMatiere" layoutX="94.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#btnValiderModifMatiereClicked" prefHeight="27.0" prefWidth="396.0" text="Valider" />
-                  <ComboBox fx:id="cboNomMatiere" layoutX="226.0" layoutY="32.0" onAction="#cboNomMatiereClicked" prefHeight="27.0" prefWidth="209.0" />
-                  <Label layoutX="28.0" layoutY="36.0" text="Nom de la matière :" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="apCreerSalles" nodeOrientation="RIGHT_TO_LEFT" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
-               <children>
-                  <Label layoutX="390.0" layoutY="62.0" text="Numéro de la salle :" />
-                  <Label layoutX="445.0" layoutY="155.0" prefHeight="19.0" prefWidth="56.0" text="Etage : " />
-                  <Button fx:id="btnValiderCreerSalle" layoutX="112.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#btnValiderCreerSalleClicked" prefHeight="27.0" prefWidth="338.0" text="Valider" />
-                  <ChoiceBox layoutX="208.0" layoutY="151.0" prefHeight="27.0" prefWidth="162.0" />
-                  <TextField fx:id="txtCreerNumSalle" alignment="CENTER" editable="false" layoutX="208.0" layoutY="58.0" />
+                  <Label layoutX="154.0" layoutY="123.0" prefHeight="19.0" prefWidth="140.0" text="Nom de la matère :" />
+                  <TextField fx:id="txtCreerNomMatiere" layoutX="339.0" layoutY="120.0" />
+                  <Button fx:id="btnValiderCreerMatiere" layoutX="154.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#btnValiderCreerMatiere" prefHeight="27.0" prefWidth="369.0" styleClass="couleurDeFondBtn" text="Valider" />
+                  <Label layoutX="154.0" layoutY="204.0" text="Nom des sous-matères :" />
+                  <TextField fx:id="txtCreerNomSousMatiere" layoutX="339.0" layoutY="204.0" prefHeight="77.0" prefWidth="329.0" />
+                  <Label layoutX="250.0" layoutY="22.0" prefHeight="34.0" prefWidth="246.0" text="Création de matières">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
                </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass></AnchorPane>
+            <AnchorPane fx:id="apModifMatiere" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
+               <children>
+                  <Label layoutX="131.0" layoutY="332.0" text="Modification nom matière : " />
+                  <TextField fx:id="txtModifNomMatiere" layoutX="329.0" layoutY="327.0" prefHeight="27.0" prefWidth="245.0" />
+                  <Label layoutX="131.0" layoutY="189.0" prefHeight="40.0" prefWidth="160.0" text="Modification noms sous-matières : " wrapText="true" />
+                  <TextArea fx:id="txtModifNomSousMatiere" layoutX="329.0" layoutY="189.0" prefHeight="99.0" prefWidth="310.0" />
+                  <Button fx:id="btnValiderModifMatiere" layoutX="131.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#btnValiderModifMatiereClicked" prefHeight="27.0" prefWidth="396.0" styleClass="couleurDeFondBtn" text="Valider" />
+                  <ComboBox fx:id="cboNomMatiere" layoutX="329.0" layoutY="111.0" onAction="#cboNomMatiereClicked" prefHeight="27.0" prefWidth="209.0" styleClass="couleurDeFondBtn" />
+                  <Label layoutX="131.0" layoutY="116.0" text="Nom de la matière :" />
+                  <Label layoutX="250.0" layoutY="22.0" prefHeight="34.0" prefWidth="280.0" text="Modification de matières">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apModifSalles" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apCreerSalles" layoutX="-63.0" layoutY="-63.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="29.0" layoutY="151.0" text="Modification étage : " />
-                  <Label layoutX="29.0" layoutY="67.0" text="Modification salle :" />
-                  <Button fx:id="btnValiderModifSalles" layoutX="85.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btnValiderModifSallesClicked" prefHeight="27.0" prefWidth="338.0" text="Valider" />
-                  <ComboBox fx:id="cboModifNumSalle" layoutX="232.0" layoutY="63.0" onMouseClicked="#cboModifNumSalleClicked" prefWidth="150.0" />
-                  <ComboBox fx:id="cboModifEtageSalle" layoutX="232.0" layoutY="147.0" onMouseClicked="#cboModifEtageSalleClicked" prefWidth="150.0" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="apVisuSoutients" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css">
+                  <Label layoutX="431.0" layoutY="185.0" text="Numéro de la salle :" />
+                  <Button fx:id="btnValiderCreerSalle" layoutX="206.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#btnValiderCreerSalleClicked" prefHeight="27.0" prefWidth="349.0" styleClass="couleurDeFondBtn" text="Valider" />
+                  <TextField fx:id="txtCreerNumSalle" alignment="CENTER" editable="false" layoutX="207.0" layoutY="181.0" />
+                  <Label layoutX="294.0" layoutY="21.0" prefHeight="34.0" prefWidth="191.0" text="Création de salles">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
+            </AnchorPane>
+            <AnchorPane fx:id="apModifSalles" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="254.0" layoutY="6.0" text="Soutiens : " />
-                  <TableView fx:id="tvSoutien" layoutX="2.0" layoutY="60.0" onMouseClicked="#tvSoutienClicked" prefHeight="357.0" prefWidth="556.0">
-                    <columns>
-                      <TableColumn fx:id="tcSoutienDemandes" prefWidth="87.0" text="demandeur" />
-                      <TableColumn fx:id="tcSoutienAides" prefWidth="74.0" text="aide" />
+                  <Label layoutX="196.0" layoutY="201.0" text="Modification étage : " />
+                  <Label layoutX="201.0" layoutY="129.0" text="Modification salle :" />
+                  <Button fx:id="btnValiderModifSalles" layoutX="204.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#btnValiderModifSallesClicked" prefHeight="27.0" prefWidth="338.0" styleClass="couleurDeFondBtn" text="Valider" />
+                  <ComboBox fx:id="cboModifNumSalle" layoutX="383.0" layoutY="125.0" onMouseClicked="#cboModifNumSalleClicked" prefWidth="150.0" styleClass="couleurDeFondBtn" />
+                  <ComboBox fx:id="cboModifEtageSalle" layoutX="383.0" layoutY="197.0" onMouseClicked="#cboModifEtageSalleClicked" prefWidth="150.0" styleClass="couleurDeFondBtn" />
+                  <Label layoutX="250.0" layoutY="22.0" prefHeight="34.0" prefWidth="246.0" text="Modification de salles">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
+            </AnchorPane>
+            <AnchorPane fx:id="apVisuSoutients" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
+               <children>
+                  <Label layoutX="33.0" layoutY="17.0" text="Soutiens : ">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <TableView fx:id="tvSoutien" layoutX="12.0" layoutY="56.0" onMouseClicked="#tvSoutienClicked" prefHeight="452.0" prefWidth="728.0">
+                     <columns>
+                        <TableColumn fx:id="tcSoutienDemandes" prefWidth="87.0" text="demandeur" />
+                        <TableColumn fx:id="tcSoutienAides" prefWidth="74.0" text="aide" />
                         <TableColumn fx:id="tcSoutienMatiere" prefWidth="69.0" text="matière" />
                         <TableColumn fx:id="tcSoutienSMatiere" prefWidth="95.0" text="sous-matière(s)" />
                         <TableColumn fx:id="tcSoutienDescription" prefWidth="85.0" text="description" />
                         <TableColumn fx:id="tcSoutienStatut" prefWidth="56.0" text="statut" />
                         <TableColumn fx:id="tcSoutienDateLimite" prefWidth="89.0" text="date limite" />
-                    </columns>
+                     </columns>
                   </TableView>
-                  <Button fx:id="btnAffectation" layoutX="352.0" layoutY="16.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="175.0" text="Affecter" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="apVisuSoutients2" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false">
-               <children>
-                  <Label layoutX="254.0" layoutY="6.0" text="Affectation" />
-                  <TableView fx:id="tvAffectationSalleSelection" layoutX="383.0" layoutY="45.0" prefHeight="236.0" prefWidth="140.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Salles" />
-                    </columns>
-                  </TableView>
-                  <TextArea fx:id="txtAffectationInfo1" layoutX="39.0" layoutY="45.0" prefHeight="40.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAffectationInfo2" layoutX="39.0" layoutY="99.0" prefHeight="40.0" prefWidth="200.0" />
-                  <Button fx:id="btnValidationAffection" layoutX="139.0" layoutY="345.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="298.0" text="Valider" />
                </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass></AnchorPane>
+            <AnchorPane fx:id="apVisuSoutients2" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
+               <children>
+                  <Label layoutX="309.0" layoutY="14.0" prefHeight="18.0" prefWidth="129.0" text="Affectation :">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Label>
+                  <TableView fx:id="tvAffectationSalleSelection" layoutX="517.0" layoutY="54.0" prefHeight="236.0" prefWidth="140.0">
+                     <columns>
+                        <TableColumn fx:id="tcNumSalle" prefWidth="126.0" text="Salles" />
+                     </columns>
+                  </TableView>
+                  <TextArea fx:id="txtAffectationInfo1" layoutX="78.0" layoutY="65.0" prefHeight="40.0" prefWidth="200.0" />
+                  <TextArea fx:id="txtAffectationInfo2" layoutX="78.0" layoutY="172.0" prefHeight="40.0" prefWidth="200.0" />
+                  <Button fx:id="btnValidationAffection" layoutX="234.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#btnValidationAffectionClicked" prefHeight="27.0" prefWidth="298.0" text="Valider" />
+                  <Label layoutX="78.0" layoutY="35.0" prefHeight="21.0" prefWidth="175.0" text="ID de la demande :">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="78.0" layoutY="142.0" prefHeight="21.0" prefWidth="175.0" text="Nom du demandeur :">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apStatistiques" prefHeight="424.0" prefWidth="562.0" styleClass="ap" stylesheets="@../../CSS/MesStyles.css" visible="false" />
+            <AnchorPane fx:id="apStatistiques" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
+               <styleClass>
+                  <String fx:value="ap" />
+                  <String fx:value="monAnchorPane" />
+               </styleClass></AnchorPane>
          </children>
       </AnchorPane>
+      <AnchorPane layoutX="5.0" layoutY="86.0" prefHeight="107.0" prefWidth="867.0" stylesheets="@../../CSS/MesStyles.css">
+         <styleClass>
+            <String fx:value="couleurDeFondAcceuil" />
+            <String fx:value="monAnchorPane" />
+         </styleClass>
+         <children>
+            <Button fx:id="btnCreerMatiere" layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#btnCreerMatiereClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Créer des matières" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnModifMatiere" layoutX="311.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#btnModifMatiereClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des matières" textFill="WHITE" wrapText="true">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCreerSalles" layoutX="593.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#btnCreerSallesClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Créer des salles" textFill="WHITE" wrapText="true">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnModifSalles" layoutX="593.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#btnModifSallesClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des salles" textFill="WHITE" wrapText="true">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnVisuSoutiens" layoutX="311.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#btnVisuSoutiensClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Visualisation des soutients" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnStatistiquesAdmin" layoutX="35.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#btnStatistiquesAdminClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Les statistiques" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <styleClass>
+                  <String fx:value="couleurDeFond" />
+                  <String fx:value="btnMenu" />
+               </styleClass>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnDeconnexion" layoutX="684.0" layoutY="31.0" mnemonicParsing="false" onAction="#deconnexion" prefHeight="15.0" prefWidth="166.0" stylesheets="@../../CSS/MesStyles.css" text="Déconnexion">
+         <styleClass>
+            <String fx:value="ap" />
+            <String fx:value="monAnchorPane" />
+            <String fx:value="btnMenu" />
+         </styleClass>
+      </Button>
+      <ImageView fitHeight="84.0" fitWidth="284.0" layoutX="318.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/Outlook-gawwclqp.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
