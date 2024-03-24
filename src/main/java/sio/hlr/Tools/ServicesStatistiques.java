@@ -100,4 +100,100 @@ public class ServicesStatistiques {
             throw new RuntimeException(var3);
         }
     }
+
+    public HashMap<String, Integer> GetDatasGraphique4() throws SQLException {
+        HashMap<String, Integer> datas = new HashMap();
+
+        try {
+            ps = uneCnx.prepareStatement("SELECT niveau.designation AS niveau, COUNT(demande.id) AS nombre_demandes\n" +
+                    "FROM demande\n" +
+                    "INNER JOIN user ON demande.id_user = user.id\n" +
+                    "INNER JOIN niveau ON user.id_niveau = niveau.id\n" +
+                    "GROUP BY niveau.designation;");
+            rs = ps.executeQuery();
+
+            while(rs.next()) {
+                datas.put(rs.getString(1), rs.getInt(2));
+            }
+
+            rs.close();
+            return datas;
+        } catch (SQLException var4) {
+            throw new RuntimeException(var4);
+        }
+    }
+
+
+    // Le nombre de soutiens réalisés par un utilisateur pour chaque matière (un soutien est réalisé lorsque le statut est à 3 donc statut = salle attribuée)*
+
+    public HashMap<String, Integer> GetDatasGraphique5() throws SQLException {
+        HashMap<String, Integer> datas = new HashMap();
+
+        try {
+            ps = uneCnx.prepareStatement("SELECT CONCAT(u.nom, ' ', u.prenom) AS nom_prenom, COUNT(s.id) AS nombre_soutiens\n" +
+                    "FROM user u\n" +
+                    "INNER JOIN competence c ON u.id = c.id_user\n" +
+                    "INNER JOIN soutien s ON c.id = s.id_competence\n" +
+                    "GROUP BY u.id\n" +
+                    "ORDER BY nombre_soutiens DESC\n" +
+                    "LIMIT 10;\n");
+            rs = ps.executeQuery();
+
+            while(rs.next()) {
+                datas.put(rs.getString(1), rs.getInt(2));
+            }
+
+            rs.close();
+            return datas;
+        } catch (SQLException var3) {
+            throw new RuntimeException(var3);
+        }
+    }
+
+    public HashMap<String, Integer> GetDatasGraphique6() throws SQLException {
+        HashMap<String, Integer> datas = new HashMap();
+
+        try {
+            ps = uneCnx.prepareStatement("SELECT sous_matiere, COUNT(*) AS nombres_sollicites\n" +
+                    "FROM (\n" +
+                    "    SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(c.sous_matiere, '#', numbers.n), '#', -1) AS sous_matiere\n" +
+                    "    FROM competence c\n" +
+                    "    JOIN (\n" +
+                    "        SELECT 1 + units.i + tens.i * 10 AS n\n" +
+                    "        FROM\n" +
+                    "            (SELECT 0 AS i UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS units\n" +
+                    "            CROSS JOIN\n" +
+                    "            (SELECT 0 AS i UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS tens\n" +
+                    "    ) AS numbers\n" +
+                    "    ON CHAR_LENGTH(c.sous_matiere) - CHAR_LENGTH(REPLACE(c.sous_matiere, '#', '')) >= numbers.n - 1\n" +
+                    "\n" +
+                    "    UNION ALL\n" +
+                    "\n" +
+                    "    SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(d.sous_matiere, '#', numbers.n), '#', -1) AS sous_matiere\n" +
+                    "    FROM demande d\n" +
+                    "    JOIN (\n" +
+                    "        SELECT 1 + units.i + tens.i * 10 AS n\n" +
+                    "        FROM\n" +
+                    "            (SELECT 0 AS i UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS units\n" +
+                    "            CROSS JOIN\n" +
+                    "            (SELECT 0 AS i UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS tens\n" +
+                    "    ) AS numbers\n" +
+                    "    ON CHAR_LENGTH(d.sous_matiere) - CHAR_LENGTH(REPLACE(d.sous_matiere, '#', '')) >= numbers.n - 1\n" +
+                    ") AS submatieres\n" +
+                    "WHERE sous_matiere <> ''  -- Filtrer les sous-matières vides\n" +
+                    "GROUP BY sous_matiere\n" +
+                    "ORDER BY nombres_sollicites DESC\n" +
+                    "LIMIT 20;\n");
+            rs = ps.executeQuery();
+
+            while(rs.next()) {
+                datas.put(rs.getString(1), rs.getInt(2));
+            }
+
+            rs.close();
+            return datas;
+        } catch (SQLException var3) {
+            throw new RuntimeException(var3);
+        }
+    }
 }

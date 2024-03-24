@@ -390,12 +390,12 @@
                      </font>
                   </Button>
                   <LineChart fx:id="graph3" layoutX="-2.0" layoutY="67.0" prefHeight="448.0" prefWidth="746.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
                   </LineChart>
                   <Label layoutX="47.0" layoutY="21.0" prefHeight="40.0" prefWidth="248.0" stylesheets="@../../CSS/MesStyles.css" text="Mes statistiques (Graphique 3): ">
                      <font>

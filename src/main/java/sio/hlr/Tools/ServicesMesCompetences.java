@@ -41,6 +41,18 @@ public class ServicesMesCompetences {
         return mesCompetences;
     }
 
+    public ObservableList<Integer> GetAllExpireCompetencesByUser() throws SQLException {
+        ObservableList<Integer> expireCompetencesId = FXCollections.observableArrayList();
+        int idUser = servicesUsers.getIdUser();
+        ps = uneCnx.prepareStatement("SELECT id FROM competence c WHERE c.id_user=? AND DATEDIFF(CURRENT_DATE, c.date)>=30");
+        ps.setInt(1,idUser);
+        rs = ps.executeQuery();
+        while(rs.next()){
+            expireCompetencesId.add(rs.getInt(1));
+        }
+        return  expireCompetencesId;
+    }
+
     public void creerCompetence(ArrayList<String> lesSousMatieres, String nomMatiere) throws SQLException {
         int idUser = servicesUsers.getIdUser();
         int statut = 1;

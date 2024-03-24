@@ -8,6 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +27,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class HLRMenuAdminController implements Initializable {
@@ -72,8 +78,6 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     private AnchorPane apVisuSoutients;
     @javafx.fxml.FXML
-    private AnchorPane apStatistiques;
-    @javafx.fxml.FXML
     private ComboBox cboModifNumSalle;
     @javafx.fxml.FXML
     private ComboBox cboModifEtageSalle;
@@ -97,6 +101,7 @@ public class HLRMenuAdminController implements Initializable {
     ServicesSalles servicesSalles;
     ServicesMatieres servicesMatieres;
     ServicesSousMatieres servicesSousMatieres;
+    ServicesStatistiques servicesStatistiques;
 
     @javafx.fxml.FXML
     private AnchorPane apVisuSoutients2;
@@ -113,6 +118,30 @@ public class HLRMenuAdminController implements Initializable {
     LocalDate DateActuelle = LocalDate.now();
     @javafx.fxml.FXML
     private TableColumn tcSoutienAides;
+    @javafx.fxml.FXML
+    private Button btnGraphique1to2;
+    @javafx.fxml.FXML
+    private Button btnGraphique1to3;
+    @javafx.fxml.FXML
+    private Button btnGraphique2to1;
+    @javafx.fxml.FXML
+    private Button btnGraphique2to3;
+    @javafx.fxml.FXML
+    private Button btnGraphique3to1;
+    @javafx.fxml.FXML
+    private Button btnGraphique3to2;
+    @javafx.fxml.FXML
+    private AnchorPane apStatistiques1;
+    @javafx.fxml.FXML
+    private AnchorPane apStatistiques2;
+    @javafx.fxml.FXML
+    private AnchorPane apStatistiques3;
+    @javafx.fxml.FXML
+    private BarChart graph1;
+    @javafx.fxml.FXML
+    private PieChart graph2;
+    @javafx.fxml.FXML
+    private LineChart graph3;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -178,7 +207,7 @@ public class HLRMenuAdminController implements Initializable {
 
     @javafx.fxml.FXML
     public void btnStatistiquesAdminClicked(Event event) {
-        apStatistiques.toFront();
+        apStatistiques1.toFront();
     }
 
     @javafx.fxml.FXML
@@ -318,7 +347,7 @@ public class HLRMenuAdminController implements Initializable {
         HLRApplication.LoginScene();
     }
 
-    @Deprecated
+    @javafx.fxml.FXML
     public void btnValidationAffectionClicked(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         String matiere = tvSoutien.getSelectionModel().getSelectedItem().getMatiere();
@@ -346,5 +375,105 @@ public class HLRMenuAdminController implements Initializable {
             lesMatieres.add(uneMatiere.getDesignation());
         }
         cboNomMatiere.setItems(lesMatieres);
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnGraphique1to2Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques2.toFront();
+        graphique2();
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnGraphique1to3Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques3.toFront();
+        graphique3();
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnGraphique2to1Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques1.toFront();
+        graphique1();
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnGraphique2to3Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques3.toFront();
+        graphique3();
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnGraphique3to1Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques1.toFront();
+        graphique1();
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnGraphique3to2Clicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques2.toFront();
+        graphique2();
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnLesStatistiquesClicked(ActionEvent actionEvent) throws SQLException {
+        apStatistiques1.toFront();
+        graphique1();
+    }
+
+    public void graphique1() throws SQLException {
+        graph1.getData().clear();
+        servicesStatistiques = new ServicesStatistiques();
+        HashMap<String, Integer> datasGraphique = servicesStatistiques.GetDatasGraphique4();
+        graph1.setTitle("Le nombre de demandes par niveau");
+
+        for (String xValue : datasGraphique.keySet()) {
+            int yValue = datasGraphique.get(xValue);
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(xValue);
+
+            series.getData().add(new XYChart.Data<>(xValue, yValue));
+
+            graph1.getData().add(series);
+        }
+    }
+    public void graphique2() throws SQLException {
+        graph2.getData().clear();
+        servicesStatistiques = new ServicesStatistiques();
+        ObservableList<PieChart.Data> datasGraph2 = FXCollections.observableArrayList();
+        HashMap<String, Integer> datasGraphique2 = servicesStatistiques.GetDatasGraphique5();
+        Iterator var12 = datasGraphique2.keySet().iterator();
+
+        while(var12.hasNext()) {
+            String valeur = (String)var12.next();
+            datasGraph2.add(new PieChart.Data(valeur, (double)(Integer)datasGraphique2.get(valeur)));
+        }
+
+        graph2.setData(datasGraph2);
+        graph2.setTitle("Les 10 étudiants qui ont réalisé le plus de soutiens");
+        var12 = graph2.getData().iterator();
+
+        while(var12.hasNext()) {
+            PieChart.Data entry = (PieChart.Data) var12.next();
+            double var16 = entry.getPieValue();
+            Tooltip t = new Tooltip("" + var16 + " : " + entry.getName());
+            t.setStyle("-fx-background-color:#3D9ADA");
+            Tooltip.install(entry.getNode(), t);
+        }
+    }
+    public void graphique3() throws SQLException {
+        graph3.getData().clear();
+        servicesStatistiques = new ServicesStatistiques();
+        HashMap<String, Integer> datasGraphique = servicesStatistiques.GetDatasGraphique6();
+
+        graph3.setTitle("Les 20 sous matières les plus sollicitées");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Sous matières");
+
+        for (String xValue : datasGraphique.keySet()) {
+            int yValue = datasGraphique.get(xValue);
+            series.getData().add(new XYChart.Data<>(xValue, yValue));
+        }
+        graph3.getData().add(series);
     }
 }
