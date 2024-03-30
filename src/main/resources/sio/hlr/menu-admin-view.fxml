@@ -75,24 +75,6 @@
                   <String fx:value="monAnchorPane" />
                </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apModifSalles" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
-               <children>
-                  <Label layoutX="196.0" layoutY="201.0" text="Modification étage : " />
-                  <Label layoutX="201.0" layoutY="129.0" text="Modification salle :" />
-                  <Button fx:id="btnValiderModifSalles" layoutX="204.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#btnValiderModifSallesClicked" prefHeight="27.0" prefWidth="338.0" styleClass="couleurDeFondBtn" text="Valider" />
-                  <ComboBox fx:id="cboModifNumSalle" layoutX="383.0" layoutY="125.0" onMouseClicked="#cboModifNumSalleClicked" prefWidth="150.0" styleClass="couleurDeFondBtn" />
-                  <ComboBox fx:id="cboModifEtageSalle" layoutX="383.0" layoutY="197.0" onMouseClicked="#cboModifEtageSalleClicked" prefWidth="150.0" styleClass="couleurDeFondBtn" />
-                  <Label layoutX="250.0" layoutY="22.0" prefHeight="34.0" prefWidth="246.0" text="Modification de salles">
-                     <font>
-                        <Font name="System Bold" size="23.0" />
-                     </font>
-                  </Label>
-               </children>
-               <styleClass>
-                  <String fx:value="ap" />
-                  <String fx:value="monAnchorPane" />
-               </styleClass>
-            </AnchorPane>
             <AnchorPane fx:id="apVisuSoutients" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
                   <Label layoutX="33.0" layoutY="17.0" text="Soutiens : ">
@@ -264,15 +246,6 @@
                </font>
             </Button>
             <Button fx:id="btnCreerSalles" layoutX="593.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#btnCreerSallesClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Créer des salles" textFill="WHITE" wrapText="true">
-               <styleClass>
-                  <String fx:value="couleurDeFond" />
-                  <String fx:value="btnMenu" />
-               </styleClass>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnModifSalles" layoutX="593.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#btnModifSallesClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Modifier des salles" textFill="WHITE" wrapText="true">
                <styleClass>
                   <String fx:value="couleurDeFond" />
                   <String fx:value="btnMenu" />
