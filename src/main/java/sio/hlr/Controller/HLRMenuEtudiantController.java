@@ -288,7 +288,20 @@ public class HLRMenuEtudiantController implements Initializable{
     //////////////////////////////// Mes Demandes  /////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // Affiche toutes les demandes de l’étudiant.
+    @javafx.fxml.FXML
+    public void onBtnMesDemandesClicked(Event event) throws SQLException {
+        tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
+        apMesDemandes.toFront();
+    }
 
+    // Redirige vers la page de création de demande.
+    @FXML
+    public void onBtnCreerDemandeClicked(Event event) {
+        apCreerDemande.toFront();
+    }
+
+    // Affiche la demande de l’étudiant avec la matière et les sous matières.
     @FXML
     public void tvChoixMatiereDemandeClicked(Event event) throws SQLException {
         servicesMatieres = new ServicesMatieres();
@@ -299,6 +312,7 @@ public class HLRMenuEtudiantController implements Initializable{
         tvCreerSMatiereDemande.setItems(servicesSousMatieres.GetAllSousMatieres(designation));
     }
 
+    // Affiche la page de création d’une demande avec les matières et sous matières.
     @FXML
     public void onBtn2CreerDemandeClicked(Event event) throws SQLException {
         // je vérifie s'il y a au moins une sous matière qui a été selectionnée par le user
@@ -350,6 +364,7 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
+    // Affiche la page de modification d’une demande avec les matières et sous matières.
     @javafx.fxml.FXML
     public void onBtnModifierDemandeClicked(Event event) throws SQLException {
         if(tvMesDemandes.getSelectionModel().getSelectedItem() == null){
@@ -386,6 +401,8 @@ public class HLRMenuEtudiantController implements Initializable{
             apModifierDemande.toFront();
         }
     }
+
+    // Affiche la page de modification d’une demande avec le nom des matières et des sous matières.
     @FXML
     public void tvModifMatiereDemandeClicked(Event event) throws SQLException {
         servicesMatieres = new ServicesMatieres();
@@ -396,6 +413,7 @@ public class HLRMenuEtudiantController implements Initializable{
         tvModifSMatiereDemande.setItems(servicesSousMatieres.GetAllSousMatieres(designation));
     }
 
+    //Applique les modifications faites par l’étudiant concernant sa demande.
     @FXML
     public void onBtn2ModifierDemandeClicked(Event event) throws SQLException {
         // je vérifie s'il y a au moins une sous matière qui a été selectionnée par le user
@@ -451,6 +469,21 @@ public class HLRMenuEtudiantController implements Initializable{
     //////////////////////////////// Mes Competences  //////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // Affiche toutes les compétences de l’étudiant.
+    @javafx.fxml.FXML
+    public void onBtnMesCompetencesClicked(Event event) throws SQLException {
+        tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
+        apMesCompetences.toFront();
+    }
+
+
+    // Redirige vers la page de création de compétence.
+    @javafx.fxml.FXML
+    public void onBtnCreerCompetenceClicked(Event event) {
+        apCreerCompetence.toFront();
+    }
+
+    // Affiche toutes les compétences de l’étudiant afin de les modifier.
     @FXML
     public void tvChoixMatiereCompetenceClicked(Event event) throws SQLException {
         servicesMatieres = new ServicesMatieres();
@@ -478,6 +511,7 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
+    // Créée/Modifie une compétence pour un étudiant dans une matière avec des sous-matières spécifiques.
     @FXML
     public void onBtn2CreerCompetenceClicked(Event event) throws SQLException {
         // je vérifie s'il y a au moins une sous matière qui a été selectionnée par le user
@@ -527,7 +561,7 @@ public class HLRMenuEtudiantController implements Initializable{
     //////////////////////////////// Les demandes des autres  //////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    // Affiche la page des demandes des autres avec les matières et sous matières.
     @javafx.fxml.FXML
     public void onBtnLesDemandesClicked(Event event) throws SQLException {
         servicesLesDemandes = new ServicesLesDemandes();
@@ -535,6 +569,7 @@ public class HLRMenuEtudiantController implements Initializable{
         tvLesDemandes.setItems(servicesLesDemandes.getDemandesCorrespondantesCompetences());
     }
 
+    // Affiche les informations de la demande pour le soutien.
     @FXML
     public void tvLesDemandesClicked(Event event) throws SQLException {
         if(tvLesDemandes.getSelectionModel().getSelectedItem() == null){
@@ -560,6 +595,7 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
+    // Valide le soutien après la saisie de la date et du commentaire.
     @FXML
     public void btnValidationDemandeClicked(Event event) throws SQLException {
         if(dpDateUpdateSoutien.getValue()==null){
@@ -591,71 +627,63 @@ public class HLRMenuEtudiantController implements Initializable{
         }
     }
 
-    @javafx.fxml.FXML
-    public void onBtnMesDemandesClicked(Event event) throws SQLException {
-        tvMesDemandes.setItems(servicesMesDemandes.GetAllMesDemandes());
-        apMesDemandes.toFront();
-    }
-
-    @javafx.fxml.FXML
-    public void onBtnMesCompetencesClicked(Event event) throws SQLException {
-        tvMesCompetences.setItems(servicesMesCompetences.GetAllMesCompetences());
-        apMesCompetences.toFront();
-    }
-
-    @FXML
-    public void onBtnCreerDemandeClicked(Event event) {
-        apCreerDemande.toFront();
-    }
-
-    @javafx.fxml.FXML
-    public void onBtnCreerCompetenceClicked(Event event) {
-        apCreerCompetence.toFront();
-    }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////// Mes Statistiques  /////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    // Affiche la page des statistiques de l’étudiant.
     @javafx.fxml.FXML
     public void onBtnMesStatistiquesClicked(Event event) throws SQLException {
         apStatistiques.toFront();
         graphique1();
     }
+
+    // Affiche le graphique n°2 depuis la graphique n°1.
     @FXML
     public void onBtnGraphique1to2Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques2.toFront();
         graphique2();
     }
+
+    // Affiche le graphique n°3 depuis la graphique n°1.
     @FXML
     public void onBtnGraphique1to3Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques3.toFront();
         graphique3();
 
     }
+
+    // Affiche le graphique n°1 depuis la graphique n°2.
     @FXML
     public void onBtnGraphique2to1Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques.toFront();
         graphique1();
     }
+
+    // Affiche le graphique n°3 depuis la graphique n°2.
     @FXML
     public void onBtnGraphique2to3Clicked(Event event) throws SQLException {
         apStatistiques3.toFront();
         graphique3();
     }
+
+    // Affiche le graphique n°1 depuis la graphique n°3.
     @FXML
     public void onBtnGraphique3to1Clicked(Event event) throws SQLException {
         apStatistiques.toFront();
         graphique1();
     }
 
+    // Affiche le graphique n°2 depuis la graphique n°3.
     @FXML
     public void onBtnGraphique3to2Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques2.toFront();
         graphique2();
     }
+
+    // Rempli le graphique n°1 (Nombre de demandes par matière), récupère les données de la BDD pour constituer le graphique.
     public void graphique1() throws SQLException {
         graph1.getData().clear();
         servicesStatistiques = new ServicesStatistiques();
@@ -673,6 +701,8 @@ public class HLRMenuEtudiantController implements Initializable{
             graph1.getData().add(series);
         }
     }
+
+    // Rempli le graphique n°2 (Nombre de soutiens réalisés par matière), récupère les données de la BDD pour constituer le graphique.
     public void graphique2() throws SQLException {
         graph2.getData().clear();
         servicesStatistiques = new ServicesStatistiques();
@@ -697,6 +727,8 @@ public class HLRMenuEtudiantController implements Initializable{
             Tooltip.install(entry.getNode(), t);
         }
     }
+
+    // Rempli le graphique n°3 (Nombre de soutiens acceptés par niveau), récupère les données de la BDD pour constituer le graphique.
     public void graphique3() throws SQLException {
         graph3.getData().clear();
         servicesStatistiques = new ServicesStatistiques();
@@ -719,6 +751,7 @@ public class HLRMenuEtudiantController implements Initializable{
     //////////////////////////////// Deconnexion  //////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // Permet de se déconnecter du compte.
     @FXML
     public void deconnexion(ActionEvent actionEvent) throws IOException {
         HLRApplication.LoginScene();

@@ -168,15 +168,24 @@ public class HLRMenuAdminController implements Initializable {
         }
 
     }
+
+    /*
+    * Affiche la page de création des matières.
+    */
     @javafx.fxml.FXML
     public void btnCreerMatiereClicked(Event event){apCreerMatieres.toFront();}
 
+    /*
+     * Affiche la page de modification des matières.
+     */
     @javafx.fxml.FXML
     public void btnModifMatiereClicked(Event event) throws SQLException {
         refreshModifMatiere();
-
-        //--------------------------------------------------------------//
     }
+
+    /*
+    * Liste déroulante de matières de la BDD, permet de sélectionner une matière.
+    */
     @javafx.fxml.FXML
     public void cboNomMatiereClicked(Event event) throws SQLException {
          servicesSousMatieres = new ServicesSousMatieres();
@@ -188,6 +197,9 @@ public class HLRMenuAdminController implements Initializable {
 
     }
 
+    /*
+     * Affiche la page de création des salles de classes.
+     */
     @javafx.fxml.FXML
     public void btnCreerSallesClicked(Event event) throws SQLException {
         apCreerSalles.toFront();
@@ -195,21 +207,26 @@ public class HLRMenuAdminController implements Initializable {
         txtCreerNumSalle.setText(String.valueOf(servicesSalles.getSalle()));
     }
 
-    @javafx.fxml.FXML
-    public void btnModifSallesClicked(Event event) {
-        apModifSalles.toFront();
-    }
-
+    /*
+     * Affiche la page de visualisation des soutiens des élèves.
+     */
     @javafx.fxml.FXML
     public void btnVisuSoutiensClicked(Event event) {
         apVisuSoutients.toFront();
     }
 
+    /*
+     * Affiche la page des statistiques, affiche le graphique n°1.
+     */
     @javafx.fxml.FXML
     public void btnStatistiquesAdminClicked(Event event) {
         apStatistiques1.toFront();
     }
 
+    /*
+     * Valide la saisie de la nouvelle matière,
+     * insertion dans la table “matière” de la BDD la nouvelle matière (Nom, sous-matières, id est auto-incrémenté)
+     */
     @javafx.fxml.FXML
     public void btnValiderCreerMatiere(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -240,6 +257,10 @@ public class HLRMenuAdminController implements Initializable {
         }
     }
 
+    /*
+     * Valide la saisie de la modification de la matière,
+     * mise à jour dans la table “matière” de la BDD, la matière sélectionnée (Nom, sous-matières)
+     */
     @javafx.fxml.FXML
     public void btnValiderModifMatiereClicked(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -282,6 +303,10 @@ public class HLRMenuAdminController implements Initializable {
 
     }
 
+    /*
+     * Valide la création de la salle, ajout dans la table “salle” de la BDD,
+     * la nouvelle salle (id, nom_salle, etage)
+     */
     @javafx.fxml.FXML
     public void btnValiderCreerSalleClicked(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -296,38 +321,9 @@ public class HLRMenuAdminController implements Initializable {
         alert.showAndWait();
     }
 
-    @javafx.fxml.FXML
-    public void btnValiderModifSallesClicked(Event event) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        if (cboModifNumSalle.getValue()==null)
-        {
-            alert.setTitle("Erreur de saisie");
-            alert.setHeaderText("");
-            alert.setContentText("Veuillez saisir le numéro de la salle");
-            alert.showAndWait();
-        }
-        else if (cboModifEtageSalle.getValue()==null)
-        {
-            alert.setTitle("Erreur de saisie");
-            alert.setHeaderText("");
-            alert.setContentText("Veuillez saisir l'étage");
-            alert.showAndWait();
-        }
-        else
-        {
-            // a compléter
-
-        }
-    }
-
-    @javafx.fxml.FXML
-    public void cboModifNumSalleClicked(Event event) {
-    }
-
-    @javafx.fxml.FXML
-    public void cboModifEtageSalleClicked(Event event) {
-    }
-
+    /*
+     * Affiche la page de visualisation des soutiens en attentes d’affectation d’une salle.
+     */
     @javafx.fxml.FXML
     public void tvSoutienClicked(Event event) throws SQLException {
         ObservableList<Integer> lesIdDemandesSelectionne = FXCollections.observableArrayList();
@@ -342,11 +338,10 @@ public class HLRMenuAdminController implements Initializable {
         tvAffectationSalleSelection.setItems(servicesSalles.getAllSalle());
     }
 
-    @javafx.fxml.FXML
-    public void deconnexion(ActionEvent actionEvent) throws IOException {
-        HLRApplication.LoginScene();
-    }
-
+    /*
+     * Valide l'affectation d’une salle pour un soutien sélectionné dans “tvSoutienClicked”,
+     * mise à jour de la table “soutien” de la BDD le soutien (id_salle et statut = 3)
+     */
     @javafx.fxml.FXML
     public void btnValidationAffectionClicked(Event event) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -365,6 +360,10 @@ public class HLRMenuAdminController implements Initializable {
         alert.showAndWait();
     }
 
+    /*
+     * Rafraichi la liste déroulante des matières (cboNomMatiere).
+     * Fonction rappelée dans “btnValiderModifMatiereClicked”.
+     */
     public void refreshModifMatiere() throws SQLException {
         apModifMatiere.toFront();
         // Remplissage de la liste déroulante (cboNomMatiere)
@@ -377,48 +376,73 @@ public class HLRMenuAdminController implements Initializable {
         cboNomMatiere.setItems(lesMatieres);
     }
 
+    /*
+     * Affiche le graphique n°2 depuis la graphique n°1.
+     */
     @javafx.fxml.FXML
     public void onBtnGraphique1to2Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques2.toFront();
         graphique2();
     }
 
+    /*
+     * Affiche le graphique n°3 depuis la graphique n°1.
+     */
     @javafx.fxml.FXML
     public void onBtnGraphique1to3Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques3.toFront();
         graphique3();
     }
 
+    /*
+     * Affiche le graphique n°1 depuis la graphique n°2.
+     */
     @javafx.fxml.FXML
     public void onBtnGraphique2to1Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques1.toFront();
         graphique1();
     }
 
+    /*
+     * Affiche le graphique n°3 depuis la graphique n°2.
+     */
     @javafx.fxml.FXML
     public void onBtnGraphique2to3Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques3.toFront();
         graphique3();
     }
 
+    /*
+     * Affiche le graphique n°1 depuis la graphique n°3.
+     */
     @javafx.fxml.FXML
     public void onBtnGraphique3to1Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques1.toFront();
         graphique1();
     }
 
+    /*
+     * Affiche le graphique n°2 depuis la graphique n°3.
+     */
     @javafx.fxml.FXML
     public void onBtnGraphique3to2Clicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques2.toFront();
         graphique2();
     }
 
+    /*
+     * Affiche la page des statistiques, affiche le graphique n°1.
+     */
     @javafx.fxml.FXML
     public void onBtnLesStatistiquesClicked(ActionEvent actionEvent) throws SQLException {
         apStatistiques1.toFront();
         graphique1();
     }
 
+    /*
+     * Rempli le graphique n°1 (nombre de demande par niveau),
+     * récupère les données de la BDD pour constituer le graphique.
+     */
     public void graphique1() throws SQLException {
         graph1.getData().clear();
         servicesStatistiques = new ServicesStatistiques();
@@ -436,6 +460,11 @@ public class HLRMenuAdminController implements Initializable {
             graph1.getData().add(series);
         }
     }
+
+    /*
+     * Rempli le graphique n°2 (camembert des étudiants ayant réalisé le plus de soutien),
+     * récupère les données de la BDD pour constituer le graphique.
+     */
     public void graphique2() throws SQLException {
         graph2.getData().clear();
         servicesStatistiques = new ServicesStatistiques();
@@ -460,6 +489,11 @@ public class HLRMenuAdminController implements Initializable {
             Tooltip.install(entry.getNode(), t);
         }
     }
+
+    /*
+     * Rempli le graphique n°3 (nombre de demande de soutien par matière),
+     * récupère les données de la BDD pour constituer le graphique.
+     */
     public void graphique3() throws SQLException {
         graph3.getData().clear();
         servicesStatistiques = new ServicesStatistiques();
@@ -475,5 +509,13 @@ public class HLRMenuAdminController implements Initializable {
             series.getData().add(new XYChart.Data<>(xValue, yValue));
         }
         graph3.getData().add(series);
+    }
+
+    /*
+     * Permet de se déconnecter du compte.
+     */
+    @javafx.fxml.FXML
+    public void deconnexion(ActionEvent actionEvent) throws IOException {
+        HLRApplication.LoginScene();
     }
 }
