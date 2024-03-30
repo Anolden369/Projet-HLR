@@ -33,6 +33,8 @@ public class HLRConnexionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
+    // Redirige l'utilisateur qui se connecte soit vers la page 'administrateur', soit vers la page 'étudiant'.
+    // Vérifie donc si les informations saisies dans le formulaire (login, mdp) sont correctes et redirige l'utilisateur en fonction du statut.
     @FXML
     public void onBtnConnexionClicked(ActionEvent actionEvent) {
         try{
@@ -61,6 +63,8 @@ public class HLRConnexionController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    // Quitte l’utilisateur de l’application.
     @FXML
     public void onBtnExitClicked(Event event) {
         Stage stage = (Stage) btnExit.getScene().getWindow();
