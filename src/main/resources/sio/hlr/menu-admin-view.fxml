@@ -254,7 +254,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="btnVisuSoutiens" layoutX="311.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#btnVisuSoutiensClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Visualisation des soutients" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnVisuSoutiens" layoutX="311.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#btnVisuSoutiensClicked" prefHeight="40.0" prefWidth="246.0" stylesheets="@../../CSS/MesStyles.css" text="Visualisation des soutiens" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <styleClass>
                   <String fx:value="couleurDeFond" />
                   <String fx:value="btnMenu" />
