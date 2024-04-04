@@ -165,7 +165,6 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <PieChart fx:id="graph2" layoutX="-2.0" layoutY="70.0" prefHeight="448.0" prefWidth="746.0" />
                   <Button fx:id="btnGraphique2to1" layoutX="401.0" layoutY="28.0" mnemonicParsing="false" onAction="#onBtnGraphique2to1Clicked" prefHeight="27.0" prefWidth="150.0" styleClass="couleurDeFondBtn" stylesheets="@../../CSS/MesStyles.css" text="Graphique n°1">
                      <font>
                         <Font size="13.0" />
@@ -176,13 +175,20 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
+                  <PieChart fx:id="graph2" layoutX="-2.0" layoutY="70.0" prefHeight="448.0" prefWidth="486.0" />
+                  <TableView fx:id="tvStatistiquePourcentage" layoutX="482.0" layoutY="110.0" prefHeight="260.0" prefWidth="264.0">
+                    <columns>
+                      <TableColumn fx:id="tcEleve" prefWidth="156.0" text="Élève" />
+                      <TableColumn fx:id="tcPourcentage" prefWidth="96.0" text="Pourcentage" />
+                    </columns>
+                  </TableView>
                </children>
                <styleClass>
                   <String fx:value="ap" />
                   <String fx:value="monAnchorPane" />
                </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apStatistiques3" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane fx:id="apStatistiques3" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css" visible="false">
                <styleClass>
                   <String fx:value="ap" />
                   <String fx:value="monAnchorPane" />
@@ -213,7 +219,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
+            <AnchorPane layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css" visible="false">
                <styleClass>
                   <String fx:value="ap" />
                   <String fx:value="monAnchorPane" />

@@ -1,5 +1,10 @@
 package sio.hlr.Tools;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import sio.hlr.Entities.Matiere;
+import sio.hlr.Entities.User;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -31,6 +36,34 @@ public class ServicesStatistiques {
 
             while(rs.next()) {
                 datas.put(rs.getString(1), rs.getInt(2));
+            }
+
+            rs.close();
+            return datas;
+        } catch (SQLException var4) {
+            throw new RuntimeException(var4);
+        }
+    }
+
+    public ObservableList GetPourcentageDatasGraphique1() throws SQLException {
+        ObservableList<Matiere> datas = FXCollections.observableArrayList();
+        int idUser = servicesUsers.getIdUser();
+
+        try {
+            ps = uneCnx.prepareStatement("SELECT matiere.designation,\n" +
+                    "       ROUND((COUNT(demande.id) * 100.0 / total_demandes), 2) AS pourcentage\n" +
+                    "FROM demande\n" +
+                    "JOIN matiere ON matiere.id = demande.id_matiere\n" +
+                    "JOIN (SELECT COUNT(id) AS total_demandes FROM demande WHERE id_user = ?) AS total_demandes_table\n" +
+                    "WHERE demande.id_user = ?\n" +
+                    "GROUP BY matiere.designation;\n");
+            ps.setInt(1, idUser);
+            ps.setInt(2, idUser);
+            rs = ps.executeQuery();
+
+            while(rs.next()) {
+                Matiere matiere = new Matiere(rs.getString(1), rs.getDouble(2));
+                datas.add(matiere);
             }
 
             rs.close();
@@ -196,4 +229,32 @@ public class ServicesStatistiques {
             throw new RuntimeException(var3);
         }
     }
+
+    public ObservableList GetPourcentageDatasGraphique5() throws SQLException {
+        ObservableList<User> datas = FXCollections.observableArrayList();
+        try {
+            ps = uneCnx.prepareStatement("SELECT CONCAT(u.nom, ' ', u.prenom) AS nom_prenom, \n" +
+                    "       ROUND(COUNT(s.id) * 100.0 / totalSoutiens, 2) AS pourcentage_soutiens\n" +
+                    "FROM user u\n" +
+                    "INNER JOIN competence c ON u.id = c.id_user\n" +
+                    "INNER JOIN soutien s ON c.id = s.id_competence\n" +
+                    "CROSS JOIN (SELECT COUNT(*) AS totalSoutiens FROM soutien) total\n" +
+                    "GROUP BY u.id\n" +
+                    "ORDER BY pourcentage_soutiens DESC\n" +
+                    "LIMIT 10;\n");
+            rs = ps.executeQuery();
+
+
+            while(rs.next()) {
+                User user = new User(rs.getString(1), rs.getDouble(2));
+                datas.add(user);
+            }
+
+            rs.close();
+            return datas;
+        } catch (SQLException var3) {
+            throw new RuntimeException(var3);
+        }
+    }
+
 }

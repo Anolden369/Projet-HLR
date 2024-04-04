@@ -178,6 +178,12 @@ public class HLRMenuEtudiantController implements Initializable{
     private Button btnGraphique3to1;
     @FXML
     private Button btnGraphique3to2;
+    @FXML
+    private TableView tvMesStatistiquesGraph1;
+    @FXML
+    private TableColumn tcMesStatistiquesMatiereGraph1;
+    @FXML
+    private TableColumn tcMesStatistiquesPourcentageGraph1;
 
 
     @Override
@@ -700,6 +706,22 @@ public class HLRMenuEtudiantController implements Initializable{
 
             graph1.getData().add(series);
         }
+        tcMesStatistiquesMatiereGraph1.setCellValueFactory(new PropertyValueFactory<Matiere,String>("designation"));
+        tcMesStatistiquesPourcentageGraph1.setCellValueFactory(new PropertyValueFactory<Matiere, Double>("pourcentageDemandes"));
+
+        tcMesStatistiquesPourcentageGraph1.setCellFactory(tc -> new TableCell<Matiere, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f%%", item));
+                }
+            }
+        });
+
+        tvMesStatistiquesGraph1.setItems(servicesStatistiques.GetPourcentageDatasGraphique1());
     }
 
     // Rempli le graphique n°2 (Nombre de soutiens réalisés par matière), récupère les données de la BDD pour constituer le graphique.

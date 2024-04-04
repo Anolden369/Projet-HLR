@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import sio.hlr.Entities.Demandes;
 import sio.hlr.Entities.Matiere;
 import sio.hlr.Entities.Salle;
+import sio.hlr.Entities.User;
 import sio.hlr.HLRApplication;
 import sio.hlr.Tools.*;
 
@@ -42,8 +43,6 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     private Button btnCreerSalles;
     @javafx.fxml.FXML
-    private Button btnModifSalles;
-    @javafx.fxml.FXML
     private Button btnVisuSoutiens;
     @javafx.fxml.FXML
     private Button btnStatistiquesAdmin;
@@ -66,21 +65,13 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     private Button btnValiderCreerSalle;
     @javafx.fxml.FXML
-    private Button btnValiderModifSalles;
-    @javafx.fxml.FXML
     private AnchorPane apCreerMatieres;
     @javafx.fxml.FXML
     private AnchorPane apModifMatiere;
     @javafx.fxml.FXML
     private AnchorPane apCreerSalles;
     @javafx.fxml.FXML
-    private AnchorPane apModifSalles;
-    @javafx.fxml.FXML
     private AnchorPane apVisuSoutients;
-    @javafx.fxml.FXML
-    private ComboBox cboModifNumSalle;
-    @javafx.fxml.FXML
-    private ComboBox cboModifEtageSalle;
     @javafx.fxml.FXML
     private TableView<Demandes> tvSoutien;
     @javafx.fxml.FXML
@@ -142,6 +133,12 @@ public class HLRMenuAdminController implements Initializable {
     private PieChart graph2;
     @javafx.fxml.FXML
     private LineChart graph3;
+    @javafx.fxml.FXML
+    private TableView tvStatistiquePourcentage;
+    @javafx.fxml.FXML
+    private TableColumn tcEleve;
+    @javafx.fxml.FXML
+    private TableColumn tcPourcentage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -471,6 +468,21 @@ public class HLRMenuAdminController implements Initializable {
         ObservableList<PieChart.Data> datasGraph2 = FXCollections.observableArrayList();
         HashMap<String, Integer> datasGraphique2 = servicesStatistiques.GetDatasGraphique5();
         Iterator var12 = datasGraphique2.keySet().iterator();
+
+        tcEleve.setCellValueFactory(new PropertyValueFactory<User,String>("nom"));
+        tcPourcentage.setCellValueFactory(new PropertyValueFactory<User,Double>("pourcentage"));
+        tcPourcentage.setCellFactory(tc -> new TableCell<User, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f%%", item));
+                }
+            }
+        });
+        tvStatistiquePourcentage.setItems(servicesStatistiques.GetPourcentageDatasGraphique5());
 
         while(var12.hasNext()) {
             String valeur = (String)var12.next();

@@ -10,6 +10,7 @@ public class User {
     private int niveau;
     private int sexe;
     private int tel;
+    private double pourcentage;
 
     public User(int id, String nom, String prenom, String email, String password, String role, int niveau, int sexe, int tel) {
         this.id = id;
@@ -35,6 +36,15 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String nom, double pourcentageEleve) {
+        this.pourcentage = pourcentageEleve;
+        this.nom = nom;
+    }
+
+    public double getPourcentage() {
+        return pourcentage;
     }
 
     public int getId() {

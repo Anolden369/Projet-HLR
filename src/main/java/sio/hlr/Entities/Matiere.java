@@ -7,6 +7,7 @@ public class Matiere {
     private String designation;
     private String sousMatiere;
     private CheckBox uneSelection;
+    private Double pourcentageDemandes;
 
     public Matiere() {
         this.uneSelection = new CheckBox();
@@ -22,6 +23,15 @@ public class Matiere {
         this.designation = designation;
         this.sousMatiere = sousMatiere;
         this.uneSelection = new CheckBox();
+    }
+
+    public Matiere(String designation, Double pourcentageDemandes) {
+        this.designation = designation;
+        this.pourcentageDemandes = pourcentageDemandes;
+    }
+
+    public Double getPourcentageDemandes() {
+        return pourcentageDemandes;
     }
 
     public int getId() {
