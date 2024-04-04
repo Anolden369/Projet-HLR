@@ -188,7 +188,7 @@
                   <String fx:value="monAnchorPane" />
                </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="apStatistiques3" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane fx:id="apStatistiques3" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <styleClass>
                   <String fx:value="ap" />
                   <String fx:value="monAnchorPane" />
@@ -219,7 +219,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css" visible="false">
+            <AnchorPane layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <styleClass>
                   <String fx:value="ap" />
                   <String fx:value="monAnchorPane" />
