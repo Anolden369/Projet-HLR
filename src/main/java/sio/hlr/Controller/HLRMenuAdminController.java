@@ -79,10 +79,6 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     private TableColumn tcSoutienMatiere;
     @javafx.fxml.FXML
-    private TableColumn tcSoutienSMatiere;
-    @javafx.fxml.FXML
-    private TableColumn tcSoutienDescription;
-    @javafx.fxml.FXML
     private TableColumn tcSoutienStatut;
     @javafx.fxml.FXML
     private TableColumn tcSoutienDateLimite;
@@ -107,8 +103,6 @@ public class HLRMenuAdminController implements Initializable {
     @javafx.fxml.FXML
     private TableColumn tcNumSalle;
     LocalDate DateActuelle = LocalDate.now();
-    @javafx.fxml.FXML
-    private TableColumn tcSoutienAides;
     @javafx.fxml.FXML
     private Button btnGraphique1to2;
     @javafx.fxml.FXML
@@ -139,6 +133,10 @@ public class HLRMenuAdminController implements Initializable {
     private TableColumn tcEleve;
     @javafx.fxml.FXML
     private TableColumn tcPourcentage;
+    @javafx.fxml.FXML
+    private TableColumn tcIdDemande;
+    @javafx.fxml.FXML
+    private TableColumn tcSousMatieres;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -156,7 +154,8 @@ public class HLRMenuAdminController implements Initializable {
             tcSoutienDemandes.setCellValueFactory(new PropertyValueFactory<Demandes, String>("nomUser"));
             tcSoutienMatiere.setCellValueFactory(new PropertyValueFactory<Demandes,String>("matiere"));
             tcSoutienDateLimite.setCellValueFactory(new PropertyValueFactory<Demandes, Date>("dateFinDemande"));
-            tcSoutienSMatiere.setCellValueFactory(new PropertyValueFactory<Demandes,String>("id"));
+            tcIdDemande.setCellValueFactory(new PropertyValueFactory<Demandes,String>("id"));
+            tcSousMatieres.setCellValueFactory(new PropertyValueFactory<Demandes,String>("sousMatiere"));
             tcSoutienStatut.setCellValueFactory(new PropertyValueFactory<Demandes,String>("status"));
             tvSoutien.setItems(servicesLesDemandes.GetAllLesDemandesAdmin());
 
@@ -249,7 +248,7 @@ public class HLRMenuAdminController implements Initializable {
             servicesMatieres.ajoutMatiereSousMatiere(txtCreerNomMatiere.getText(),txtCreerNomSousMatiere.getText());
             alert1.setTitle("Ajout affectué");
             alert1.setHeaderText("");
-            alert1.setContentText("La matière a bien été ajouté !");
+            alert1.setContentText("La matière a bien été ajoutée !");
             alert1.showAndWait();
         }
     }

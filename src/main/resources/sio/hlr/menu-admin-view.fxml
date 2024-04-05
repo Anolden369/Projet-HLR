@@ -83,13 +83,12 @@
                      </font></Label>
                   <TableView fx:id="tvSoutien" layoutX="12.0" layoutY="56.0" onMouseClicked="#tvSoutienClicked" prefHeight="452.0" prefWidth="728.0">
                      <columns>
+                        <TableColumn fx:id="tcIdDemande" prefWidth="95.0" text="ID demande" />
                         <TableColumn fx:id="tcSoutienDemandes" prefWidth="87.0" text="demandeur" />
-                        <TableColumn fx:id="tcSoutienAides" prefWidth="74.0" text="aide" />
-                        <TableColumn fx:id="tcSoutienMatiere" prefWidth="69.0" text="matière" />
-                        <TableColumn fx:id="tcSoutienSMatiere" prefWidth="95.0" text="sous-matière(s)" />
-                        <TableColumn fx:id="tcSoutienDescription" prefWidth="85.0" text="description" />
-                        <TableColumn fx:id="tcSoutienStatut" prefWidth="56.0" text="statut" />
-                        <TableColumn fx:id="tcSoutienDateLimite" prefWidth="89.0" text="date limite" />
+                        <TableColumn fx:id="tcSoutienMatiere" prefWidth="91.0" text="matière" />
+                        <TableColumn fx:id="tcSousMatieres" prefWidth="223.0" text="sous-matière" />
+                        <TableColumn fx:id="tcSoutienStatut" prefWidth="73.0" text="statut" />
+                        <TableColumn fx:id="tcSoutienDateLimite" prefWidth="144.0" text="date limite" />
                      </columns>
                   </TableView>
                </children>

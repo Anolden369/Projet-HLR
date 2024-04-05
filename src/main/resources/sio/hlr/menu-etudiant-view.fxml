@@ -227,7 +227,7 @@
             </AnchorPane>
             <AnchorPane fx:id="apCreerCompetence" layoutX="-63.0" layoutY="-63.0" prefHeight="520.0" prefWidth="746.0" stylesheets="@../../CSS/MesStyles.css">
                <children>
-                  <Label layoutX="34.0" layoutY="25.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une compétence :">
+                  <Label layoutX="34.0" layoutY="14.0" prefHeight="32.0" prefWidth="194.0" stylesheets="@../../CSS/MesStyles.css" text="Créer une compétence :">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -248,6 +248,7 @@
                         <TableColumn fx:id="tcChoixSMatiereCreerCompetence" prefWidth="89.0" text="Choix" />
                      </columns>
                   </TableView>
+                  <Label layoutX="34.0" layoutY="46.0" prefHeight="19.0" prefWidth="668.0" text="Si la compétence n'existe pas, elle sera créée automatiquement. Sinon, les modifications seront appliquées." />
                </children>
                <styleClass>
                   <String fx:value="ap" />
